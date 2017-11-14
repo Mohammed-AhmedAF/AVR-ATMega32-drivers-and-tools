@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+/*Just testing*/
+
 void add(int a, int b) {
 	int c = a + b;
 	printf("%d\n",c);
