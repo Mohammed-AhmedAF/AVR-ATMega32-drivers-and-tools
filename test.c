@@ -3,6 +3,8 @@
 
 /*Just testing*/
 
+/*just adding a comment */
+
 void add(int a, int b) {
 	int c = a + b;
 	printf("%d\n",c);
