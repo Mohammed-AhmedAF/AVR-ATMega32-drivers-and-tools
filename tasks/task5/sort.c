@@ -124,11 +124,10 @@ void doSelectionSort(int arr[], int size, char dir) {
 			for(j = i+1; j < size-i; j++) {
 			 	if (max <= arr[j]) {
 					max = arr[j];
-					index = arr[j];		
+					arr[j] = arr[i];
+					arr[i] = max;
+				}	
 			}
-			arr[index] = arr[i];
-			arr[i] = max;
-			}	
 		}
 	}
 	else {
