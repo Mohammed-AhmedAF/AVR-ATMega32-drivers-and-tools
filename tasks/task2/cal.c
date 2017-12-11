@@ -11,16 +11,17 @@ want to quit, using a yes or no question.
 We ask for a confirmation of quiting.
  */
 
+typedef unsigned long int u32;
 
 void main() {
 	char cont = 'y', internal = 'y', exe= 'y';
 	char operation;
-	int a, b, res;
+	u32 a, b, res;
 	while (exe=='y') {
 		printf("Enter first number: \n");
-		scanf(" %d",&a);
+		scanf(" %uld",&a);
 		printf("Enter second number: \n");
-		scanf(" %d",&b);
+		scanf(" %uld",&b);
 		while(1) {
 		printf("(A)dition or (S)ubstraction: \n");
 		scanf(" %c",&operation);
