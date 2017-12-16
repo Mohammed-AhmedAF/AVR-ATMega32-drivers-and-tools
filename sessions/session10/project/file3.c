@@ -2,7 +2,7 @@
 #include "types.h"
 void funCalPower(u32,u32);
 void funPrintPower(void);
-
+void fun();
 u32 x = 3;
 u32 y = 1;
 
