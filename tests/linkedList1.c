@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct node {
 	int num;
@@ -8,6 +9,9 @@ typedef struct node {
 
 void showHelp();
 void createLinkedList();
+void fillLinkedList();
+
+
 
 
 char answer[10];
@@ -35,16 +39,28 @@ void createLinkedList() {
 		start = malloc(sizeof(node_t));
 		start->next = NULL;
 		current = start;
+		printf("Created first node.\n");
 		for (i = 2; i <= size;i++) {
+			printf("Created node %d\n",i);
 			previous = current;
 			current = malloc(sizeof(node_t));
 			previous->next = current;
 			current->next = NULL;
 		}
+		fillLinkedList();
 	}
 	else {
 		printf("Invalid size.\n");
 	}
+}
+
+void fillLinkedList() {
+	for (i = 1; i <= size; i++) {
+		printf("Enter number: \n");
+		scanf(" %d",&current->num);
+		current = current->next;
+	}
+	printf("List filled successfully.\n");
 }
 
 void showHelp() {
