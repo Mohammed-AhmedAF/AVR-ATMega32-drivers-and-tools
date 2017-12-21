@@ -28,5 +28,4 @@ int compare(int a, int b){
 	else {
 		return 0;
 	}
-}
 

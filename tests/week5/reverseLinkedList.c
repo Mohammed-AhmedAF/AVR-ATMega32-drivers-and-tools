@@ -12,7 +12,7 @@ void main() {
 	Node * head;
 	Node * current;
 	Node * previous;
-	int * dataArr = (int *) malloc(sizeof(Node)*5);
+	int * dataArr = (int *) calloc(8,sizeof(int));
 	int i,val;
 	/*Filling linked list*/
 	for(i = 0; i <= 8; i++) {
@@ -39,7 +39,7 @@ void main() {
 	i = 0;
 	while(current != NULL)	{
 		printf("%d", current->data);
-		dataArr =&current->data;
+		*dataArr =current->data;
 		dataArr++;
 		current = current->next;
 		i++;
