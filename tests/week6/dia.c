@@ -40,6 +40,6 @@ void main() {
 		step +=(size-1);
 	}
 	printf("lSum is %d, rSum is %d\n",lSum,rSum);
-	printf("absolute diff is %d\n",rSum - lSum);
+	printf("absolute diff is %d\n",abs(lSum - rSum));
 	free(arr);
 }
