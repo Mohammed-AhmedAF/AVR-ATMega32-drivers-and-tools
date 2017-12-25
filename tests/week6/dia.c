@@ -23,17 +23,23 @@ void main() {
 	int * arr = (int * ) malloc(sizeof(int)*size*size);
 	for (i = 0; i < size; i++) {
 		for (j = 0; j < size; j++) {
-			*(arr+(size*i)+j) = count++;
+			*(arr+(size*i)+j) = rand()%(size*size);
 		}
 		printf("----\n");
 	} 
 	viewMatrix(arr,size);
-	/*Summing diagonal*/
-	/*for (i = 0; i < size; i++) {
-		printf("lSum is %d\n",lSum);
+	/*Summing left diagonal*/
+	for (i = 0; i < size; i++) {
 		lSum += arr[step+i];
 		step = size*(i+1);
-		printf("Step is %d\n",step);
-		}*/
+		}
+	/*Summing right diagonal*/
+	step = size-1;
+	for (i = 0; i <size;i++) {
+		rSum +=arr[step];
+		step +=(size-1);
+	}
+	printf("lSum is %d, rSum is %d\n",lSum,rSum);
+	printf("absolute diff is %d\n",rSum - lSum);
 	free(arr);
 }
