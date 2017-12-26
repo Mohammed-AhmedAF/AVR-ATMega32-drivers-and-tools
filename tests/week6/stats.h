@@ -9,13 +9,14 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.h
+ * @brief header file for week1 assingment
  *
- * <Add Extended Description Here>
+ * This header file contains the function declarations of functions used
+ * in the code file.
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author Mohamed Ahmed
+ * @date 26-12-2017
  *
  */
 #ifndef __STATS_H__

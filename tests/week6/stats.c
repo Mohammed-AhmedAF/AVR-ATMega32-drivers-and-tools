@@ -10,9 +10,11 @@
  *****************************************************************************/
 /**
  * @file stats.c
- * @brief <Add Brief Description Here >
+ * @brief code file for week1 assinments
  *
- * <Add Extended Description Here>
+ * This code file has the definition of the array and function calls
+ * of the first assinment of the course Introduction to Embedded Systems
+ * on Coursera.
  *
  * @author Mohamed Ahmed Abd Al-Fattah Mahmoud Kamel
  * @date 26-12-2017
@@ -62,10 +64,12 @@ void sort_array(unsigned char * ptest,unsigned int size) {
 	}
 }
 unsigned char find_maximum(unsigned char * ptest, unsigned int size) {
+	sort_array(ptest,size);
 	return *ptest;
 }
 
 unsigned char find_minimum(unsigned char * ptest, unsigned int size) {
+	sort_array(ptest,size);
 	return *(ptest+size-1);
 }
 
@@ -79,6 +83,7 @@ unsigned char find_mean(unsigned char * ptest, unsigned int size) {
 }
 
 unsigned char find_median(unsigned char * ptest, unsigned int size) {
+	sort_array(ptest,size)
 	return *(ptest+size/2) + *(ptest+size/2+1);
 }
 
