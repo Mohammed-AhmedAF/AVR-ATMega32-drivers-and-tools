@@ -1,4 +1,4 @@
-#include <hello.h>
+#include "hello.h"
 
 void main() {
 	showHelloMessage();
