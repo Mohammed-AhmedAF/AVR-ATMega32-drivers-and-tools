@@ -1,0 +1,2 @@
+void printHelloMessage(int x);
+
