@@ -1,9 +1,13 @@
-CC = gcc
-CFLAGS = -I.
-OBJ = helloMain.c func.c
+SRC := helloMain.c \
+	func.c
 
-%.o :
-	$(CC) -o $@ $(OBJ) $(FLAGS)
+OBJ := $(SRC:.c=.o)
+
+CC = gcc
+CFLAGS = -I . -g
+
+%.o : $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
 
 clean :
-	rm hello.o
+	rm %.o
