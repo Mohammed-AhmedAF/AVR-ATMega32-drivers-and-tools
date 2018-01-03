@@ -4,10 +4,10 @@ SRC := helloMain.c \
 OBJ := $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -I ../
 
 %.o : $(SRC)
-	$(CC) -o $@ $^ -I /..
+	$(CC) -o $@ $^ $(CFLAGS)
 
 clean :
 	rm *.o
