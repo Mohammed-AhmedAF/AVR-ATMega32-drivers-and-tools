@@ -8,7 +8,7 @@
 #ifndef DIO_H_
 #define DIO_H_
 
-typedef unsigned char u8;
+typedef char u8;
 
 #define DDRA *((u8*) 0x3A)
 #define PORTA *((u8*) 0x3B)
