@@ -31,7 +31,7 @@ void main(void) {
 	while(1) {
 		SetBit(PORTA,0);
 		SetBit(PORTC,0);
-		for(i = 0; i < 100; i++) {
+		for(i = 99; i >= 0; i--) {
 		_delay_ms(250);
 		d = i%10;
 		b = (i-i%10)/10;
