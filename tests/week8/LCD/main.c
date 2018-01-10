@@ -11,10 +11,13 @@ void main(void)  {
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 	while(1) {
-		char name = 'M';
-		for (u8 i = 0; i < 16; i++) {
-			Lcd_vidWriteCharacter(name);	
+	char name ='M';
+		for (u8 j = 0; j < 16; j++) {
+	Lcd_vidSendCommand(0b00000001);
+				for (u8 i = 0; i < j; i++) {
 			Lcd_vidSendCommand(0b00010100);
+		}
+		Lcd_vidWriteCharacter(name);
 		}
 	}
 }
@@ -23,8 +26,8 @@ void Lcd_vidInit(void) {
 	Lcd_vidSendCommand(0b00000001);
 	Lcd_vidSendCommand(0b00000010);
 	Lcd_vidSendCommand(0b00000110);
-	Lcd_vidSendCommand(0b00001101);
-	Lcd_vidSendCommand(0b00010000);
+	Lcd_vidSendCommand(0b00001100);
+	Lcd_vidSendCommand(0b00110000);
 }
 
 void Lcd_vidSendCommand(u8 u8Command) {
