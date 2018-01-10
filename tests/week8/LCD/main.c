@@ -20,11 +20,11 @@ void main(void)  {
 			Lcd_vidWriteCharacter(name);
 		}
 		if (flag == STD_HIGH) {
-			Lcd_vidSendCommand(0b00000100);
+			Lcd_vidSendCommand(0b00010000);
 			flag = STD_LOW;
 		}
 		else  {
-			Lcd_vidSendCommand(0b00000110);
+			Lcd_vidSendCommand(0b00010100);
 			flag = STD_HIGH;
 		}
 	}
