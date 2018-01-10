@@ -4,6 +4,8 @@
 void Lcd_vidInit();
 void Lcd_vidSendCommand(u8);
 void Lcd_vidWriteCharacter(u8);
+
+void Lcd_insertMessage(s8 *);
 u8 flag = STD_HIGH;
 u8 u8Shift = 0b00010100;
 void main(void)  {
@@ -12,22 +14,9 @@ void main(void)  {
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 	while(1) {
-		char name ='M';
-		for (u8 j = 0; j < 16; j++) {
+		s8 * u8name = "Mohamed";
+		Lcd_insertMessage(u8name);
 		Lcd_vidSendCommand(0b00000001);
-			for (u8 i = 0; i < j; i++) {
-				Lcd_vidSendCommand(u8Shift);
-			}
-			Lcd_vidWriteCharacter(name);
-		}
-		if (flag == STD_HIGH) {
-			u8Shift = 0b00010000;
-			flag = STD_LOW;
-		}
-		else  {
-			u8Shift = 0b00010100;
-			flag = STD_HIGH;
-		}
 	}
 }
 
@@ -56,4 +45,11 @@ void Lcd_vidWriteCharacter(u8 u8DataCpy) {
 	Dio_vidSetPortValue(DIO_PORTD,u8DataCpy);
 	Dio_vidSetPinValue(DIO_PORTA,2,0);
 	_delay_ms(50);
+}
+
+void Lcd_insertMessage(s8 * s8Message) {
+	for (s8 i = 0; i < 7; i++) {
+		Lcd_vidWriteCharacter(*s8Message++);
+		_delay_ms(1000);
+	}
 }
