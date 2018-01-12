@@ -15,22 +15,7 @@ void main(void)  {
 	Dio_vidSetPortValue(DIO_PORTB,0b11110000);
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
-	s8 * u8name = "Mohamed";
-	/*Lcd_insertMessage(u8name);*/
-
 	while(1) {
-		/*	for(s8 i = 0; i < 9; i++) {
-			if (flag == 0xFF) {
-			Lcd_vidSendCommand(0x1c);
-			_delay_ms(500);
-			}
-			else {
-			Lcd_vidSendCommand(0x18);
-			_delay_ms(500);
-			}
-			}
-			flag = ~(flag);
-			}*/
 		for (u8 r = 0; r < 4; r++) {
 			Dio_vidSetPinValue(DIO_PORTB,r,0);
 			for (u8 c = 4; c <= 7; c++) {
@@ -81,16 +66,3 @@ void Lcd_insertMessage(s8 * s8Message) {
 	_delay_ms(1000);
 }
 
-void Lcd_vidGoToXY(u8 u8xCpy, u8 u8yCpy) {
-	Lcd_vidSendCommand(0b00000010);
-	if (u8yCpy == 1) {
-		for (s8 i = 0; i < u8xCpy; i++) {
-			Lcd_vidSendCommand(0x14);
-		}
-	}
-	else  {
-		for (s8 i = 0; i < (u8xCpy | 0x40 );i++) {
-			Lcd_vidSendCommand(0x14);
-	}
-	}
-}
