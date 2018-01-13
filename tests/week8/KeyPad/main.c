@@ -6,8 +6,10 @@ void Lcd_vidSendCommand(u8);
 void Lcd_vidWriteCharacter(u8);
 void Lcd_vidGoToXY(u8,u8);
 void Lcd_insertMessage(s8 *);
+void vidTakeNumber(s8);
 u8 u8Shift = 0b00010100;
 u8 flag = 0xff;
+s8 u8KeyPad[4][4] = {{'0','.','-','='},{'1','2','3','+'},{'4','5','6','*'},{'7','8','9','/'}};
 void main(void)  {
 	Dio_vidSetPortDirection(DIO_PORTD,0b11111111);
 	Dio_vidSetPortDirection(DIO_PORTA,0b00000111);
@@ -20,11 +22,8 @@ void main(void)  {
 			Dio_vidSetPinValue(DIO_PORTB,r,0);
 			for (u8 c = 4; c <= 7; c++) {
 				if (Dio_u8GetPinValue(DIO_PORTB,c) == 0) {
-				u8 rChar = r+48;
-				u8 cChar = c+48 -4;
-				Lcd_vidWriteCharacter(cChar);
-				Lcd_vidWriteCharacter(rChar);
-				Lcd_vidWriteCharacter(' ');
+				Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);
+				vidTakeNumber(u8KeyPad[c-4][r]);
 				}
 			}
 			Dio_vidSetPinValue(DIO_PORTB,r,1);
