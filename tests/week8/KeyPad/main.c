@@ -5,12 +5,15 @@ void Lcd_vidInit();
 void Lcd_vidSendCommand(u8);
 void Lcd_vidWriteCharacter(u8);
 void Lcd_vidGoToXY(u8,u8);
-void Lcd_insertMessage(s8 *);
+void Lcd_vidInsertMessage(s8 *);
 void vidTakeNumber(s8);
 u8 u8Shift = 0b00010100;
 s8 number = 0;
 u8 flag = 0xff;
 s8 u8KeyPad[4][4] = {{'0','c','-','='},{'1','2','3','+'},{'4','5','6','*'},{'7','8','9','/'}};
+s8 s8Password[4] = {'1','3','2','4'};
+s8 user[4];
+s8 * s8Message;
 void main(void)  {
 	Dio_vidSetPortDirection(DIO_PORTD,0b11111111);
 	Dio_vidSetPortDirection(DIO_PORTA,0b00000111);
@@ -64,19 +67,29 @@ void Lcd_vidWriteCharacter(u8 u8DataCpy) {
 	_delay_ms(500);
 }
 
-void Lcd_insertMessage(s8 * s8Message) {
-	for (s8 i = 0; i < 7; i++) {
+void Lcd_vidInsertMessage(s8 * s8Message) {
+	for (s8 i = 0; i < 8; i++) {
 		Lcd_vidWriteCharacter(*s8Message++);
 	}
 	_delay_ms(1000);
+	Lcd_vidSendCommand(0b00000001);
 }
 
 void vidTakeNumber(s8 key) {
+	static s8 i = 0;
 	if (key == '=') {
-		s8 * message = &number;
-		Lcd_insertMessage(message);
+		Lcd_vidSendCommand(0b00000001);
+		for(u8 x = 0; x < 4; x++) {
+			if (s8Password[x] != user[x]) {
+				s8Message = "Error!";
+				Lcd_vidInsertMessage(s8Message);
+				Lcd_vidInit();
+				break;
+			}
+		}
 	}
 	else {
-		number = key-48;
+		user[i] = key;
+		i++;
 	}
 }
