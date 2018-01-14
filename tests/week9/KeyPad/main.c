@@ -6,6 +6,8 @@ void Lcd_vidInit();
 void vidTakeNumber(s8);
 void vidAskPassword(void);
 void vidChoose(void);
+s8 s8GetChoise(void);
+
 u8 u8Shift = 0b00010100;
 s8 * s8Message;
 s8 number = 0;
@@ -23,33 +25,39 @@ void main(void)  {
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 	while(1) {
-		/*vidAskPassword(); */
 		vidChoose();
 		_delay_ms(10000);
 	}
 }
 
 void vidChoose(void) {
+	s8 s8Choise;
 	s8Message = "1. Calc 2. Motor\0";
 	Lcd_vidInsertMessage(s8Message);
 	Lcd_vidSendCommand(LCD_RETURN_HOME); /*If I don't add this, there will be a delay in showing the third option*/
 	Lcd_vidGoToXY(0,2);
 	s8Message = "3. Farah\0";
 	Lcd_vidInsertMessage(s8Message);
-	/*	switch(u8choose) {
-		case 1:
-		vidCalc();
-		break;
-		case 2:
-		vidMotor();
-		break;
-		case 3:
-		vidFarah();
-		break;
-		default
-		s8Message = "Invalid Input.";
-		Lcd_vidInsertMessage(s8Message);
-		} */
+	_delay_ms(1000);
+	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+	s8Choise = s8GetChoise();
+	switch (s8Choise) {
+		case '1':
+			s8Message = "Calc\0";
+			Lcd_vidInsertMessage(s8Message);
+			break;
+		case '2':
+			s8Message = "Motor\0";
+			Lcd_vidInsertMessage(s8Message);
+			break;
+		case '3':
+			s8Message = "Farah\0";
+			Lcd_vidInsertMessage(s8Message);
+			break;
+		default :
+			s8Message = "Invalid ans.\0";
+			Lcd_vidInsertMessage(s8Message);
+	}
 }
 
 void vidAskPassword(void) {
@@ -99,4 +107,23 @@ void vidTakeNumber(s8 key) {
 	}
 }
 
+s8 s8GetChoise (void) {
+	while (1) {
+		for (u8 r = 0; r < 4; r++) {
+			Dio_vidSetPinValue(DIO_PORTB,r,0);
+			for (u8 c = 4; c <= 7; c++) {
+				if (Dio_u8GetPinValue(DIO_PORTB,c) == 0) {
+					if(u8KeyPad[c-4][r] == 'c') {
+						Lcd_vidSendCommand(0b00000001); /*Clear screen*/
+						number = 0;
+						iUser = 0;
+						break;
+					}
+					return u8KeyPad[c-4][r];
+				}
+			}
+			Dio_vidSetPinValue(DIO_PORTB,r,1);
+		}
+	}
+}
 
