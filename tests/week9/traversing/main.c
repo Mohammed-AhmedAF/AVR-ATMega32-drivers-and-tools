@@ -26,6 +26,8 @@ void main(void)  {
 			Lcd_vidWriteCharacter('m');
 			Lcd_vidGoToXY(15-i,2);
 			Lcd_vidWriteCharacter('m');
+			_delay_ms(500);
+			Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 		}
 	}
 }
