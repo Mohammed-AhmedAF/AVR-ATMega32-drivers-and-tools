@@ -4,6 +4,8 @@
 
 void Lcd_vidInit();
 void vidTakeNumber(s8);
+void vidAskPassword(void);
+
 u8 u8Shift = 0b00010100;
 s8 * s8Message;
 s8 number = 0;
@@ -21,6 +23,29 @@ void main(void)  {
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 	while(1) {
+		vidAskPassword();
+	}
+}
+
+void vidChoose(void) {
+	switch(u8choose) {
+		case 1:
+			vidCalc();
+			break;
+		case 2:
+			vidMotor();
+			break;
+		case 3:
+			vidFarah();
+			break;
+		default
+			s8Message = "Invalid Input.";
+			Lcd_vidInsertMessage(s8Message);
+	}
+}
+
+void vidAskPassword(void) {
+	while (1) {
 		for (u8 r = 0; r < 4; r++) {
 			Dio_vidSetPinValue(DIO_PORTB,r,0);
 			for (u8 c = 4; c <= 7; c++) {
@@ -39,23 +64,23 @@ void main(void)  {
 		}
 	}
 }
-
 void vidTakeNumber(s8 key) {
 	if (key == ' ') {
 		if (iUser >= 5) {
-			s8Message = "Longer";
+			s8Message = "Wrong Password";
 			Lcd_vidInsertMessage(s8Message);
 			iUser = 0;
 		}
 		else {
 			for(s8 x = 0; x < 4; x++) {
 				if (s8Password[x] == user[x]) {;
-					Lcd_vidWriteCharacter('C');
+					continue;
 				}
 				else  {
-					Lcd_vidWriteCharacter('E');
+					s8Message = "Error";
+					Lcd_vidInsertMessage(s8Message);
+					break;
 				}
-
 			}
 
 		}
