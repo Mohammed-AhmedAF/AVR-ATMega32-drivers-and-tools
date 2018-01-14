@@ -19,7 +19,7 @@ s8 iUser;
 
 void main(void)  {
 	Dio_vidSetPortDirection(DIO_PORTD,0b11111111);
-	Dio_vidSetPortDirection(DIO_PORTA,0b00000111);
+	Dio_vidSetPortDirection(DIO_PORTA,0b00001111);
 	Dio_vidSetPortDirection(DIO_PORTB,0b00001111);
 	Dio_vidSetPortValue(DIO_PORTB,0b11110000);
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
@@ -49,6 +49,7 @@ void vidChoose(void) {
 		case '2':
 			s8Message = "Motor\0";
 			Lcd_vidInsertMessage(s8Message);
+			vidMotor();
 			break;
 		case '3':
 			s8Message = "Farah\0";
@@ -60,6 +61,14 @@ void vidChoose(void) {
 	}
 }
 
+void vidMotor() {
+	while(1) {
+		Dio_vidSetPinValue(DIO_PORTA,3,1);
+		_delay_ms(2000);
+		Dio_vidSetPinValue(DIO_PORTA,3,0);
+		_delay_ms(2000);
+	}
+}
 void vidAskPassword(void) {
 	while (1) {
 		for (u8 r = 0; r < 4; r++) {
