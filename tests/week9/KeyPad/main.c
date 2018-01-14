@@ -17,12 +17,19 @@ s8 user[16];
 s8 iUser;
 void main(void)  {
 	Dio_vidSetPortDirection(DIO_PORTD,0b11111111);
-	Dio_vidSetPortDirection(DIO_PORTA,0b00000111);
+	Dio_vidSetPortDirection(DIO_PORTA,0b00010111);
+	Dio_vidSetPinValue(DIO_PORTA,3,1);
 	Dio_vidSetPortDirection(DIO_PORTB,0b00001111);
 	Dio_vidSetPortValue(DIO_PORTB,0b11110000);
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 	while(1) {
+		if (Dio_u8GetPinValue(DIO_PORTA,3)== 0) {
+			Dio_vidSetPinValue(DIO_PORTA,4,1);
+		}
+		else  {
+			Dio_vidSetPinValue(DIO_PORTA,4,0);
+		}
 		for (u8 r = 0; r < 4; r++) {
 			Dio_vidSetPinValue(DIO_PORTB,r,0);
 			for (u8 c = 4; c <= 7; c++) {
