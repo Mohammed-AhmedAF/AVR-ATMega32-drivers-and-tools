@@ -4,7 +4,7 @@
 void Lcd_vidInit();
 void Lcd_vidSendCommand(u8);
 void Lcd_vidWriteCharacter(u8);
-void Lcd_vidGoToXY(u8,u8);
+void Lcd_vidGoToXY(s8,s8);
 void Lcd_vidInsertMessage(s8 *);
 void vidTakeNumber(s8);
 u8 u8Shift = 0b00010100;
@@ -15,21 +15,15 @@ s8 u8KeyPad[4][4] = {{'0','c','-',' '},{'1','2','3','+'},{'4','5','6','*'},{'7',
 s8 s8Password[4] = {'1','3','2','4'};
 s8 user[16];
 s8 iUser;
+
 void main(void)  {
 	Dio_vidSetPortDirection(DIO_PORTD,0b11111111);
-	Dio_vidSetPortDirection(DIO_PORTA,0b00010111);
-	Dio_vidSetPinValue(DIO_PORTA,3,1);
+	Dio_vidSetPortDirection(DIO_PORTA,0b00000111);
 	Dio_vidSetPortDirection(DIO_PORTB,0b00001111);
 	Dio_vidSetPortValue(DIO_PORTB,0b11110000);
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 	while(1) {
-		if (Dio_u8GetPinValue(DIO_PORTA,3)== 0) {
-			Dio_vidSetPinValue(DIO_PORTA,4,1);
-		}
-		else  {
-			Dio_vidSetPinValue(DIO_PORTA,4,0);
-		}
 		for (u8 r = 0; r < 4; r++) {
 			Dio_vidSetPinValue(DIO_PORTB,r,0);
 			for (u8 c = 4; c <= 7; c++) {
@@ -109,3 +103,18 @@ void vidTakeNumber(s8 key) {
 		iUser++;
 	}
 }
+
+void Lcd_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
+	if (s8yCpy == 1) {
+		for (s8 i = 0; i < s8xCpy;i++) {
+			Lcd_vidSendCommand(0b00010100);
+		}	
+	}
+	else {
+		for (s8 i = 0; i < s8xCpy+40; i++) {
+			Lcd_vidSendCommand(0b00010100);
+		}
+	}
+}
+
+
