@@ -7,7 +7,10 @@ void vidTakeNumber(s8);
 void vidAskPassword(void);
 void vidChoose(void);
 s8 s8GetChoise(void);
-
+void vidMotor(void);
+void vidFarah(void);
+void vidTraverse(void);
+void init(void);
 u8 u8Shift = 0b00010100;
 s8 * s8Message;
 s8 number = 0;
@@ -18,12 +21,7 @@ s8 user[16];
 s8 iUser;
 
 void main(void)  {
-	Dio_vidSetPortDirection(DIO_PORTD,0b11111111);
-	Dio_vidSetPortDirection(DIO_PORTA,0b00001111);
-	Dio_vidSetPortDirection(DIO_PORTB,0b00001111);
-	Dio_vidSetPortValue(DIO_PORTB,0b11110000);
-	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
-	Lcd_vidInit();
+	init();
 	while(1) {
 		vidChoose();
 		_delay_ms(10000);
@@ -52,8 +50,7 @@ void vidChoose(void) {
 			vidMotor();
 			break;
 		case '3':
-			s8Message = "Farah\0";
-			Lcd_vidInsertMessage(s8Message);
+			vidFarah();
 			break;
 		default :
 			s8Message = "Invalid ans.\0";
@@ -61,12 +58,36 @@ void vidChoose(void) {
 	}
 }
 
+void init(void) {
+	Dio_vidSetPortDirection(DIO_PORTD,0b11111111);
+	Dio_vidSetPortDirection(DIO_PORTA,0b00001111);
+	Dio_vidSetPortDirection(DIO_PORTB,0b00001111);
+	Dio_vidSetPortDirection(DIO_PORTC,0b11111111);
+	Dio_vidSetPortValue(DIO_PORTB,0b11110000);
+	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
+	Lcd_vidInit();
+}
 void vidMotor() {
 	while(1) {
 		Dio_vidSetPinValue(DIO_PORTA,3,1);
 		_delay_ms(2000);
 		Dio_vidSetPinValue(DIO_PORTA,3,0);
 		_delay_ms(2000);
+	}
+}
+
+void vidFarah() {
+	PORTC = 0b00000001;
+	Lcd_vidInit();
+	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+	while(1) {
+		for (u8 i = 0; i < 6; i++) {
+			_delay_ms(100);
+			PORTC = PORTC << 1;
+			_delay_ms(100);
+			vidTraverse();
+		}
+		PORTC = 0b00000001;
 	}
 }
 void vidAskPassword(void) {
@@ -76,7 +97,7 @@ void vidAskPassword(void) {
 			for (u8 c = 4; c <= 7; c++) {
 				if (Dio_u8GetPinValue(DIO_PORTB,c) == 0) {
 					if(u8KeyPad[c-4][r] == 'c') {
-						Lcd_vidSendCommand(0b00000001); /*Clear screen*/
+						Lcd_vidSendCommand(LCD_CLEAR_SCREEN); /*Clear screen*/
 						number = 0;
 						iUser = 0;
 						break;
@@ -136,3 +157,16 @@ s8 s8GetChoise (void) {
 	}
 }
 
+void vidTraverse(void) {
+	static s8 i = 0;
+	Lcd_vidGoToXY(i,1);
+	Lcd_vidWriteCharacter('m');
+	Lcd_vidGoToXY(15-i,2);
+	Lcd_vidWriteCharacter('m');
+	_delay_ms(100);
+	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+	i++;
+	if (i == 15) {
+		i = 0;
+	}
+}
