@@ -30,26 +30,26 @@ void main(void)  {
 }
 
 void vidChoose(void) {
-	s8Message = "1. Calc 2. Motor";
+	s8Message = "1. Calc 2. Motor\0";
 	Lcd_vidInsertMessage(s8Message);
+	Lcd_vidSendCommand(LCD_RETURN_HOME); /*If I don't add this, there will be a delay in showing the third option*/
 	Lcd_vidGoToXY(0,2);
-	s8Message = "3. Farah";
+	s8Message = "3. Farah\0";
 	Lcd_vidInsertMessage(s8Message);
-	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
-/*	switch(u8choose) {
+	/*	switch(u8choose) {
 		case 1:
-			vidCalc();
-			break;
+		vidCalc();
+		break;
 		case 2:
-			vidMotor();
-			break;
+		vidMotor();
+		break;
 		case 3:
-			vidFarah();
-			break;
+		vidFarah();
+		break;
 		default
-			s8Message = "Invalid Input.";
-			Lcd_vidInsertMessage(s8Message);
-	} */
+		s8Message = "Invalid Input.";
+		Lcd_vidInsertMessage(s8Message);
+		} */
 }
 
 void vidAskPassword(void) {
