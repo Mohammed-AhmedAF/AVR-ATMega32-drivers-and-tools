@@ -19,7 +19,7 @@ build:
 	$(CC) $(SRC) $(CFLAGS) -o main.o
 
 .PHONY : load
-load: build
+load: clean build
 	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
 
 .PHONY : convert
