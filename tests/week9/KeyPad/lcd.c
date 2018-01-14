@@ -40,16 +40,14 @@ void Lcd_vidWriteCharacter(u8 u8DataCpy) {
 	Dio_vidSetPinValue(DIO_PORTA,2,1);
 	Dio_vidSetPortValue(DIO_PORTD,u8DataCpy);
 	Dio_vidSetPinValue(DIO_PORTA,2,0);
-	_delay_ms(500);
+	_delay_ms(5);
 }
 
 void Lcd_vidInsertMessage(s8 * s8Message) {
-	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 	while (*s8Message != '\0') {
 		Lcd_vidWriteCharacter(*s8Message++);
 	}
 	_delay_ms(1000);
-	Lcd_vidSendCommand(0b00000001);
 }
 
 

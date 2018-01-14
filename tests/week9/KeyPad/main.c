@@ -5,7 +5,7 @@
 void Lcd_vidInit();
 void vidTakeNumber(s8);
 void vidAskPassword(void);
-
+void vidChoose(void);
 u8 u8Shift = 0b00010100;
 s8 * s8Message;
 s8 number = 0;
@@ -23,12 +23,20 @@ void main(void)  {
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 	while(1) {
-		vidAskPassword();
+		/*vidAskPassword(); */
+		vidChoose();
+		_delay_ms(10000);
 	}
 }
 
 void vidChoose(void) {
-	switch(u8choose) {
+	s8Message = "1. Calc 2. Motor";
+	Lcd_vidInsertMessage(s8Message);
+	Lcd_vidGoToXY(0,2);
+	s8Message = "3. Farah";
+	Lcd_vidInsertMessage(s8Message);
+	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+/*	switch(u8choose) {
 		case 1:
 			vidCalc();
 			break;
@@ -41,7 +49,7 @@ void vidChoose(void) {
 		default
 			s8Message = "Invalid Input.";
 			Lcd_vidInsertMessage(s8Message);
-	}
+	} */
 }
 
 void vidAskPassword(void) {
