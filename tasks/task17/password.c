@@ -1,0 +1,73 @@
+#include "dio.h"
+#include <util/delay.h> 
+#include "lcd.h"
+#include "Std_Types.h"
+#include "password.h"
+
+s8 u8KeyPad[4][4] = {{'0','c','-',' '},{'1','2','3','+'},{'4','5','6','*'},{'7','8','9','/'}};
+s8 s8Password[4] = {'1','3','2','4'};
+s8 user[16];
+s8 iUser;
+s8 pass, number;
+extern s8 * s8Message;
+
+void vidAskPassword(void) {
+	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+	Lcd_vidSendCommand(LCD_RETURN_HOME);
+	s8Message = "Enter password: ";
+	Lcd_vidInsertMessage(s8Message);
+	Lcd_vidGoToXY(0,2);
+	while (pass == 0) {
+		for (u8 r = 0; r < 4; r++) {
+			Dio_vidSetPinValue(DIO_PORTB,r,0);
+			for (u8 c = 4; c <= 7; c++) {
+				if (Dio_u8GetPinValue(DIO_PORTB,c) == 0) {
+					if(u8KeyPad[c-4][r] == 'c') {
+						Lcd_vidSendCommand(LCD_CLEAR_SCREEN); /*Clear screen*/
+						number = 0;
+						iUser = 0;
+						break;
+					}
+					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);	
+					vidTakeNumber(u8KeyPad[c-4][r]);
+					_delay_ms(300);
+				}
+			}
+			Dio_vidSetPinValue(DIO_PORTB,r,1);
+		}
+	}
+}
+
+void vidTakeNumber(s8 key) {
+	if (key == ' ') {
+		if (iUser >= 5) {
+			Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+			Lcd_vidSendCommand(LCD_RETURN_HOME);
+			s8Message = "Wrong Password";
+			Lcd_vidBlinkMessage(s8Message,3);
+			iUser = 0;
+			_delay_ms(500);
+			vidAskPassword();
+		}
+		else {
+			for(s8 x = 0; x < 4; x++) {
+				if (s8Password[x] == user[x]) {
+					if (x == 3) {
+						pass = 1;
+					}
+					continue;
+				}
+				else  {
+					s8Message = "Error";
+					Lcd_vidInsertMessage(s8Message);
+					break;
+				}
+			}
+		}
+	}
+	else {
+		user[iUser] = key;
+		iUser++;
+	}
+}
+
