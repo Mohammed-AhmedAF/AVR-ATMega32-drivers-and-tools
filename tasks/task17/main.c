@@ -19,7 +19,6 @@ u8 flag = 0xff;
 extern u8 u8KeyPad[4][4];
 extern u8 number;
 extern u8 iUser;
-u8 eq[3];
 u8 res;
 void main(void)  {
 	init();
@@ -110,8 +109,8 @@ void calc() {
 						break;
 					}
 					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);
+					_delay_ms(500);
 					vidPutInEquation(u8KeyPad[c-4][r]);
-					_delay_ms(300);
 				}
 			}
 			Dio_vidSetPinValue(DIO_PORTB,r,1);
@@ -123,28 +122,30 @@ void vidShowResult(void) {
 	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 	Lcd_vidSendCommand(LCD_RETURN_HOME);
 	s8 s8Res = res+48;
-	s8Message = &s8Res;
-	Lcd_vidInsertMessage(s8Message);
+	Lcd_vidWriteCharacter(s8Res);
 	_delay_ms(1000);
 }
 void vidPutInEquation(u8 key) {
 	static s8 i = 0;
+	static u8 eq[4];
+	u8 symbol;
 	if (key == ' ') {
-		switch (eq[1]) {
+		symbol = eq[2];
+		switch (symbol) {
 			case '+':
-				res = (eq[0]-48) + (eq[2]-48);
+				res = (eq[1]-48) + (eq[3]-48);
 				vidShowResult();
 				break;
 			case '-':
-				res = eq[0] - eq[2];
+				res = eq[0] - eq[3];
 				vidShowResult();
 				break;
 			case '*':
-				res = eq[0] * eq[2];
+				res = eq[0] * eq[3];
 				vidShowResult();
 				break;
 			case '/':
-				res = eq[0] / eq[2];
+				res = eq[0] / eq[3];
 				vidShowResult();
 				break;
 			default :
@@ -152,6 +153,7 @@ void vidPutInEquation(u8 key) {
 				Lcd_vidSendCommand(LCD_RETURN_HOME);
 				s8Message = "Invalid equation\0";
 				Lcd_vidBlinkMessage(s8Message,3);
+
 				break;
 		}
 	}
