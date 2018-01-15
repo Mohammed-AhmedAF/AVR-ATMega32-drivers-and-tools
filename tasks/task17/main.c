@@ -2,6 +2,7 @@
 #include "lcd.h"
 #include "password.h"
 #include "farah.h"
+#include "motor.h"
 #include <util/delay.h>
 
 
@@ -9,7 +10,6 @@ void Lcd_vidInit();
 void vidChoose(void);
 void calc(void);
 s8 s8GetChoice(void);
-void vidMotor(void);
 void init(void);
 void vidPutInEquation(u8);
 void vidShowResult(void);
@@ -66,15 +66,6 @@ void init(void) {
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 }
-void vidMotor() {
-	while(1) {
-		Dio_vidSetPinValue(DIO_PORTA,3,1);
-		_delay_ms(2000);
-		Dio_vidSetPinValue(DIO_PORTA,3,0);
-		_delay_ms(2000);
-	}
-}
-
 s8 s8GetChoice (void) {
 	while (1) {
 		for (u8 r = 0; r < 4; r++) {
@@ -137,7 +128,7 @@ void vidPutInEquation(u8 key) {
 				vidShowResult();
 				break;
 			case '-':
-				res = eq[0] - eq[3];
+				res = (eq[1]-48) - (eq[3]-48);
 				vidShowResult();
 				break;
 			case '*':
