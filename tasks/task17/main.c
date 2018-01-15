@@ -1,22 +1,26 @@
 #include "dio.h"
 #include "lcd.h"
 #include "password.h"
+#include "farah.h"
 #include <util/delay.h>
+
 
 void Lcd_vidInit();
 void vidChoose(void);
 void calc(void);
 s8 s8GetChoice(void);
 void vidMotor(void);
-void vidFarah(void);
-void vidTraverse(void);
 void init(void);
+void vidPutInEquation(u8);
+void vidShowResult(void);
 u8 u8Shift = 0b00010100;
 s8 * s8Message;
 u8 flag = 0xff;
 extern u8 u8KeyPad[4][4];
 extern u8 number;
 extern u8 iUser;
+u8 eq[3];
+u8 res;
 void main(void)  {
 	init();
 	while(1) {
@@ -72,20 +76,6 @@ void vidMotor() {
 	}
 }
 
-void vidFarah() {
-	PORTC = 0b00000001;
-	Lcd_vidInit();
-	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
-	while(1) {
-		for (u8 i = 0; i < 6; i++) {
-			_delay_ms(100);
-			PORTC = PORTC << 1;
-			_delay_ms(100);
-			vidTraverse();
-		}
-		PORTC = 0b00000001;
-	}
-}
 s8 s8GetChoice (void) {
 	while (1) {
 		for (u8 r = 0; r < 4; r++) {
@@ -107,20 +97,6 @@ s8 s8GetChoice (void) {
 	}
 }
 
-void vidTraverse(void) {
-	static s8 i = 0;
-	Lcd_vidGoToXY(i,1);
-	Lcd_vidWriteCharacter('m');
-	Lcd_vidGoToXY(15-i,2);
-	Lcd_vidWriteCharacter('m');
-	_delay_ms(100);
-	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
-	i++;
-	if (i == 15) {
-		i = 0;
-	}
-}
-
 void calc() {
 	while (1) {
 		for (u8 r = 0; r < 4; r++) {
@@ -133,11 +109,54 @@ void calc() {
 						iUser = 0;
 						break;
 					}
-						Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);
-						_delay_ms(300);
+					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);
+					vidPutInEquation(u8KeyPad[c-4][r]);
+					_delay_ms(300);
 				}
 			}
 			Dio_vidSetPinValue(DIO_PORTB,r,1);
 		}
 	}
-} 
+}
+
+void vidShowResult(void) {
+	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+	Lcd_vidSendCommand(LCD_RETURN_HOME);
+	s8 s8Res = res+48;
+	s8Message = &s8Res;
+	Lcd_vidInsertMessage(s8Message);
+	_delay_ms(1000);
+}
+void vidPutInEquation(u8 key) {
+	static s8 i = 0;
+	if (key == ' ') {
+		switch (eq[1]) {
+			case '+':
+				res = (eq[0]-48) + (eq[2]-48);
+				vidShowResult();
+				break;
+			case '-':
+				res = eq[0] - eq[2];
+				vidShowResult();
+				break;
+			case '*':
+				res = eq[0] * eq[2];
+				vidShowResult();
+				break;
+			case '/':
+				res = eq[0] / eq[2];
+				vidShowResult();
+				break;
+			default :
+				Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+				Lcd_vidSendCommand(LCD_RETURN_HOME);
+				s8Message = "Invalid equation\0";
+				Lcd_vidBlinkMessage(s8Message,3);
+				break;
+		}
+	}
+	else {
+		eq[i] = key;
+		i++;
+	}
+}
