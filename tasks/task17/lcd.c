@@ -50,4 +50,18 @@ void Lcd_vidInsertMessage(s8 * s8Message) {
 	}
 }
 
+void Lcd_vidBlinkMessage(s8 * s8MessageCpy,s8 s8nCpy) {
+	s8 * s8Message = s8MessageCpy;
+	while (s8nCpy > 0) {
+		Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+		Lcd_vidSendCommand(LCD_RETURN_HOME);
+		_delay_ms(100);
+		while (*s8Message != '\0') {
+			Lcd_vidWriteCharacter(*s8Message++);
+		}
+		s8Message = s8MessageCpy;
+		s8nCpy--;
+		_delay_ms(1000);
+	}
+}
 
