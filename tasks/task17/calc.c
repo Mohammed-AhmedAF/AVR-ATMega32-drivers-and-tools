@@ -4,7 +4,7 @@
 #include "Std_Types.h"
 #include <util/delay.h>
 
-u8 res;
+u32 res;
 extern u8 u8KeyPad[4][4];
 extern s8 * s8Message;
 
@@ -15,7 +15,7 @@ void calc() {
 			for (u8 c = 4; c <= 7; c++) {
 				if (Dio_u8GetPinValue(DIO_PORTB,c) == 0) {
 					if(u8KeyPad[c-4][r] == 'c') {
-						Lcd_vidSendCommand(LCD_CLEAR_SCREEN);						
+					Lcd_vidSendCommand(LCD_CLEAR_SCREEN);						
 						break;	
 					}
 					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);
@@ -28,23 +28,28 @@ void calc() {
 	}
 }
 
-
-
-u8 Calc_u8ToNumber(u8 * u8EqPointerCpy, u8 u8SymbolCpy) {
-	u8 x = Calc_u8Power(10,2);
-	u8 num = 0;
-	while (*u8EqPointerCpy != u8SymbolCpy) { 
-		num = ((*u8EqPointerCpy)-48)/x + num;
+u32 Calc_u32ToNumber(u8 u8EqCpy[], u8 u8SymbolCpy) {
+	u32 x = Calc_u32Power(10,2);
+	u32 num = 0;
+	u8 i = 0;
+	do {
+		if (x == 1) {
+			num = (u8EqCpy[i]-48) + num;
+			Lcd_vidWriteCharacter(u8EqCpy[i]);
+			_delay_ms(800);
+			break;
+		}
+		num = (u8EqCpy[i]-48)*x + num;
+		Lcd_vidWriteCharacter(u8EqCpy[i]);
+		_delay_ms(500);
 		x = x/10;
-		u8EqPointerCpy++;
-
-	}
-	num = ((*u8EqPointerCpy++)-48) + num;
+		i++;
+	}while (u8EqCpy[i] != u8SymbolCpy);
 	return num;
 }
 
-u8 Calc_u8Power(u8 x, u8 y) {
-	u8 res = 1;	
+u32 Calc_u32Power(u8 x, u8 y) {
+	u32 res = 1;	
 	for (u8 i = 1; i <= y; i++) {
 		res = res*x;
 	}
@@ -56,10 +61,10 @@ void vidPutInEquation(u8 key) {
 	static u8 eq[4];
 	u8 symbol;
 	if (key == ' ') {
-		symbol = eq[1];
+		symbol = eq[3];
 		switch (symbol) {
 			case '+':
-				res = Calc_u8ToNumber(eq,'+') + (eq[4]-48);
+				res = Calc_u32ToNumber(eq,'+') + (eq[4]-48);
 				vidShowResult();
 				break;
 			case '-':
@@ -92,19 +97,20 @@ void vidPutInEquation(u8 key) {
 void vidShowResult(void) {
 	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 	Lcd_vidSendCommand(LCD_RETURN_HOME);
-	s8 s8a;
-	u8 x = Calc_u8Power(10,2);
+	u8 u8a;
+	u32 x = Calc_u32Power(10,2);
 	if (res > 9) {
-		for (u8 i = 1; i <= 2; i++) {
-			s8a = (res/x)+48;
-			Lcd_vidWriteCharacter(s8a);
+		for (u8 i = 1; i <= 3; i++) {
+			u8a = (res/x)+48;
+			res = res - (res/x)*x;
+			Lcd_vidWriteCharacter(u8a);
+			_delay_ms(500);
 			x = x/10;
 		}
 	}
 	else {
-		s8 s8Res = res+48;
-		Lcd_vidWriteCharacter(s8Res);
+		u8 u8Res = res+48;
+		Lcd_vidWriteCharacter(u8Res);
 	}
 	_delay_ms(1000);
 }
-
