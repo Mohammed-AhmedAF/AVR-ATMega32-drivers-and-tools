@@ -22,6 +22,10 @@ build:
 load: clean build
 	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
 
+.PHONY : flash
+flash :
+	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
+
 .PHONY : convert
 convert: clean
 	unix2dos *
