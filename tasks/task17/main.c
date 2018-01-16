@@ -132,11 +132,11 @@ void vidPutInEquation(u8 key) {
 				vidShowResult();
 				break;
 			case '*':
-				res = eq[0] * eq[3];
+				res = (eq[1]-48) * (eq[3]-48);
 				vidShowResult();
 				break;
 			case '/':
-				res = eq[0] / eq[3];
+				res = (eq[1]-48) / (eq[3]-48);
 				vidShowResult();
 				break;
 			default :
