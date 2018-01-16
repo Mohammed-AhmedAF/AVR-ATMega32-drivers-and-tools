@@ -3,23 +3,20 @@
 #include "password.h"
 #include "farah.h"
 #include "motor.h"
+#include "calc.h"
 #include <util/delay.h>
 
 
 void Lcd_vidInit();
 void vidChoose(void);
-void calc(void);
 s8 s8GetChoice(void);
 void init(void);
-void vidPutInEquation(u8);
-void vidShowResult(void);
 u8 u8Shift = 0b00010100;
 s8 * s8Message;
 u8 flag = 0xff;
-extern u8 u8KeyPad[4][4];
+u8 u8KeyPad[4][4] = {{'0','c','-',' '},{'1','2','3','+'},{'4','5','6','*'},{'7','8','9','/'}};
 extern u8 number;
 extern u8 iUser;
-u8 res;
 void main(void)  {
 	init();
 	while(1) {
@@ -86,79 +83,5 @@ s8 s8GetChoice (void) {
 			}
 			Dio_vidSetPinValue(DIO_PORTB,r,1);
 		}
-	}
-}
-
-void calc() {
-
-	while (1) {
-		for (u8 r = 0; r < 4; r++) {
-			Dio_vidSetPinValue(DIO_PORTB,r,0);
-			for (u8 c = 4; c <= 7; c++) {
-				if (Dio_u8GetPinValue(DIO_PORTB,c) == 0) {
-					if(u8KeyPad[c-4][r] == 'c') {
-						Lcd_vidSendCommand(LCD_CLEAR_SCREEN);						
-						_delay_ms(300);
-					}
-					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);
-					_delay_ms(500);
-					vidPutInEquation(u8KeyPad[c-4][r]);
-				}
-			}
-			Dio_vidSetPinValue(DIO_PORTB,r,1);
-		}
-	}
-}
-
-void vidShowResult(void) {
-	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
-	Lcd_vidSendCommand(LCD_RETURN_HOME);
-	if (res > 9) {
-		s8 b = (res/10)+48;
-		s8 a = (res%10)+48;
-		Lcd_vidWriteCharacter(b);
-		Lcd_vidWriteCharacter(a);
-	}
-	else {
-		s8 s8Res = res+48;
-	Lcd_vidWriteCharacter(s8Res);
-	}
-	_delay_ms(1000);
-}
-void vidPutInEquation(u8 key) {
-	static s32 i = 0;
-	static u8 eq[4];
-	u8 symbol;
-	if (key == ' ') {
-		symbol = eq[1];
-		switch (symbol) {
-			case '+':
-				res = (eq[0]-48) + (eq[2]-48);
-				vidShowResult();
-				break;
-			case '-':
-				res = (eq[0]-48) - (eq[2]-48);
-				vidShowResult();
-				break;
-			case '*':
-				res = (eq[0]-48) * (eq[2]-48);
-				vidShowResult();
-				break;
-			case '/':
-				res = (eq[0]-48) / (eq[2]-48);
-				vidShowResult();
-				break;
-			default :
-				Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
-				Lcd_vidSendCommand(LCD_RETURN_HOME);
-				s8Message = "Invalid equation\0";
-				Lcd_vidBlinkMessage(s8Message,3);
-
-				break;
-		}
-	}
-	else {
-		eq[i] = key;
-		i++;
 	}
 }

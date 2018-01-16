@@ -4,7 +4,7 @@
 #include "Std_Types.h"
 #include "password.h"
 
-s8 u8KeyPad[4][4] = {{'0','c','-',' '},{'1','2','3','+'},{'4','5','6','*'},{'7','8','9','/'}};
+extern u8 u8KeyPad[4][4];
 s8 s8Password[4] = {'1','3','2','4'};
 s8 user[16];
 s8 iUser;
@@ -38,8 +38,8 @@ void vidAskPassword(void) {
 	}
 }
 
-void vidTakeNumber(s8 key) {
-	if (key == ' ') {
+void vidTakeNumber(s8 keyCpy) {
+	if (keyCpy == ' ') {
 		if (iUser >= 5) {
 			Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 			Lcd_vidSendCommand(LCD_RETURN_HOME);
@@ -66,7 +66,7 @@ void vidTakeNumber(s8 key) {
 		}
 	}
 	else {
-		user[iUser] = key;
+		user[iUser] = keyCpy;
 		iUser++;
 	}
 }
