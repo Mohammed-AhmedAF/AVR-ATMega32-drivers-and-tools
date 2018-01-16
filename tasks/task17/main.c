@@ -40,9 +40,9 @@ void vidChoose(void) {
 	s8Message = "3. Farah\0";
 	Lcd_vidInsertMessage(s8Message);
 	s8Choise = s8GetChoice();
+	_delay_ms(500);
 	switch (s8Choise) {
 		case '1':
-			s8Message = "Calc\0";
 			calc();
 			break;
 		case '2':
@@ -53,6 +53,8 @@ void vidChoose(void) {
 			break;
 		default :
 			s8Message = "Invalid ans.\0";
+			Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+			Lcd_vidSendCommand(LCD_RETURN_HOME);
 			Lcd_vidInsertMessage(s8Message);
 	}
 }
@@ -88,16 +90,15 @@ s8 s8GetChoice (void) {
 }
 
 void calc() {
+
 	while (1) {
 		for (u8 r = 0; r < 4; r++) {
 			Dio_vidSetPinValue(DIO_PORTB,r,0);
 			for (u8 c = 4; c <= 7; c++) {
 				if (Dio_u8GetPinValue(DIO_PORTB,c) == 0) {
 					if(u8KeyPad[c-4][r] == 'c') {
-						Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
-						number = 0;
-						iUser = 0;
-						break;
+						Lcd_vidSendCommand(LCD_CLEAR_SCREEN);						
+						_delay_ms(300);
 					}
 					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);
 					_delay_ms(500);
@@ -112,31 +113,39 @@ void calc() {
 void vidShowResult(void) {
 	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 	Lcd_vidSendCommand(LCD_RETURN_HOME);
-	s8 s8Res = res+48;
+	if (res > 9) {
+		s8 b = (res/10)+48;
+		s8 a = (res%10)+48;
+		Lcd_vidWriteCharacter(b);
+		Lcd_vidWriteCharacter(a);
+	}
+	else {
+		s8 s8Res = res+48;
 	Lcd_vidWriteCharacter(s8Res);
+	}
 	_delay_ms(1000);
 }
 void vidPutInEquation(u8 key) {
-	static s8 i = 0;
+	static s32 i = 0;
 	static u8 eq[4];
 	u8 symbol;
 	if (key == ' ') {
-		symbol = eq[2];
+		symbol = eq[1];
 		switch (symbol) {
 			case '+':
-				res = (eq[1]-48) + (eq[3]-48);
+				res = (eq[0]-48) + (eq[2]-48);
 				vidShowResult();
 				break;
 			case '-':
-				res = (eq[1]-48) - (eq[3]-48);
+				res = (eq[0]-48) - (eq[2]-48);
 				vidShowResult();
 				break;
 			case '*':
-				res = (eq[1]-48) * (eq[3]-48);
+				res = (eq[0]-48) * (eq[2]-48);
 				vidShowResult();
 				break;
 			case '/':
-				res = (eq[1]-48) / (eq[3]-48);
+				res = (eq[0]-48) / (eq[2]-48);
 				vidShowResult();
 				break;
 			default :
