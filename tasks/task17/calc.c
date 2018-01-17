@@ -7,6 +7,8 @@
 u32 res;
 extern u8 u8KeyPad[4][4];
 extern s8 * s8Message;
+u8 lSize;
+u8 rSize;
 
 void calc() {
 	while (1) {
@@ -15,7 +17,7 @@ void calc() {
 			for (u8 c = 4; c <= 7; c++) {
 				if (Dio_u8GetPinValue(DIO_PORTB,c) == 0) {
 					if(u8KeyPad[c-4][r] == 'c') {
-					Lcd_vidSendCommand(LCD_CLEAR_SCREEN);						
+						Lcd_vidSendCommand(LCD_CLEAR_SCREEN);						
 						break;	
 					}
 					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);
@@ -28,24 +30,32 @@ void calc() {
 	}
 }
 
-u32 Calc_u32ToNumber(u8 u8EqCpy[], u8 u8SymbolCpy) {
-	u32 x = Calc_u32Power(10,2);
-	u32 num = 0;
+u32 Calc_u32ToNumber(u8 u8EqCpy[], u8 sideCpy) {
+	u32 x;
 	u8 i = 0;
-	do {
+	u32 num = 0;
+	u8 size;
+	if (sideCpy == 'l') {
+		x = Calc_u32Power(10,lSize-1);
+		i = 0;
+		size = lSize;
+	}
+	else {
+		x = Calc_u32Power(10,rSize-1);
+		i = lSize+1;
+		size = rSize;
+	}
+	for (u8 j = 0; j < size; j++) {
 		if (x == 1) {
 			num = (u8EqCpy[i]-48) + num;
-			Lcd_vidWriteCharacter(u8EqCpy[i]);
-			_delay_ms(800);
 			break;
 		}
 		num = (u8EqCpy[i]-48)*x + num;
-		Lcd_vidWriteCharacter(u8EqCpy[i]);
-		_delay_ms(500);
 		x = x/10;
 		i++;
-	}while (u8EqCpy[i] != u8SymbolCpy);
+	}
 	return num;
+
 }
 
 u32 Calc_u32Power(u8 x, u8 y) {
@@ -56,27 +66,43 @@ u32 Calc_u32Power(u8 x, u8 y) {
 	return res;
 }
 
+void vidPack(u8 eqCpy[],u8 u8SymbolCpy) {
+	u8 i = 0;
+	u8 j = 0;
+	do {
+		i++;
+	}while (eqCpy[i] != u8SymbolCpy);
+	lSize = i;
+	do {
+		i++;
+	}while (eqCpy[i] != ' ');
+	rSize = i-lSize-1;
+}
+
 void vidPutInEquation(u8 key) {
 	static s32 i = 0;
-	static u8 eq[4];
+	static u8 eq[10];
 	u8 symbol;
 	if (key == ' ') {
+		eq[i] = key;
 		symbol = eq[3];
 		switch (symbol) {
 			case '+':
-				res = Calc_u32ToNumber(eq,'+') + (eq[4]-48);
+				vidPack(eq,'+');
+				res = Calc_u32ToNumber(eq,'l') + Calc_u32ToNumber(eq,'r');
 				vidShowResult();
 				break;
 			case '-':
-				res = (eq[0]-48) - (eq[2]-48);
+				vidPack(eq,'-');
+				res = Calc_u32ToNumber(eq,'l') - Calc_u32ToNumber(eq,'l');
 				vidShowResult();
 				break;
 			case '*':
-				res = (eq[0]-48) * (eq[2]-48);
+				res = Calc_u32ToNumber(eq,symbol) * (eq[2]-48);
 				vidShowResult();
 				break;
 			case '/':
-				res = (eq[0]-48) / (eq[2]-48);
+				res = Calc_u32ToNumber(eq,symbol) / (eq[4]-48);
 				vidShowResult();
 				break;
 			default :
@@ -84,7 +110,6 @@ void vidPutInEquation(u8 key) {
 				Lcd_vidSendCommand(LCD_RETURN_HOME);
 				s8Message = "Invalid equation\0";
 				Lcd_vidBlinkMessage(s8Message,3);
-
 				break;
 		}
 	}
@@ -98,9 +123,9 @@ void vidShowResult(void) {
 	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 	Lcd_vidSendCommand(LCD_RETURN_HOME);
 	u8 u8a;
-	u32 x = Calc_u32Power(10,2);
+	u32 x = Calc_u32Power(10,rSize-1);
 	if (res > 9) {
-		for (u8 i = 1; i <= 3; i++) {
+		for (u8 i = 1; i <= rSize; i++) {
 			u8a = (res/x)+48;
 			res = res - (res/x)*x;
 			Lcd_vidWriteCharacter(u8a);
