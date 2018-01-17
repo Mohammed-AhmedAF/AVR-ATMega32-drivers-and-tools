@@ -38,6 +38,16 @@ void vidAskPassword(void) {
 	}
 }
 
+void vidBlinkLed(u8 portNumberCpy, u8 pinNumberCpy, u8 numberCpy) {
+	while (numberCpy > 0) {
+		Dio_vidSetPinValue(portNumberCpy,pinNumberCpy,1);
+		_delay_ms(500);
+		Dio_vidSetPinValue(portNumberCpy,pinNumberCpy,0);
+		_delay_ms(500);
+		numberCpy--;
+	}
+}
+
 void vidTakeNumber(s8 keyCpy) {
 	if (keyCpy == ' ') {
 		if (iUser >= 5) {
@@ -54,12 +64,14 @@ void vidTakeNumber(s8 keyCpy) {
 				if (s8Password[x] == user[x]) {
 					if (x == 3) {
 						pass = 1;
+						vidBlinkLed(DIO_PORTC,2,5);
 					}
 					continue;
 				}
 				else  {
 					s8Message = "Error";
 					Lcd_vidInsertMessage(s8Message);
+					vidBlinkLed(DIO_PORTC,0,5);
 					break;
 				}
 			}
