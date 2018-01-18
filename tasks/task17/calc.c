@@ -4,12 +4,12 @@
 #include "Std_Types.h"
 #include <util/delay.h>
 
-u32 res;
+s32 res;
 extern u8 u8KeyPad[4][4];
 extern s8 * s8Message;
+u8 eq[10];
 u8 lSize;
 u8 rSize;
-
 void calc() {
 	while (1) {
 		for (u8 r = 0; r < 4; r++) {
@@ -30,18 +30,18 @@ void calc() {
 	}
 }
 
-u32 Calc_u32ToNumber(u8 u8EqCpy[], u8 sideCpy) {
-	u32 x;
+s32 Calc_s32ToNumber(u8 u8EqCpy[], u8 sideCpy) {
+	s32 x;
 	u8 i = 0;
-	u32 num = 0;
+	s32 num = 0;
 	u8 size;
 	if (sideCpy == 'l') {
-		x = Calc_u32Power(10,lSize-1);
+		x = Calc_s32Power(10,lSize-1);
 		i = 0;
 		size = lSize;
 	}
 	else {
-		x = Calc_u32Power(10,rSize-1);
+		x = Calc_s32Power(10,rSize-1);
 		i = lSize+1;
 		size = rSize;
 	}
@@ -58,8 +58,8 @@ u32 Calc_u32ToNumber(u8 u8EqCpy[], u8 sideCpy) {
 
 }
 
-u32 Calc_u32Power(u8 x, u8 y) {
-	u32 res = 1;	
+s32 Calc_s32Power(u8 x, u8 y) {
+	s32 res = 1;	
 	for (u8 i = 1; i <= y; i++) {
 		res = res*x;
 	}
@@ -79,40 +79,38 @@ void vidPack(u8 eqCpy[],u8 u8SymbolCpy) {
 	rSize = i-lSize-1;
 }
 
-u8 u8GetSignPosition(u8 eqCpy[]) {
+u8 u8GetSymbolPosition(u8 eq[]) {
 	u8 i = 0;
 	do {
 		i++;
-	}while(eqCpy[i] != '+');
-	return eqCpy[i];
-
+	}while ((eq[i] != '*') && (eq[i] != '+') && (eq[i] != '/') && (eq[i] != '-'));
+	return i;
 }
 
 void vidPutInEquation(u8 key) {
 	static s32 i = 0;
-	static u8 eq[10];
+	static u8 symbolPosition;
 	u8 symbol;
 	if (key == ' ') {
 		eq[i] = key;
-		symbol = u8GetSignPosition(eq);
+		symbol = eq[u8GetSymbolPosition(eq)];
+		vidPack(eq,symbol);
 		switch (symbol) {
 			case '+':
-				vidPack(eq,'+');
-				res = Calc_u32ToNumber(eq,'l') + Calc_u32ToNumber(eq,'r');
-				vidShowResult();
+				res = Calc_s32ToNumber(eq,'l') + Calc_s32ToNumber(eq,'r');
+				vidShowResult(0);
 				break;
 			case '-':
-				vidPack(eq,'-');
-				res = Calc_u32ToNumber(eq,'l') - Calc_u32ToNumber(eq,'l');
-				vidShowResult();
+				res = Calc_s32ToNumber(eq,'l') - Calc_s32ToNumber(eq,'r');
+				vidShowResult(0);
 				break;
 			case '*':
-				res = Calc_u32ToNumber(eq,symbol) * (eq[2]-48);
-				vidShowResult();
+				res = Calc_s32ToNumber(eq,'l') * Calc_s32ToNumber(eq,'r');
+				vidShowResult(0);
 				break;
 			case '/':
-				res = Calc_u32ToNumber(eq,symbol) / (eq[4]-48);
-				vidShowResult();
+				res = Calc_s32ToNumber(eq,'l') / Calc_s32ToNumber(eq,'r');
+				vidShowResult(0);
 				break;
 			default :
 				Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
@@ -123,29 +121,31 @@ void vidPutInEquation(u8 key) {
 		}
 	}
 	else {
-	eq[i] = key;
+		eq[i] = key;
 		i++;
 	}
 }
-
-u8 u8GetResultSize(void) {
-	u32 x = 0;
-	u8 p = 0;
-	do {
-		x = Calc_u32Power(10,p)*9+x;
-		p++;
-	}while (res > x);
-	return p+1;
+s8 s8GetResultSize(void) {
+	s32 n = res;
+	s8 count = 0;
+	while(n != 0)
+	{
+		n /= 10;
+		++count;
+	}
+	return count;
 }
-
-void vidShowResult(void) {
-	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
-	Lcd_vidSendCommand(LCD_RETURN_HOME);
+void vidShowResult(u8 callCpy) {
 	u8 u8a;
-	u8 size = 3;
+	u8 resSize;
+	if (callCpy == 0) {
+		Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
+		Lcd_vidSendCommand(LCD_RETURN_HOME);
+	}
 	if (res > 9) {
-		u8 x = Calc_u32Power(10,size);
-		for (u8 i = 1; i <= size; i++) {
+		resSize = s8GetResultSize();
+		s32 x = Calc_s32Power(10,resSize-1);	
+		for (s8 i = 1; i <= resSize; i++) {
 			u8a = (res/x)+48;
 			res = res - (res/x)*x;
 			Lcd_vidWriteCharacter(u8a);
@@ -153,9 +153,13 @@ void vidShowResult(void) {
 			x = x/10;
 		}
 	}
-	else {
+	else if (0 < res) {
 		u8 u8Res = res+48;
 		Lcd_vidWriteCharacter(u8Res);
 	}
-	_delay_ms(1000);
+	else {
+		Lcd_vidWriteCharacter('-');
+		res = res*(-1);
+		vidShowResult(1);	
+	}
 }
