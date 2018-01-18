@@ -79,13 +79,22 @@ void vidPack(u8 eqCpy[],u8 u8SymbolCpy) {
 	rSize = i-lSize-1;
 }
 
+u8 u8GetSignPosition(u8 eqCpy[]) {
+	u8 i = 0;
+	do {
+		i++;
+	}while(eqCpy[i] != '+');
+	return eqCpy[i];
+
+}
+
 void vidPutInEquation(u8 key) {
 	static s32 i = 0;
 	static u8 eq[10];
 	u8 symbol;
 	if (key == ' ') {
 		eq[i] = key;
-		symbol = eq[3];
+		symbol = u8GetSignPosition(eq);
 		switch (symbol) {
 			case '+':
 				vidPack(eq,'+');
@@ -114,18 +123,29 @@ void vidPutInEquation(u8 key) {
 		}
 	}
 	else {
-		eq[i] = key;
+	eq[i] = key;
 		i++;
 	}
+}
+
+u8 u8GetResultSize(void) {
+	u32 x = 0;
+	u8 p = 0;
+	do {
+		x = Calc_u32Power(10,p)*9+x;
+		p++;
+	}while (res > x);
+	return p+1;
 }
 
 void vidShowResult(void) {
 	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 	Lcd_vidSendCommand(LCD_RETURN_HOME);
 	u8 u8a;
-	u32 x = Calc_u32Power(10,rSize-1);
+	u8 size = 3;
 	if (res > 9) {
-		for (u8 i = 1; i <= rSize; i++) {
+		u8 x = Calc_u32Power(10,size);
+		for (u8 i = 1; i <= size; i++) {
 			u8a = (res/x)+48;
 			res = res - (res/x)*x;
 			Lcd_vidWriteCharacter(u8a);
