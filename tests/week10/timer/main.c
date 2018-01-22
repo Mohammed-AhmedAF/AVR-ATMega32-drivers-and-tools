@@ -1,9 +1,8 @@
-#include "dio.h"
-#include "Std_Types.h"
 #include "Macros.h"
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include "lcd.h"
+#include "dio.h"
 volatile u8 count = 0;
 
 void main(void) {
@@ -27,9 +26,11 @@ void main(void) {
 	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 	Lcd_vidSendCommand(LCD_RETURN_HOME);
 	while (1) {
-		if (count >= 30) {
+		if (count == 30) {
+			if (TCNT0 == 124) {
 				Toggle_Bit(PORTA,7);
 				count = 0;
+			}
 		}
 	}
 
