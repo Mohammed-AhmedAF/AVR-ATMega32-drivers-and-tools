@@ -5,11 +5,11 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 volatile u8 count;
-
+void Lcd_vidShowCount(u8);
 void main(void) {
 
 	Dio_vidSetPortDirection(DIO_PORTA,0b10000111);
-	Dio_vidSetPortDirection(DIO_PORTA,0b11111111);
+	Dio_vidSetPortDirection(DIO_PORTD,0b11111111);
 	Lcd_vidInit();
 
 	Set_Bit(TIMSK,0);
@@ -18,6 +18,9 @@ void main(void) {
 	Set_Bit(TCCR0,0);
 	Clear_Bit(TCCR0,1);
 	Set_Bit(TCCR0,2);
+
+	Clear_Bit(TCCR0,3);
+	Clear_Bit(TCCR0,6);
 
 	Set_Bit(SREG,7);
 
@@ -30,8 +33,11 @@ void main(void) {
 	}
 }
 
-void Lcd_vidShowCount(u8 res) {
-	u8 * message;
+
+ISR(TIMER0_OVF_vect) {
+	count++;
+	u8 res = count;
+	s8 * message;
 	u8 arr[3];
 	u8 u8a;
 	u8 x = 100;
@@ -43,14 +49,10 @@ void Lcd_vidShowCount(u8 res) {
 	}
 	message = arr;
 	Lcd_vidInsertSizedMessage(message,3);
+	_delay_ms(400);
 	Lcd_vidSendCommand(LCD_CLEAR_SCREEN);
 	Lcd_vidSendCommand(LCD_RETURN_HOME);
 
-}
-
-ISR(TIMER0_OVF_vect) {
-	count++;
-	Lcd_vidShowCount(TCNT0);
 }
 
 
