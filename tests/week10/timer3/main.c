@@ -24,8 +24,10 @@ void main(void) {
 
 	while(1) {
 		if (count == 30) {
-			Toggle_Bit(PORTA,7);
-			count = 0;
+			if (TCNT0 == 170) {
+				Toggle_Bit(PORTA,7);
+				count = 0;
+			}
 		}
 	}
 
