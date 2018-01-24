@@ -1,5 +1,5 @@
 CC = avr-gcc
-SRC = main.c dio.c
+SRC = potentioMeter.c dio.c lcd.c
 CFLAGS = -mmcu=atmega32 -I . -O
 
 PRO = avrdude
