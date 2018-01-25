@@ -4,6 +4,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 volatile u8 value = 0;
+const u8 vals[9] = {0b00000000,0b00000001,0b00000011,0b00000111,0b00001111,0b00011111,0b00111111,0b01111111,0b11111111};
 void main(void) {
 	//Setting pin direction for LED
 	Dio_vidSetPortDirection(DIO_PORTA,0b00000000);
@@ -41,8 +42,8 @@ void main(void) {
 		
 
 	while(1) {
-		Dio_vidSetPortValue(DIO_PORTB,value);
-		_delay_ms(300);
+		u8 indx = value/31;
+		Dio_vidSetPortValue(DIO_PORTB,vals[indx]);
 	}
 
 }
