@@ -1,5 +1,7 @@
+
+MAIN = main.c
 CC = avr-gcc
-SRC = main.c DIO_prog.c LCD_prog.c
+SRC = $(MAIN) DIO_prog.c LCD_prog.c
 CFLAGS = -mmcu=atmega32 -I . -O
 OUT = main.o
 
@@ -25,7 +27,7 @@ load: clean build
 
 .PHONY : flash
 flash :
-	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
+	$(PRO) -p atmega32 -c usbasp -U flash:w:$(OUT)
 
 .PHONY : convert
 convert: clean
