@@ -24,4 +24,5 @@
 void LCD_vidInit(void);
 void LCD_vidSendCommand(u8);
 void LCD_vidWriteChar(u8);
+void LCD_vidWriteString(u8*);
 #endif

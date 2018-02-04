@@ -62,3 +62,13 @@ void LCD_vidWriteChar(u8 charCpy) {
 	_delay_ms(2);
 	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,0);
 }
+
+void LCD_vidWriteString(u8 * u8String) {
+	u8 charCpy;
+	while(*(u8String) != '\0') {
+		charCpy = *u8String;
+		LCD_vidWriteChar(charCpy);
+		u8String++;
+	}
+}
+

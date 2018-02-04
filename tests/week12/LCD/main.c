@@ -7,8 +7,8 @@
 void main(void) {
 
 	LCD_vidInit();
-
-		LCD_vidWriteChar('m');
+		u8 * message = "Hello\0";
+		LCD_vidWriteString(message);
 		_delay_ms(400);
 
 }
