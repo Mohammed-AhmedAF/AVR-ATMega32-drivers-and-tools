@@ -25,12 +25,12 @@
 #define PORTD *((u8*) 0x32)
 #define PIND *((u8*) 0x30)
 
-void Dio_vidSetPortDirection(u8 u8PortNumberCpy, u8 u8DirectionCpy);
-void Dio_vidSetPortValue(u8 u8PortNumberCpy, u8 u8ValueCpy);
-u8 Dio_u8GetPortValue(u8 u8PortNumberCpy);
+void DIO_vidSetPortDirection(u8 u8PortNumberCpy, u8 u8DirectionCpy);
+void DIO_vidSetPortValue(u8 u8PortNumberCpy, u8 u8ValueCpy);
+u8 DIO_u8GetPortValue(u8 u8PortNumberCpy);
 
-void Dio_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8ValueCpy);
-void Dio_vidSetPinDirection(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8DirectionCpy);
-u8 Dio_u8GetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy);
+void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8ValueCpy);
+void DIO_vidSetPinDirection(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8DirectionCpy);
+u8 DIO_u8GetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy);
 
 #endif

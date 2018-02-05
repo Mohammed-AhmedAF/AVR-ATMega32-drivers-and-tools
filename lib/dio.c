@@ -2,7 +2,7 @@
 #include "Std_Types.h"
 #include "Macros.h"
 
-void Dio_vidSetPortValue(u8 u8PortNumberCpy, u8 u8ValueCpy) {
+void DIO_vidSetPortValue(u8 u8PortNumberCpy, u8 u8ValueCpy) {
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
 			PORTA = u8ValueCpy;
@@ -19,7 +19,7 @@ void Dio_vidSetPortValue(u8 u8PortNumberCpy, u8 u8ValueCpy) {
 	}
 }
 
-void Dio_vidSetPortDirection(u8 u8PortNumberCpy, u8 u8DirectionCpy) {
+void DIO_vidSetPortDirection(u8 u8PortNumberCpy, u8 u8DirectionCpy) {
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
 		DDRA = u8DirectionCpy;
@@ -36,7 +36,7 @@ void Dio_vidSetPortDirection(u8 u8PortNumberCpy, u8 u8DirectionCpy) {
 	}
 }
 
-u8 Dio_u8GetPortValue(u8 u8PortNumberCpy) {
+u8 DIO_u8GetPortValue(u8 u8PortNumberCpy) {
 	u8 u8Value;
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
@@ -55,8 +55,7 @@ u8 Dio_u8GetPortValue(u8 u8PortNumberCpy) {
 	return u8Value;
 }
 
-void Dio_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
-	u8 u8Port;
+void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
 			if (u8ValueCpy == 1) {
@@ -92,44 +91,57 @@ void Dio_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
 			break;
 		}
 }
-void Dio_u8SetPinDirection(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8DirectionCpy) {
-	u8 u8Port;
+
+void DIO_vidSetPinDirection(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8DirectionCpy) {
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
-			u8Port = DDRA;
+			if(u8DirectionCpy == STD_HIGH) {
+				Set_Bit(DDRA,u8PinNumberCpy);
+			}
+			else {
+				Clear_Bit(DDRA,u8PinNumberCpy);
+			}
 			break;
 		case DIO_PORTB:
-			u8Port = DDRB;
+			if(u8DirectionCpy == STD_HIGH) {
+				Set_Bit(DDRB,u8PinNumberCpy);
+			}
+			else {
+				Clear_Bit(DDRB,u8PinNumberCpy);
+			}
 			break;
 		case DIO_PORTC:
-			u8Port = DDRC;
+			if(u8DirectionCpy == STD_HIGH) {
+				Set_Bit(DDRC,u8PinNumberCpy);
+			}
+			else {
+				Clear_Bit(DDRC,u8PinNumberCpy);
+			}
 			break;
 		case DIO_PORTD:
-			u8Port = DDRD;
-			break;
-	}
-	if (u8DirectionCpy == STD_HIGH) {
-		Set_Bit (u8Port,u8PinNumberCpy);	
-	}
-	else {
-		Clear_Bit (u8Port,u8PinNumberCpy);
+			if(u8DirectionCpy == STD_HIGH) {
+				Set_Bit(DDRD,u8PinNumberCpy);
+			}
+			else {
+				Clear_Bit(DDRD,u8PinNumberCpy);
+			}
 	}
 }
 
-u8 Dio_u8GetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy) {
+u8 DIO_u8GetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy) {
 	u8 u8Value;
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
-		u8Value = Get_Bit(PINA,u8PinNumberCpy);
+		u8Value = GET_BIT(PINA,u8PinNumberCpy);
 		break;
 		case DIO_PORTB:
-		u8Value = Get_Bit(PINB,u8PinNumberCpy);
+		u8Value = GET_BIT(PINB,u8PinNumberCpy);
 		break;
 		case DIO_PORTC:
-		u8Value = Get_Bit(PINC, u8PinNumberCpy);
+		u8Value = GET_BIT(PINC, u8PinNumberCpy);
 		break;
 		case DIO_PORTD:
-		u8Value = Get_Bit(PIND,u8PinNumberCpy);
+		u8Value = GET_BIT(PIND,u8PinNumberCpy);
 		break;
 	}
 	return u8Value;
