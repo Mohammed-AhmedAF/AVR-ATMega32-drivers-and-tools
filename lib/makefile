@@ -1,5 +1,6 @@
+MAIN = main.c
 CC = avr-gcc
-SRC = main.c dio.c lcd.c password.c farah.c motor.c calc.c
+SRC = $(MAIN) DIO_prog.c
 CFLAGS = -mmcu=atmega32 -I . -O
 
 PRO = avrdude
