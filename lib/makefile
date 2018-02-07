@@ -19,8 +19,11 @@ PRO = avrdude
 build:
 	$(CC) $(SRC) $(CFLAGS) -o main.o
 
+.PHONY : generate_ctags
+	ctags -R
+
 .PHONY : load
-load: clean build
+load: clean generate_ctags build
 	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
 
 .PHONY : flash
