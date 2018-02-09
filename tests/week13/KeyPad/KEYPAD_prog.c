@@ -10,14 +10,14 @@ void KEYPAD_vidInit() {
 	DIO_vidSetPinDirection(ROW2_PORT,ROW2_PIN,1);
 	DIO_vidSetPinDirection(ROW3_PORT,ROW3_PIN,1);
 
-	DIO_vidSetPinDirection(COL0_PORT,COL0_PORT,0);	
+	DIO_vidSetPinDirection(COL0_PORT,COL0_PIN,0);	
 	DIO_vidSetPinValue(COL0_PORT,COL0_PIN,1);	
 	DIO_vidSetPinDirection(COL1_PORT,COL1_PIN,0);
 	DIO_vidSetPinValue(COL1_PORT,COL1_PIN,1);
 	DIO_vidSetPinDirection(COL2_PORT,COL2_PIN,0);
 	DIO_vidSetPinValue(COL2_PORT,COL2_PIN,1);
 	DIO_vidSetPinDirection(COL3_PIN,COL3_PIN,0);
-	DIO_vidSetPinValue(COL2_PORT,COL2_PIN,1);
+	DIO_vidSetPinValue(COL3_PORT,COL3_PIN,1);
 
 }
 
