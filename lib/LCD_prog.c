@@ -75,9 +75,10 @@ void LCD_vidWriteCharacter(u8 charCpy) {
 	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,1);
 }
 
-void LCD_vidWriteString(u8 * u8String) {	
-	while(*u8String != '\0') {
-		LCD_vidWriteCharacter(*u8String++);
+void LCD_vidWriteString(s8 * s8String) {	
+	while(*s8String != '\0') {
+		u8 ch = *s8String++;
+		LCD_vidWriteCharacter(ch);
 	}
 }
 
