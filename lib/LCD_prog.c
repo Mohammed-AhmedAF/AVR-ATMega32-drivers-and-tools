@@ -55,7 +55,7 @@ void LCD_vidSendCommand(u8 commandCpy) {
 	_delay_ms(2);
 }
 
-void LCD_vidWriteChar(u8 charCpy) {
+void LCD_vidWriteCharacter(u8 charCpy) {
 	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_RS,STD_HIGH);
 	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_RW,STD_LOW);
 
