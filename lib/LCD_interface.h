@@ -32,6 +32,6 @@
 void LCD_vidInit(void);
 void LCD_vidSendCommand(u8);
 void LCD_vidWriteCharacter(u8);
-void LCD_vidWriteString(s8*);
+void LCD_vidWriteString(u8*);
 void LCD_vidGoToXY(s8,s8);
 #endif
