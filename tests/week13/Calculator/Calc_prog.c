@@ -5,11 +5,22 @@
 #include <util/delay.h>
 
 s32 res;
+s8 ind;
 u8 eq[10];
 u8 lSize;
 u8 rSize;
 /*vidPutInEquation(u8KeyPad[c-4][r] */
 extern s8 * s8Message;
+void Calc_vidRestart(void) {
+	u8 i = 0;
+	for (i = 0; i < 10; i++) {
+		eq[i] = 0;
+	}
+	res = 0;
+	lSize = 0;
+	rSize = 0;
+	ind = 0;
+}
 s32 Calc_s32ToNumber(u8 u8EqCpy[], u8 sideCpy) {
 	s32 x;
 	u8 i = 0;
@@ -67,12 +78,11 @@ u8 u8GetSymbolPosition(u8 eq[]) {
 	return i;
 }
 
-void vidPutInEquation(u8 key) {
-	static s32 i = 0;
+void Calc_vidPutInEquation(u8 key) {
 	static u8 symbolPosition;
-	u8 symbol;
+	static u8 symbol;
 	if (key == '=') {
-		eq[i] = key;
+		eq[ind] = key;
 		symbol = eq[u8GetSymbolPosition(eq)];
 		vidPack(eq,symbol);
 		switch (symbol) {
@@ -89,20 +99,26 @@ void vidPutInEquation(u8 key) {
 				vidShowResult(0);
 				break;
 			case '/':
-				res = Calc_s32ToNumber(eq,'l') / Calc_s32ToNumber(eq,'r');
-				vidShowResult(0);
+				if (Calc_s32ToNumber(eq,'r') == 0) {
+					s8Message = "Div by 0!";
+					LCD_vidGoToXY(0,2);
+					LCD_vidWriteString(s8Message);
+				}
+				else {
+					res = Calc_s32ToNumber(eq,'l') / Calc_s32ToNumber(eq,'r');
+					vidShowResult(0);
+				}
 				break;
 			default :
-				LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-				LCD_vidSendCommand(LCD_RETURN_HOME);
+				LCD_vidGoToXY(0,2);
 				s8Message = "Invalid equation\0";
 				LCD_vidBlinkString(s8Message,3);
 				break;
 		}
 	}
 	else {
-		eq[i] = key;
-		i++;
+		eq[ind] = key;
+		ind++;
 	}
 }
 s8 s8GetResultSize(void) {
@@ -119,8 +135,7 @@ void vidShowResult(u8 callCpy) {
 	u8 u8a;
 	u8 resSize;
 	if (callCpy == 0) {
-		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		LCD_vidSendCommand(LCD_RETURN_HOME);
+		LCD_vidGoToXY(0,2);
 	}
 	if (res > 9) {
 		resSize = s8GetResultSize();
