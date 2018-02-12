@@ -13,8 +13,13 @@ void Services_vidWriteCharacter(void) {
 		_delay_ms(200);
 		u8keyPressed = KEYPAD_u8GetKey();
 	}while(u8keyPressed == 0xFF);
-	if((u8keyPressed >= 0) && (u8keyPressed <= 9)) {
-		u8keyPressed += 0x30;
+	if (u8keyPressed == '#') {
+		_delay_ms(1000);
 	}
-	LCD_vidWriteCharacter(u8keyPressed);
+	else {
+		if((u8keyPressed >= 0) && (u8keyPressed <= 9)) {
+			u8keyPressed += 0x30;
+		}
+		LCD_vidWriteCharacter(u8keyPressed);
+	}
 }
