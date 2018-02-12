@@ -3,9 +3,9 @@
 #include "DIO_interface.h"
 #include "LCD_interface.h"
 #include "KEYPAD_interface.h"
+#include "Services_interface.h"
 #include <util/delay.h>
 
-u8 u8keyPressed;
 void Services_vidWriteCharacter(void) {
 	u8keyPressed = 0xFF;
 	do {

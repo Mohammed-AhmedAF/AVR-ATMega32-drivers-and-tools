@@ -16,7 +16,7 @@ void KEYPAD_vidInit() {
 	DIO_vidSetPinValue(COL1_PORT,COL1_PIN,1);
 	DIO_vidSetPinDirection(COL2_PORT,COL2_PIN,0);
 	DIO_vidSetPinValue(COL2_PORT,COL2_PIN,1);
-	DIO_vidSetPinDirection(COL3_PIN,COL3_PIN,0);
+	DIO_vidSetPinDirection(COL3_PORT,COL3_PIN,0);
 	DIO_vidSetPinValue(COL3_PORT,COL3_PIN,1);
 
 }

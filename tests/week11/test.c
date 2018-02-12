@@ -1,16 +1,18 @@
 #include <stdio.h>
 
-int calculateSum(int *, int);
+int calculateSum(int *);
 
 void main(void) {
 	
 	int A[5] = {1,2,3,4,5};
-	int size = sizeof(A)/sizeof(A[0]);
-	int sum = calculateSum(A,size);
-	printf("Sum is %d\n", sum);
+
+	printf("Sum is %d\n", calculateSum(A));
 }
-int calculateSum(int * A, int size) {
+int calculateSum(int * A) {
 	int sum = 0;
+	int size = sizeof(A)/sizeof(A[0]);
+	printf("Size of A: %d\n",sizeof(A));
+	printf("Size of one element: %d\n",sizeof(A[0]));
 	for (int i = 0; i < size; i++) {
 		sum += A[i];
 	}

@@ -28,8 +28,8 @@ void vidAskPassword(void) {
 						iUser = 0;
 						break;
 					}
-					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]);	
-					vidTakeNumber(u8KeyPad[c-4][r]);
+					Lcd_vidWriteCharacter(u8KeyPad[c-4][r]); //to put the character on LCD	
+					vidTakeNumber(u8KeyPad[c-4][r]);  //to save the entered character in an array
 					_delay_ms(300);
 				}
 			}
@@ -41,9 +41,9 @@ void vidAskPassword(void) {
 void vidBlinkLed(u8 portNumberCpy, u8 pinNumberCpy, u8 numberCpy) {
 	while (numberCpy > 0) {
 		Dio_vidSetPinValue(portNumberCpy,pinNumberCpy,1);
-		_delay_ms(500);
+		_delay_ms(250);
 		Dio_vidSetPinValue(portNumberCpy,pinNumberCpy,0);
-		_delay_ms(500);
+		_delay_ms(250);
 		numberCpy--;
 	}
 }
@@ -64,14 +64,14 @@ void vidTakeNumber(s8 keyCpy) {
 				if (s8Password[x] == user[x]) {
 					if (x == 3) {
 						pass = 1;
-						vidBlinkLed(DIO_PORTC,2,5);
+						vidBlinkLed(DIO_PORTC,2,3);
 					}
 					continue;
 				}
 				else  {
 					s8Message = "Error";
 					Lcd_vidInsertMessage(s8Message);
-					vidBlinkLed(DIO_PORTC,0,5);
+					vidBlinkLed(DIO_PORTC,0,3);
 					break;
 				}
 			}

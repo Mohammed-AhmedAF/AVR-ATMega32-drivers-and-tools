@@ -59,34 +59,34 @@ void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
 			if (u8ValueCpy == 1) {
-				Set_Bit(PORTA,u8PinNumberCpy);
+				SET_BIT(PORTA,u8PinNumberCpy);
 			}
 			else {
-				Clear_Bit(PORTA,u8PinNumberCpy);
+				CLEAR_BIT(PORTA,u8PinNumberCpy);
 			}
 			break;
 		case DIO_PORTB:
 			if (u8ValueCpy == 1) {
-				Set_Bit(PORTB,u8PinNumberCpy);
+				SET_BIT(PORTB,u8PinNumberCpy);
 			}
 			else {
-				Clear_Bit(PORTB,u8PinNumberCpy);
+				CLEAR_BIT(PORTB,u8PinNumberCpy);
 			}	
 			break;
 		case DIO_PORTC:
 			if (u8ValueCpy == 1) {
-				Set_Bit(PORTC,u8PinNumberCpy);
+				SET_BIT(PORTC,u8PinNumberCpy);
 			}
 			else {
-				Clear_Bit(PORTC,u8PinNumberCpy);
+				CLEAR_BIT(PORTC,u8PinNumberCpy);
 			}						
 			break;
 		case DIO_PORTD:
 		if (u8ValueCpy == 1) {
-				Set_Bit(PORTD,u8PinNumberCpy);
+				SET_BIT(PORTD,u8PinNumberCpy);
 			}
 			else {
-				Clear_Bit(PORTD,u8PinNumberCpy);
+				CLEAR_BIT(PORTD,u8PinNumberCpy);
 			}							
 			break;
 		}
@@ -96,34 +96,34 @@ void DIO_vidSetPinDirection(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8Directio
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
 			if(u8DirectionCpy == STD_HIGH) {
-				Set_Bit(DDRA,u8PinNumberCpy);
+				SET_BIT(DDRA,u8PinNumberCpy);
 			}
 			else {
-				Clear_Bit(DDRA,u8PinNumberCpy);
+				CLEAR_BIT(DDRA,u8PinNumberCpy);
 			}
 			break;
 		case DIO_PORTB:
 			if(u8DirectionCpy == STD_HIGH) {
-				Set_Bit(DDRB,u8PinNumberCpy);
+				SET_BIT(DDRB,u8PinNumberCpy);
 			}
 			else {
-				Clear_Bit(DDRB,u8PinNumberCpy);
+				CLEAR_BIT(DDRB,u8PinNumberCpy);
 			}
 			break;
 		case DIO_PORTC:
 			if(u8DirectionCpy == STD_HIGH) {
-				Set_Bit(DDRC,u8PinNumberCpy);
+				SET_BIT(DDRC,u8PinNumberCpy);
 			}
 			else {
-				Clear_Bit(DDRC,u8PinNumberCpy);
+				CLEAR_BIT(DDRC,u8PinNumberCpy);
 			}
 			break;
 		case DIO_PORTD:
 			if(u8DirectionCpy == STD_HIGH) {
-				Set_Bit(DDRD,u8PinNumberCpy);
+				SET_BIT(DDRD,u8PinNumberCpy);
 			}
 			else {
-				Clear_Bit(DDRD,u8PinNumberCpy);
+				CLEAR_BIT(DDRD,u8PinNumberCpy);
 			}
 	}
 }

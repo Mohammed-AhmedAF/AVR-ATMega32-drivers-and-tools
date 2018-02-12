@@ -18,13 +18,26 @@
 #define LCD_CLEAR_SCREEN 0b00000001
 #define LCD_RETURN_HOME 0b00000010
 
+#define LCD_ENTRY_MODE 0b00000110
+#define LCD_DISPLAY_CONTROL 0b00001100
+#define LCD_FUNCTION_SET 0b00111000
+
+#define LCD_FUNCTION_SET_4 0b00101000
+
+#define LCD_MOVE_CURSOR_LEFT 0x14
+
 #define LCD_E 2
 #define LCD_RW 1
 #define LCD_RS 0
 
 void LCD_vidInit(void);
 void LCD_vidSendCommand(u8);
-void LCD_vidWriteChar(u8);
-void LCD_vidWriteString(u8*);
+void LCD_vidWriteCharacter(u8);
+void LCD_vidWriteString(s8*);
 void LCD_vidGoToXY(s8,s8);
+
+void LCD_vidInit_4(void);
+void LCD_vidSendCommand_4(u8);
+void LCD_vidWriteCharacter_4(u8);
+
 #endif

@@ -1,6 +1,6 @@
+#include "DIO_interface.h"
 #include "Std_Types.h"
 #include "KEYPAD_interface.h"
-#include "DIO_interface.h"
 #include "LCD_interface.h"
 #include "Macros.h"
 #include <util/delay.h>
@@ -10,6 +10,7 @@ void main(void) {
 	KEYPAD_vidInit();
 	u8 u8PressedKey = 0xFF;
 	while(1) {
+		u8PressedKey = 0xFF;
 		do {
 			u8PressedKey = KEYPAD_u8GetKey();
 			_delay_ms(200);

@@ -3,7 +3,7 @@
 typedef struct structa_tag {
 	char c;
 	short int s;
-} structa_t;
+} structa;
 
 typedef struct structb_tag {
 	short int s;
@@ -24,7 +24,8 @@ typedef struct structd_tag {
 } structd_t;
 
 void main(void) {
-	printf("Size of struct_a: %ld\n",sizeof(structa_t));
+	printf("Size of struct_a: %ld\n",sizeof(structa));
+
 	printf("Size of struct_b: %ld\n",sizeof(structb_t));
 	printf("Size of struct_c: %ld\n",sizeof(structc_t));
 	printf("Size of struct_d: %ld\n",sizeof(structd_t));

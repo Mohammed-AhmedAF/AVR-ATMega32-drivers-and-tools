@@ -21,7 +21,7 @@ void main(void)  {
 	Dio_vidSetPortValue(DIO_PORTD,0b00000000);
 	Lcd_vidInit();
 	while(1) {
-		for (s8 i = 0; i < 16; i++) {
+		for (s8 i = 0; i < 16; i++) {	
 			Lcd_vidGoToXY(i,1);
 			Lcd_vidWriteCharacter('m');
 			Lcd_vidGoToXY(15-i,2);

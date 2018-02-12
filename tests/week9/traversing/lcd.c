@@ -12,7 +12,7 @@ void Lcd_vidInit(void) {
 }
 
 void Lcd_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
-	Lcd_vidSendCommand(0b00000010);
+	Lcd_vidSendCommand(LCD_RETURN_HOME);
 	if (s8yCpy == 1) {
 		for (s8 i = 0; i < s8xCpy;i++) {
 			Lcd_vidSendCommand(0b00010100);
@@ -50,5 +50,3 @@ void Lcd_vidInsertMessage(s8 * s8Message) {
 	_delay_ms(1000);
 	Lcd_vidSendCommand(0b00000001);
 }
-
-

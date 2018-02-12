@@ -1,9 +1,8 @@
 
 MAIN = main.c
 CC = avr-gcc
-SRC = $(MAIN) DIO_prog.c LCD_prog.c
+SRC = $(MAIN) DIO_prog.c LCD_xy.c 
 CFLAGS = -mmcu=atmega32 -I . -O
-OUT = main.o
 
 PRO = avrdude
 
@@ -19,15 +18,15 @@ PRO = avrdude
 
 .PHONY : build
 build:
-	$(CC) $(SRC) $(CFLAGS) -o $(OUT)
+	$(CC) $(SRC) $(CFLAGS) -o main.o
 
 .PHONY : load
 load: clean build
-	$(PRO) -p atmega32 -c usbasp -U flash:w:$(OUT)
+	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
 
 .PHONY : flash
 flash :
-	$(PRO) -p atmega32 -c usbasp -U flash:w:$(OUT)
+	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
 
 .PHONY : convert
 convert: clean

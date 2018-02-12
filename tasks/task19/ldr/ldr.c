@@ -30,7 +30,8 @@ void main(void) {
 	Set_Bit(ADMUX,2);
 	Clear_Bit(ADMUX,3);
 	Clear_Bit(ADMUX,4);
-	
+
+	//Adjusting right	
 	Set_Bit(ADMUX,5);
 
 	//Setting Reference Channel in ADMUX
@@ -42,8 +43,7 @@ void main(void) {
 		
 
 	while(1) {
-		u8 indx = value/31;
-		Dio_vidSetPortValue(DIO_PORTB,vals[indx]);
+		PORTB = value;
 	}
 
 }

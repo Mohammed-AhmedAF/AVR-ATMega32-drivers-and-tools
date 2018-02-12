@@ -20,7 +20,7 @@ extern u8 iUser;
 void main(void)  {
 	init();
 	while(1) {
-		vidAskPassword();		
+//		vidAskPassword();		
 		vidChoose();
 		_delay_ms(10000);
 	}

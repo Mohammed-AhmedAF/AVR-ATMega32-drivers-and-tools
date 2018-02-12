@@ -1,5 +1,5 @@
-#ifndef KEYPAD_H
-#define KEYPAD_H
+#ifndef KEYPAD_INTERFACE_H
+#define KEYPAD_INTERFACE_H
 
 #define ROW0_PORT DIO_PORTC
 #define ROW0_PIN 0

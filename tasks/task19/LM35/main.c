@@ -9,8 +9,6 @@ u8 value = 0;
 u8 u8ToChar(u8);
 void main(void) {
 
-	Dio_vidSetPortDirection(DIO_PORTB,0xFF);
-	Dio_vidSetPortValue(DIO_PORTB,0x00);
 	Dio_vidSetPortDirection(DIO_PORTD,0xFF);
 	Dio_vidSetPortDirection(DIO_PORTA,0b00000111);
 	Lcd_vidInit();
@@ -44,7 +42,6 @@ void main(void) {
 
 	Set_Bit(ADCSRA,6); //start first conversion
 	while(1) {
-		Dio_vidSetPortValue(DIO_PORTB,value);
 		u8ToChar(value);
 
 	}
@@ -59,6 +56,7 @@ u8 u8ToChar(u8 res) {
 	u8 x = 100;
 	u8 u8a;
 	u8 arr[3];
+	res = res -255;
 	u8 * message;
 	for (s8 i = 0; i < 3; i++) {
 		u8a = (res/x)+48;

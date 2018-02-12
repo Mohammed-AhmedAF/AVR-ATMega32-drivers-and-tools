@@ -1,6 +1,6 @@
 CC = avr-gcc
 SRC = main.c dio.c lcd.c
-CFLAGS = -mmcu=atmega32 -I . -O
+CFLAGS = -mmcu=atmega32 -I . -O -g
 
 PRO = avrdude
 

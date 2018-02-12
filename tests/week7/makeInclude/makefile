@@ -6,7 +6,7 @@ CFLAGS = -I ..
 	$(CC) $(SRC) -o $@ $(CFLAGS)
 
 %.asm : $(SRC)
-	$(CC) $(SRC) -o $@ $(CFLAGS) -S
+	$(CC) $(SRC) -o $@ $(CFLAGS)
 
 .phony : clean
 

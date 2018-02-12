@@ -30,7 +30,7 @@ void main(void) {
 
 
 	while(1) {
-		//	LED_vidLightLED();	
+			//LED_vidLightLED();	
 	}
 }
 void LED_vidLightLED() {
@@ -39,5 +39,5 @@ void LED_vidLightLED() {
 }
 ISR(INT0_vect) {
 	Toggle_Bit(PORTA,1);
-	_delay_ms(500);
+	_delay_ms(1000);
 }

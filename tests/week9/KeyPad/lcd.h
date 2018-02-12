@@ -1,5 +1,5 @@
 #ifndef _LCD_H
-define LCD_H
+#define _LCD_H
 
 #define LCD_CLEAR_SCREEN 0b00000001
 #define LCD_RETURN_HOME 0b00000010

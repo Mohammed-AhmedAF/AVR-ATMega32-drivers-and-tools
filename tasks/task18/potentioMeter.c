@@ -16,6 +16,8 @@ void main(void) {
 	Lcd_vidInit();
 
 	//enable interrupt
+	Set_Bit(SREG,7);
+
 	//enable adc
 	Set_Bit(ADCSRA,7);
 
@@ -27,7 +29,7 @@ void main(void) {
 	//local adc interrupt
 	Set_Bit(ADCSRA,3);
 
-	//setting referce and channel
+	//setting reference and channel
 	Clear_Bit(ADMUX,7);
 	Set_Bit(ADMUX,6);
 	//setting left adjustment
@@ -40,7 +42,6 @@ void main(void) {
 	Clear_Bit(ADMUX,3);
 	Clear_Bit(ADMUX,4);
 
-	Set_Bit(SREG,7);
 
 	Set_Bit(ADCSRA,6); //start first conversion
 	while(1) {
