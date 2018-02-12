@@ -22,6 +22,7 @@ void Password_vidSavePassword(u8 * u8idCpy, u8 * u8passwordCpy,u8 u8idSize,u8 u8
 		db[u8userIndex].u8password[i] = *u8passwordCpy++;
 	}
 	u8userIndex++;
+	u8saveFlag = 0;
 }
 
 void Password_vidAskID(void) {
@@ -91,6 +92,7 @@ void Password_vidCheckMatch(void) {
 			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 			LCD_vidWriteString(NO_MATCH);
 			_delay_ms(500);
+			u8saveFlag = 0;
 			break;
 		}
 		else if(i==4) {
@@ -120,10 +122,10 @@ void Password_vidCheckID(void) {
 			}
 		}
 	}
-	if (found = 0) {
+	if (found == 0) {
 		LCD_vidGoToXY(0,2);
 		LCD_vidWriteString("ID not found!");
-		_delay_ms(200);
+		_delay_ms(2000);
 	}
 }
 

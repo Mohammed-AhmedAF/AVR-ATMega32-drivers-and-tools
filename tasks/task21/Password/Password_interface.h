@@ -3,6 +3,7 @@
 u8 i;
 u8 u8idSize;
 u8 u8passwordSize;
+u8 u8saveFlag;
 u8 u8id[5];
 u8 u8password[5];
 u8 u8passwordTemp[5];
