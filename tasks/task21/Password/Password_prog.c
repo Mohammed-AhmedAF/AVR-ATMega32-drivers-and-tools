@@ -12,7 +12,7 @@ void Password_vidSavePassword(u8 * u8idCpy, u8 * u8passwordCpy) {
 	}
 	/*saving password*/
 	for (i = 0; i < 6; i++) {
-		db[x].u8id[i] = *u8passwordCpy++;
+		db[x].u8password[i] = *u8passwordCpy++;
 	}
 	x++;
 }
