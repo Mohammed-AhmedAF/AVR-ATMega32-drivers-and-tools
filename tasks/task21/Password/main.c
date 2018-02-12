@@ -15,7 +15,6 @@
 #include <util/delay.h>
 
 extern u8 u8keyPressed;
-u8 * message;
 u8 i = 0;
 
 void main(void) {
@@ -24,17 +23,14 @@ void main(void) {
 
 	while(1) {
 		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		message = "ID: ";
-		LCD_vidWriteString(message);
+		LCD_vidWriteString(ID);
 		do {
 			Services_vidWriteCharacter();
 			u8id[i] = u8keyPressed;
 			i++;
 		}while(u8keyPressed != '#');
-
-		message = "Password: ";
 		LCD_vidGoToXY(0,2);
-		LCD_vidWriteString(message);
+		LCD_vidWriteString(PASSWORD);
 		i = 0;
 		do {
 			Services_vidWriteCharacter();
@@ -42,8 +38,7 @@ void main(void) {
 			i++;
 		}while(u8keyPressed != '#');
 		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		message = "Reenter password: ";
-		LCD_vidWriteString(message);
+		LCD_vidWriteString(RE_PASSWORD);
 		LCD_vidGoToXY(0,2);
 		i = 0;
 		do {
@@ -55,15 +50,13 @@ void main(void) {
 		for (i = 0; i < 5; i++) {
 			if (u8password[i] != u8passwordTemp[i]) {
 				LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-				message = "No match";
-				LCD_vidWriteString(message);
+				LCD_vidWriteString(NO_MATCH);
 				_delay_ms(500);
 				break;
 			}
 			else if(i==4) {
 				LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-				message = "Saving password";
-				LCD_vidWriteString(message);
+				LCD_vidWriteString(PASSWORD_SAVED);
 				_delay_ms(500);
 				Password_vidSavePassword(u8id,u8passwordTemp);
 				break;

@@ -12,4 +12,10 @@ struct user {
 	u8 u8password[6];
 };
 struct user db[10];
+
+#define NO_MATCH "No match"
+#define PASSWORD_SAVED "Password saved"
+#define ID "ID: "
+#define PASSWORD "Password: "
+#define RE_PASSWORD "Reenter password: "
 #endif
