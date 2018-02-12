@@ -13,9 +13,6 @@
 #include "Password_interface.h"
 #include <util/delay.h>
 
-extern u8 u8keyPressed;
-u8 i = 0;
-
 void main(void) {
 	LCD_vidInit();
 	KEYPAD_vidInit();
@@ -26,6 +23,6 @@ void main(void) {
 		Password_vidAskPassword();
 		Password_vidAskReenter();
 		Password_vidCheckMatch();
-		Password_vidViewRecord();
+		Password_vidCheckID();
 	}
 }

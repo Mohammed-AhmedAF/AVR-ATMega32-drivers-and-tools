@@ -101,6 +101,29 @@ void Password_vidCheckMatch(void) {
 			break;
 		}
 	}
+}
 
+void Password_vidCheckID(void) {
+	Password_vidAskID();
+	u8 x, found = 0;
+	for (x = 0; x < u8userIndex; x++) {
+		for (i = 0; i < 5; i++) {
+			if(db[x].u8id[i] != u8id[i]) {
+				break;
+			}
+			else if (i == 4) {
+				LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+				LCD_vidGoToXY(0,2);
+				LCD_vidWriteString("ID found!");
+				found = 1;
+				_delay_ms(2000);
+			}
+		}
+	}
+	if (found = 0) {
+		LCD_vidGoToXY(0,2);
+		LCD_vidWriteString("ID not found!");
+		_delay_ms(200);
+	}
 }
 

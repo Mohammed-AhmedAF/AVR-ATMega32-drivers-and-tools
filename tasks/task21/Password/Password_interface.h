@@ -14,7 +14,7 @@ void Password_vidAskID(void);
 void Password_vidAskPassword(void);
 void Password_vidAskReenter(void);
 void Password_vidCheckMatch(void);
-
+void Password_vidCheckID(void);
 struct user {
 	u8 u8id[5];
 	u8 u8password[6];
