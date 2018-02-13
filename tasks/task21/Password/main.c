@@ -13,22 +13,32 @@
 #include "Password_interface.h"
 #include <util/delay.h>
 
+u8 k;
+u8 u8count = 1;
 void main(void) {
 	LCD_vidInit();
 	KEYPAD_vidInit();
 
-	while(1) {
-		/*Check for password match*/
-		Password_vidAskID();
-		Password_vidAskPassword();
-		do {
-			Password_vidAskReenter();
-			Password_vidCheckMatch();
-		}while(u8saveFlag != 1);
-		u8saveFlag = 0;
-		do {
-			Password_vidCheckID(1);
-		}while(u8foundFlag == 0);
-		Password_vidCheckPassword();
+	/*Check for password match*/
+	Password_vidAskID();
+	Password_vidAskPassword();
+	do {
+		Password_vidAskReenter();
+		Password_vidCheckMatch();
+	}while(u8saveFlag != 1);
+	u8saveFlag = 0;
+	do {
+		Password_vidCheckID(1);
+	}while(u8foundFlag == 0);
+	for(k = 0; k<3; k++) {
+		Password_vidCheckPassword(u8count);
+		if (u8success == 1) {
+			break;
+		}
+		else if (k == 2) {
+			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+			LCD_vidWriteString(SYSTEM_FAILED);
+		}
+		u8count++;
 	}
 }

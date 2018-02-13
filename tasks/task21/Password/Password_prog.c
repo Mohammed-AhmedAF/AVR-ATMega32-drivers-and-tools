@@ -11,6 +11,7 @@
 
 u8 u8currentUser;
 u8 u8foundFlag;
+u8 u8success;
 void Password_vidSavePassword(u8 * u8idCpy, u8 * u8passwordCpy,u8 u8idSize,u8 u8passwordSize) {
 	u8 i = 0;
 	/*saving id*/
@@ -142,17 +143,24 @@ void Password_vidCheckID(u8 u8askFlagCpy) {
 	}
 }
 
-void Password_vidCheckPassword(void) {
+void Password_vidCheckPassword(u8 u8countCpy) {
+	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+	LCD_vidGoToXY(0,1);
+	u8countCpy += 0x30;
+	LCD_vidWriteCharacter(u8countCpy);
 	Password_vidAskPassword();
 	for (i = 0; i < 5; i++) {
 		if (db[u8currentUser].u8password[i] != u8password[i]) {
 			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 			LCD_vidWriteString("Wrong password");
-			_delay_ms(1000);
+			u8success = 0;
+			_delay_ms(800);
+			break;
 		}
-		else if(i == 4) {
+		else if (i == 4) {
 			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 			LCD_vidWriteString("Welcome");
+			u8success = 1;
 			_delay_ms(1000);
 		}
 	}
