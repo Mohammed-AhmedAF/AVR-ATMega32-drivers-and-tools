@@ -7,7 +7,9 @@ u8 u8saveFlag;
 u8 u8id[5];
 u8 u8password[5];
 u8 u8passwordTemp[5];
+extern u8 u8foundFlag;
 static u8 u8userIndex = 0;
+extern u8 u8currentUser;
 
 void Password_vidSavePassword(u8*,u8*,u8,u8);
 void Password_vidViewRecord(void);
@@ -15,7 +17,8 @@ void Password_vidAskID(void);
 void Password_vidAskPassword(void);
 void Password_vidAskReenter(void);
 void Password_vidCheckMatch(void);
-void Password_vidCheckID(void);
+void Password_vidCheckID(u8);
+void Password_vidCheckPassword(void);
 struct user {
 	u8 u8id[5];
 	u8 u8password[6];

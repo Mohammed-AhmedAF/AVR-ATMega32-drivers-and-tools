@@ -9,6 +9,8 @@
 #include "Services_interface.h"
 #include <util/delay.h>
 
+u8 u8currentUser;
+u8 u8foundFlag;
 void Password_vidSavePassword(u8 * u8idCpy, u8 * u8passwordCpy,u8 u8idSize,u8 u8passwordSize) {
 	u8 i = 0;
 	/*saving id*/
@@ -22,9 +24,13 @@ void Password_vidSavePassword(u8 * u8idCpy, u8 * u8passwordCpy,u8 u8idSize,u8 u8
 		db[u8userIndex].u8password[i] = *u8passwordCpy++;
 	}
 	u8userIndex++;
-	u8saveFlag = 0;
+	u8saveFlag = 1;
 }
 
+
+/*The function vidAskID will continue to ask for ID, if
+ * the provided ID already existed in the database.
+ */
 void Password_vidAskID(void) {
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 	LCD_vidWriteString(ID);
@@ -105,9 +111,12 @@ void Password_vidCheckMatch(void) {
 	}
 }
 
-void Password_vidCheckID(void) {
-	Password_vidAskID();
-	u8 x, found = 0;
+void Password_vidCheckID(u8 u8askFlagCpy) {
+	if(u8askFlagCpy == 1) {
+		Password_vidAskID();
+	}
+	u8 x;
+	u8foundFlag = 0;
 	for (x = 0; x < u8userIndex; x++) {
 		for (i = 0; i < 5; i++) {
 			if(db[x].u8id[i] != u8id[i]) {
@@ -116,16 +125,35 @@ void Password_vidCheckID(void) {
 			else if (i == 4) {
 				LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 				LCD_vidGoToXY(0,2);
-				LCD_vidWriteString("ID found!");
-				found = 1;
-				_delay_ms(2000);
+				LCD_vidWriteString("ID already here");
+				u8currentUser = x;
+				u8foundFlag = 1;
+				_delay_ms(1000);
+				LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 			}
 		}
 	}
-	if (found == 0) {
-		LCD_vidGoToXY(0,2);
-		LCD_vidWriteString("ID not found!");
-		_delay_ms(2000);
+	if (u8foundFlag == 0) {
+		if (u8askFlagCpy == 1) {
+			LCD_vidGoToXY(0,2);
+			LCD_vidWriteString("ID not found!");
+			_delay_ms(2000);
+		}		
 	}
 }
 
+void Password_vidCheckPassword(void) {
+	Password_vidAskPassword();
+	for (i = 0; i < 5; i++) {
+		if (db[u8currentUser].u8password[i] != u8password[i]) {
+			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+			LCD_vidWriteString("Wrong password");
+			_delay_ms(1000);
+		}
+		else if(i == 4) {
+			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+			LCD_vidWriteString("Welcome");
+			_delay_ms(1000);
+		}
+	}
+}

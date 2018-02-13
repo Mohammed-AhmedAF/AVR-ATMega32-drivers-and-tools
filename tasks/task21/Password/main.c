@@ -19,12 +19,16 @@ void main(void) {
 
 	while(1) {
 		/*Check for password match*/
+		Password_vidAskID();
+		Password_vidAskPassword();
 		do {
-			Password_vidAskID();
-			Password_vidAskPassword();
 			Password_vidAskReenter();
 			Password_vidCheckMatch();
 		}while(u8saveFlag != 1);
-		Password_vidCheckID();
+		u8saveFlag = 0;
+		do {
+			Password_vidCheckID(1);
+		}while(u8foundFlag == 0);
+		Password_vidCheckPassword();
 	}
 }
