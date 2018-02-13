@@ -9,9 +9,11 @@
 void main(void) {
 	LCD_vidInit();
 	KEYPAD_vidInit();
+	DIO_vidSetPortDirection(DIO_PORTB,0b11111111);
 
 	while(1) {
 		Services_vidWriteCharacter();
+		DIO_vidSetPortValue(DIO_PORTB,u8keyPressed-0x30);
 	}
 }
 
