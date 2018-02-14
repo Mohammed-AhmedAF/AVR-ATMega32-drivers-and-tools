@@ -10,11 +10,11 @@ void Services_vidWriteCharacter(void) {
 	u8keyPressed = 0xFF;
 	do {
 		u8keyPressed = KEYPAD_u8GetKey();
-		_delay_ms(200);
+		_delay_ms(300);
 		u8keyPressed = KEYPAD_u8GetKey();
 	}while(u8keyPressed == 0xFF);
 	if (u8keyPressed == '#') {
-		_delay_ms(1000);
+		_delay_ms(10);
 	}
 	else {
 		if((u8keyPressed >= 0) && (u8keyPressed <= 9)) {
