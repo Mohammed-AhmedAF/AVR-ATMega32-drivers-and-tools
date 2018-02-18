@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp ~/programming/imt/lib/* ./
+echo "Files copied to $PWD"
