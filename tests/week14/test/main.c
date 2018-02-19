@@ -4,7 +4,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-u32 u32OVF_count = 0;
 u32 u32time_var = 0;
 u32 u32desiredTime = 0;
 u8 u8endFlag = 0;
@@ -28,13 +27,13 @@ void main(void) {
 
 	while(1) {
 		TOGGLE_BIT(PORTA,0);
-		Timer_vidDelayMicroSec((u32)100000);
+		Timer_vidDelayMicroSec((u32)10000);
 	}
 
 }
 
 void Timer_vidDelayMicroSec(u32 u32timeCpy) {
-	u32desiredTime = u32timeCpy;
+	u32desiredTime = u32timeCpy/10;
 	while(u8endFlag == 0) {
 		continue;
 	}
@@ -42,15 +41,10 @@ void Timer_vidDelayMicroSec(u32 u32timeCpy) {
 }
 
 ISR(TIMER0_OVF_vect) {
-	u32OVF_count++;
-	TCNT0 = 247;
-	if (u32OVF_count == 10) {
-		u32OVF_count = 0;
-		u32time_var++;
-		if(u32time_var == u32desiredTime) {
-			u8endFlag = 1;
-			u32time_var = 0;
-		}
+	TCNT0 = 248;
+	u32time_var++;
+	if(u32time_var == u32desiredTime) {
+		u8endFlag = 1;
+		u32time_var = 0;
 	}
-
 }
