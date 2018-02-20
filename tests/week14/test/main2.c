@@ -12,14 +12,14 @@ void main(void) {
 
 	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN0,1);
 
-	CLEAR_BIT(TCCR0,0);
+	SET_BIT(TCCR0,0);
 	CLEAR_BIT(TCCR0,1);
 	CLEAR_BIT(TCCR0,2);
 	SET_BIT(TCCR0,3); //enable CTC
 	CLEAR_BIT(TCCR0,4); //enable output compare
 	SET_BIT(TCCR0,5);
 	CLEAR_BIT(TCCR0,6); //enable CTC
-	
+
 	SET_BIT(TIMSK,1);
 
 	SET_BIT(SREG,7);
@@ -37,16 +37,17 @@ void Timer_vidDelayMicroSec(u32 u32timeCpy) {
 	u32desiredTime = 0;
 	u8endFlag = 0;
 	u32desiredTime = (u32) u32timeCpy;
-	while(u8endFlag == 0) {
+	do{	
+		if(u32desiredTime == u32time_var) {
+			u8endFlag = 1;
+			u32time_var = 0;
+		}
 	}
+	while(u8endFlag == 0);
 	u8endFlag = 0;
 }
 
 ISR(TIMER0_COMP_vect) {
 	u32time_var++;
 	OCR0 = 7;
-	if(u32desiredTime == u32time_var) {
-		u8endFlag = 1;
-		u32time_var = 0;
-	}
 }
