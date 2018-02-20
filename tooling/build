@@ -1,0 +1,4 @@
+#!/bin/bash
+
+main=$1
+make build MAIN=${main}
