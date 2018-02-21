@@ -16,8 +16,8 @@ void main(void) {
 	CLEAR_BIT(TCCR0,1);
 	CLEAR_BIT(TCCR0,2);
 	SET_BIT(TCCR0,3); //enable CTC
-	CLEAR_BIT(TCCR0,4); //enable output compare
-	SET_BIT(TCCR0,5);
+	CLEAR_BIT(TCCR0,4);
+	CLEAR_BIT(TCCR0,5);
 	CLEAR_BIT(TCCR0,6); //enable CTC
 
 	SET_BIT(TIMSK,1);
@@ -28,7 +28,7 @@ void main(void) {
 
 	while(1) {
 		TOGGLE_BIT(PORTA,0);
-		Timer_vidDelayMicroSec((u32)10000);
+		Timer_vidDelayMicroSec((u32)100000);
 	}
 
 }
@@ -36,7 +36,7 @@ void main(void) {
 void Timer_vidDelayMicroSec(u32 u32timeCpy) {
 	u32desiredTime = 0;
 	u8endFlag = 0;
-	u32desiredTime = (u32) u32timeCpy;
+	u32desiredTime = (u32) u32timeCpy/25;
 	do {
 	
 	}
