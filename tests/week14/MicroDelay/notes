@@ -1,0 +1,1 @@
+avr-objdump -d -S -mavr main.o
