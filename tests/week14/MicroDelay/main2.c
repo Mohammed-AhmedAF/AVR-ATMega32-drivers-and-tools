@@ -24,11 +24,11 @@ void main(void) {
 
 	SET_BIT(SREG,7);
 
-	OCR0 = 7;
+	OCR0 = 8;
 
 	while(1) {
 		TOGGLE_BIT(PORTA,0);
-		Timer_vidDelayMicroSec((u32)50000);
+		Timer_vidDelayMicroSec((u32)100000);
 	}
 
 }
@@ -37,15 +37,14 @@ void Timer_vidDelayMicroSec(u32 u32timeCpy) {
 	TCNT0 = 0;
 	SET_BIT(TIMSK,1);
 	u32desiredTime = (u32) (u32timeCpy);
-	do {
-	}while(u8endFlag == 0);
-	CLEAR_BIT(TIMSK,1);
+	while (u32time_var != u32desiredTime) {
+		u8endFlag = 1;
+		u32time_var =0;
+	}
+	u8endFlag = 0;
+	SET_BIT(TIMSK,0);
 }
 
 ISR(TIMER0_COMP_vect) {
 	u32time_var++;
-	if(u32time_var == u32desiredTime) {
-		u8endFlag = 1;
-		u32time_var = 0;
-	}
 }
