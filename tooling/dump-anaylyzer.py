@@ -1,9 +1,12 @@
+#!/usr/bin/env python
+
 # A script to count the number of clock cycles an ISR will take to execute
 # Author: Mohamed Ahmed
 # Date: 20 Feb 2018
-import os
-cmd = 'avr-objdump -d -mavr main.o --prefix-addresses >> dump.txt'
-os.system(cmd)
+#import os
+#cmd = 'avr-objdump -d -mavr main.o --prefix-addresses >> dump.txt'
+#os.system(cmd)
+#os.system("exit")
 
 clkCycles = 0;
 i = 1
@@ -14,7 +17,7 @@ tempFhandler = open("instr.txt",'a')
 for line in fHandler:
     if line.startswith("00"):
         section = line.split()[1]
-        if (section.find("<__vector_10") != -1):
+        if (section.find("<__vector_11") != -1):
             commands.append(line.split()[2])
 
 instructions = set(commands)
