@@ -21,7 +21,6 @@ void main(void) {
 	CLEAR_BIT(TCCR0,5);
 	CLEAR_BIT(TCCR0,6); //enable CTC
 
-	SET_BIT(TIMSK,1);
 
 	SET_BIT(SREG,7);
 
@@ -29,16 +28,19 @@ void main(void) {
 
 	while(1) {
 		TOGGLE_BIT(PORTA,0);
-		Timer_vidDelayMicroSec((u32)5000000);
+		Timer_vidDelayMicroSec((u32)500000);
 	}
 
 }
 
 void Timer_vidDelayMicroSec(u32 u32timeCpy) {
+	TCNT0 = 0;
+	SET_BIT(TIMSK,1);
 	u32desiredTime = (u32) (u32timeCpy);
 	while (u8endFlag == 0) {
 	}
 	u8endFlag = 0;
+	SET_BIT(TIMSK,0);
 }
 
 ISR(TIMER0_COMP_vect) {
