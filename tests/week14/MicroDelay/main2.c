@@ -36,12 +36,10 @@ void main(void) {
 void Timer_vidDelayMicroSec(u32 u32timeCpy) {
 	TCNT0 = 0;
 	SET_BIT(TIMSK,1);
-	u32desiredTime = (u32) (u32timeCpy);
+	u32desiredTime =  (u32timeCpy)/10;
 	while (u32time_var != u32desiredTime) {
-		u8endFlag = 1;
-		u32time_var =0;
 	}
-	u8endFlag = 0;
+	u32time_var = 0;
 	SET_BIT(TIMSK,0);
 }
 
