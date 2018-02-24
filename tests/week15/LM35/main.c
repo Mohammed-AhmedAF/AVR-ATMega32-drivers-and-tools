@@ -4,12 +4,21 @@
 #include "Macros.h"
 #include <avr/io.h>
 #include <util/delay.h>
-
+u8 num[10] = {0b10100000,0b10101111,0b11000100,0b10000110,0b10001011,0b10010010,0b10010000,0b10100111,0b10000000,
+0b10000010};
 u8 u8analog = 0;
 u8 u8digitalValue = 0;
 u8 u8xPos, u8yPos;
 void main(void) {
-	LCD_vidInit();
+
+	DIO_vidSetPortDirection(DIO_PORTB,0b11111111);
+	DIO_vidSetPortDirection(DIO_PORTD,0b11111111);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN0,1);
+	DIO_vidSetPinDirection(DIO_PORTC,DIO_PIN0,1);
+
+
+	DIO_vidSetPinValue(DIO_PORTA,DIO_PIN0,1);
+	DIO_vidSetPinValue(DIO_PORTC,DIO_PIN0,1);
 
 	/*ADC initialization*/
 	CLEAR_BIT(ADMUX,7);
@@ -33,10 +42,8 @@ void main(void) {
 		u8analog = ((u8digitalValue)*5*100)/256;
 		u8xPos =u8analog/10;
 		u8yPos = u8analog%10;
-		LCD_vidWriteCharacter(u8xPos+'0');		
-		LCD_vidWriteCharacter(u8yPos+'0');
-		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+		DIO_vidSetPortValue(DIO_PORTB,num[u8xPos]);		
+		DIO_vidSetPortValue(DIO_PORTD,num[u8yPos]);
 		SET_BIT(ADCSRA,6);
 		
 	}
