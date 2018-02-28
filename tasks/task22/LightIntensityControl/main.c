@@ -19,7 +19,8 @@ extern u8 u8keyPressed;
 u8 u8intensity[3];
 u16 u16val = 0;
 u8 i = 0;
-void vidInsertValue(u8 [], u8);
+void vidAsk(void);
+u8 vidInsertValue(u8 [], u8);
 int main(void) {
 	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN3,STD_HIGH);
 	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN3,STD_LOW);
@@ -38,32 +39,42 @@ int main(void) {
 	TCNT0=0;
 
 	while(1) {
-		OCR0 = 0;
-		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		LCD_vidGoToXY(0,1);
-		LCD_vidWriteString("Intensity: ");
-		LCD_vidGoToXY(0,2);
-		do{
-			Services_vidWriteCharacter();
-			if (u8keyPressed != '#') {
-				u8intensity[i] = u8keyPressed;
-				i++;
-			}	
-		}while(u8keyPressed != '#');
-		vidInsertValue(u8intensity,i);
+		vidAsk();
 		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 		LCD_vidWriteString("Crnt. intensity:");
 		LCD_vidGoToXY(0,2);
 		LCD_vidWriteSizedString(u8intensity,i);
-		u16val = 0;
-		i = 0;
 		do {
 		}while(KEYPAD_u8GetKey() != '/');
 
 	}
 }
 
-void vidInsertValue(u8 valArray[3], u8 u8sizeCpy) {
+/*viAsk is a recursive function, it will call itself if the value
+ * entered is bigger than 255.
+ */
+void vidAsk(void) {
+	OCR0 = 0;
+	i = 0;
+	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+	LCD_vidGoToXY(0,1);
+	LCD_vidWriteString("Intensity: ");
+	LCD_vidGoToXY(0,2);
+	do{
+		Services_vidWriteCharacter();
+		if (u8keyPressed != '#') {
+			u8intensity[i] = u8keyPressed;
+			i++;
+		}	
+	}while(u8keyPressed != '#');
+	if (vidInsertValue(u8intensity,i) == 0) {
+		vidAsk();
+	}
+
+}
+
+u8 vidInsertValue(u8 valArray[3], u8 u8sizeCpy) {
+	u16val = 0;
 	if (u8sizeCpy == 3) {
 		u16val = (u8intensity[0]-0x30)*100;
 		u16val += (u8intensity[1]-0x30)*10;
@@ -78,10 +89,11 @@ void vidInsertValue(u8 valArray[3], u8 u8sizeCpy) {
 	}
 	if (i > 3 || (u16val > 255)) {
 		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		LCD_vidWriteString("Value is big!");
-		_delay_ms(10000);
+		LCD_vidBlinkString("Value is too big!",3);
+		return 0;
 	}
 	else {
-	OCR0 = u16val;
+		OCR0 = u16val;
+		return 1;
 	}
 }
