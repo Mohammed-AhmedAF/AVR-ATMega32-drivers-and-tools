@@ -91,6 +91,24 @@ void LCD_vidWriteSizedString(s8 * s8String,u8 u8sizeCpy) {
 	}while(u8sizeCpy > i);
 }
 
+void LCD_vidBlinkString(s8 * s8stringCpy,u8 u8timesCpy) {
+	u8 i = 0;
+	s8 * s8string;
+	s8string = s8stringCpy;
+	do {
+		_delay_ms(500);	
+		while(*s8string != '\0') {
+			u8 ch = *s8string++;
+			LCD_vidWriteCharacter(ch);
+		}
+		_delay_ms(500);
+		i++;
+		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+		s8string = s8stringCpy;
+	}
+	while (u8timesCpy > i);
+}
+
 void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
 	LCD_vidSendCommand(LCD_RETURN_HOME);
 	if (s8yCpy == 1) {
