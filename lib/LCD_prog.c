@@ -82,6 +82,15 @@ void LCD_vidWriteString(s8 * s8String) {
 	}
 }
 
+void LCD_vidWriteSizedString(s8 * s8String,u8 u8sizeCpy) {	
+	u8 i = 0;
+	do {
+		u8 ch = *s8String++;
+		LCD_vidWriteCharacter(ch);
+		i++;
+	}while(u8sizeCpy > i);
+}
+
 void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
 	LCD_vidSendCommand(LCD_RETURN_HOME);
 	if (s8yCpy == 1) {
