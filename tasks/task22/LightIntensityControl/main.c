@@ -41,7 +41,7 @@ int main(void) {
 	while(1) {
 		vidAsk();
 		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		LCD_vidWriteString("Crnt. intensity:");
+		LCD_vidWriteString("Crnt. power:");
 		LCD_vidGoToXY(0,2);
 		LCD_vidWriteSizedString(u8intensity,i);
 		do {
@@ -58,7 +58,7 @@ void vidAsk(void) {
 	i = 0;
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 	LCD_vidGoToXY(0,1);
-	LCD_vidWriteString("Intensity: ");
+	LCD_vidWriteString("Power: ");
 	LCD_vidGoToXY(0,2);
 	do{
 		Services_vidWriteCharacter();
@@ -73,6 +73,10 @@ void vidAsk(void) {
 
 }
 
+/*InsertValue is will return 0 if insertion fails,
+ * 1 if it succeed.
+ *
+ */
 u8 vidInsertValue(u8 valArray[3], u8 u8sizeCpy) {
 	u16val = 0;
 	if (u8sizeCpy == 3) {
