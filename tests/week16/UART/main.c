@@ -5,12 +5,14 @@
 #include <util/delay.h>
 void Test_vidCheck(void);
 void Test_vidSend(void);
+
+u8 u8character = 0;
 void main(void) {
 	DIO_vidSetPinValue(DIO_PORTA,DIO_PIN0,1);
 	DIO_vidSetPinValue(DIO_PORTA,DIO_PIN1,1);
 	UART_vidInit();
 	while(1) {
-		Test_vidCheck();
+		Test_vidSend();
 	}
 }  
 
@@ -24,9 +26,22 @@ void Test_vidCheck(void) {
 }
 
 void Test_vidSend(void) {
-	UART_vidSendByte('a');
-	_delay_ms(1000);	
-	UART_vidSendByte('b');
 	_delay_ms(1000);
-
+	u8character = UART_vidReceiveByte();	
+	switch(u8character) {
+		case 'a':
+			UART_vidSendString("Apple ");
+			UART_vidSendByte('\n');
+			break;
+		case 'b':
+			UART_vidSendString("Book ");
+			break;
+		case 'c':
+			UART_vidSendString("Car ");
+			break;
+		default:
+			UART_vidSendString("World ");
+			break;
+	}
 }
+
