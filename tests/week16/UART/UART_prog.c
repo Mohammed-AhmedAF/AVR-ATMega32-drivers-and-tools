@@ -21,7 +21,7 @@ void UART_vidSendByte(u8 u8byteCpy) {
 }
 
 u8 UART_vidReceiveByte(void) {
-	while(GET_BIT(UCSRA,7) == 0);
+	while(GET_BIT(UCSRA,7) == 0); //Checking the Receive Complete registe RxC bit
 	return UDR;
 }
 
