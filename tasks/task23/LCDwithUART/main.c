@@ -12,8 +12,6 @@ void main(void) {
 	/*Initialization*/
 	LCD_vidInit();
 	UART_vidInit();
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN0,STD_HIGH);
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN1,STD_HIGH);
 	LCD_vidWriteString("Hello");
 	_delay_ms(500);
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
@@ -22,6 +20,9 @@ void main(void) {
 		if (u8key == ASCII_ESCAPE) {
 			s8xPos = 0; //You will need to reinitialize x,y variables
 			s8yPos = 1; //or else backspace will not work correctly
+			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+			LCD_vidWriteString("Good Bye!");
+			_delay_ms(500);
 			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 		}
 		else if(u8key == '\r') {
@@ -40,14 +41,12 @@ void main(void) {
 			if ((s8xPos < 0) && (s8yPos == 2)) {
 				s8xPos = 15;
 				s8yPos = 1;
-				TOGGLE_BIT(PORTB,1);
 				LCD_vidWriteCharacter(ASCII_SPACE);
 				LCD_vidGoToXY(s8xPos,s8yPos);
 			}
 			else if ((s8xPos < 0) && (s8yPos == 1)) {
 				s8xPos = 0;
 				s8yPos = 1;
-				TOGGLE_BIT(PORTB,1);
 				LCD_vidWriteCharacter(ASCII_SPACE);
 				LCD_vidGoToXY(s8xPos,s8yPos);
 			}
@@ -57,7 +56,6 @@ void main(void) {
 			}
 		}
 		else {
-			TOGGLE_BIT(PORTB,0);
 			LCD_vidWriteCharacter(u8key);
 			s8xPos++;
 			if(s8xPos == 16) {
@@ -71,7 +69,6 @@ void main(void) {
 					s8yPos = 1;
 					LCD_vidGoToXY(s8xPos,s8yPos);
 				}
-				s8xPos = 0;
 			}
 		}
 	}
