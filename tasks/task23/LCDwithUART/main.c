@@ -44,12 +44,20 @@ void main(void) {
 				LCD_vidWriteCharacter(ASCII_SPACE);
 				LCD_vidGoToXY(s8xPos,s8yPos);
 			}
+			else if ((s8xPos < 0) && (s8yPos == 1)) {
+				s8xPos = 0;
+				s8yPos = 1;
+				TOGGLE_BIT(PORTB,1);
+				LCD_vidWriteCharacter(ASCII_SPACE);
+				LCD_vidGoToXY(s8xPos,s8yPos);
+			}
 			else {
 				LCD_vidWriteCharacter(ASCII_SPACE);
 				LCD_vidGoToXY(s8xPos,s8yPos);
 			}
 		}
 		else {
+			TOGGLE_BIT(PORTB,0);
 			LCD_vidWriteCharacter(u8key);
 			s8xPos++;
 			if(s8xPos == 16) {
