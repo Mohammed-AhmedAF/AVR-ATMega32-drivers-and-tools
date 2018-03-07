@@ -6,55 +6,64 @@
 #include <util/delay.h>
 
 u8 u8key;
-u8 u8xPos = 0;
-u8 u8yPos = 1;
+s8 s8xPos = 0;
+s8 s8yPos = 1;
 void main(void) {
 	/*Initialization*/
 	LCD_vidInit();
 	UART_vidInit();
+	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN0,STD_HIGH);
+	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN1,STD_HIGH);
 	LCD_vidWriteString("Hello");
 	_delay_ms(500);
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 	while(1) {
 		u8key = UART_u8ReceiveByte();
 		if (u8key == ASCII_ESCAPE) {
-			u8xPos = 0;
-			u8yPos = 1;
+			s8xPos = 0; //You will need to reinitialize x,y variables
+			s8yPos = 1; //or else backspace will not work correctly
 			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 		}
 		else if(u8key == '\r') {
-			if (u8yPos == 1) {
-				u8yPos = 2;
-				LCD_vidGoToXY(0,u8yPos);
+			if (s8yPos == 1) {
+				s8yPos = 2;
+				LCD_vidGoToXY(0,s8yPos);
 			}
 			else {
-				u8yPos = 1;
-				LCD_vidGoToXY(0,u8yPos);
+				s8yPos = 1;
+				LCD_vidGoToXY(0,s8yPos);
 			}
 
 		}
 		else if (u8key == ASCII_BACKSPACE) {
-			u8xPos--;
-			LCD_vidWriteCharacter(ASCII_SPACE);
-			LCD_vidGoToXY(u8xPos,u8yPos);
-			if (u8xPos <= -1 && (u8yPos == 2)) {
-				u8xPos = 15;
-				LCD_vidGoToXY(u8xPos,1);
+			s8xPos--;
+			if ((s8xPos < 0) && (s8yPos == 2)) {
+				s8xPos = 15;
+				s8yPos = 1;
+				TOGGLE_BIT(PORTB,1);
+				LCD_vidWriteCharacter(ASCII_SPACE);
+				LCD_vidGoToXY(s8xPos,s8yPos);
+			}
+			else {
+				LCD_vidWriteCharacter(ASCII_SPACE);
+				LCD_vidGoToXY(s8xPos,s8yPos);
 			}
 		}
 		else {
 			LCD_vidWriteCharacter(u8key);
-			u8xPos++;
-			if(u8xPos == 16) {
-				if (u8yPos == 1) {
-					u8yPos = 2;
-					LCD_vidGoToXY(0,u8yPos);
+			s8xPos++;
+			if(s8xPos == 16) {
+				if (s8yPos == 1) {
+					s8xPos = 0;
+					s8yPos = 2;
+					LCD_vidGoToXY(s8xPos,s8yPos);
 				}
 				else {
-					u8yPos = 1;
-					LCD_vidGoToXY(0,u8yPos);
+					s8xPos = 0;
+					s8yPos = 1;
+					LCD_vidGoToXY(s8xPos,s8yPos);
 				}
-				u8xPos = 0;
+				s8xPos = 0;
 			}
 		}
 	}
