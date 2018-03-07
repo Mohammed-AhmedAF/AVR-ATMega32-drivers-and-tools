@@ -23,10 +23,12 @@ void main(void) {
 		}
 		else if(u8key == '\r') {
 			if (s8yPos == 1) {
+				s8xPos = 0; //Reinitialize so that backspace works on second line.
 				s8yPos = 2;
-				LCD_vidGoToXY(0,s8yPos);
+				LCD_vidGoToXY(s8xPos,s8yPos);
 			}
 			else {
+				s8xPos = 0;
 				s8yPos = 1;
 				LCD_vidGoToXY(0,s8yPos);
 			}
