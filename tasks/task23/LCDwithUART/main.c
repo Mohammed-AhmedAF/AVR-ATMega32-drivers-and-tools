@@ -18,9 +18,11 @@ void main(void) {
 	while(1) {
 		u8key = UART_u8ReceiveByte();
 		if (u8key == ASCII_ESCAPE) {
+			u8xPos = 0;
+			u8yPos = 1;
 			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 		}
-		else if (u8key == '\r') {
+		else if(u8key == '\r') {
 			if (u8yPos == 1) {
 				u8yPos = 2;
 				LCD_vidGoToXY(0,u8yPos);
@@ -31,11 +33,12 @@ void main(void) {
 			}
 
 		}
-		else if (u8key == 8) {
-			LCD_vidGoToXY(u8xPos--,u8yPos);
+		else if (u8key == ASCII_BACKSPACE) {
+			u8xPos--;
 			LCD_vidWriteCharacter(ASCII_SPACE);
-			if (u8xPos == -1) {
-				u8xPos = 0;
+			LCD_vidGoToXY(u8xPos,u8yPos);
+			if (u8xPos <= -1 && (u8yPos == 2)) {
+				u8xPos = 15;
 				LCD_vidGoToXY(u8xPos,1);
 			}
 		}
