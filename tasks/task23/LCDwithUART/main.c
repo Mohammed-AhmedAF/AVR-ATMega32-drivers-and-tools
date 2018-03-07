@@ -9,12 +9,8 @@ u8 u8key;
 s8 s8xPos = 0;
 s8 s8yPos = 1;
 void main(void) {
-	/*Initialization*/
 	LCD_vidInit();
 	UART_vidInit();
-	LCD_vidWriteString("Hello");
-	_delay_ms(500);
-	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 	while(1) {
 		u8key = UART_u8ReceiveByte();
 		if (u8key == ASCII_ESCAPE) {
