@@ -22,11 +22,10 @@ void KEYPAD_vidInit() {
 }
 
 
-u8 keys[4][4] = {{'/',3,2,1},{'*',6,5,4},{'+',3,2,1},{'=','-',0,'#'}};
+u8 keys[4][4] = {{'/',3,2,1},{'*',6,5,4},{'+',9,8,7},{'=','-',0,'#'}};
 u8 values[4] = {0x0E,0x0D,0x0B,0x07};
 u8 value,i = 0;
 u8 KEYPAD_u8GetKey(void) {
-	/*1st*/
 	for (i = 0; i < 4; i++) {
 		u8 x = 0;
 		value = values[i];
@@ -39,6 +38,13 @@ u8 KEYPAD_u8GetKey(void) {
 		x |= (DIO_u8GetPinValue(COL1_PORT,COL1_PIN) << 1);
 		x |= (DIO_u8GetPinValue(COL2_PORT,COL2_PIN) << 2);
 		x |= (DIO_u8GetPinValue(COL3_PORT,COL3_PIN) << 3);
+		
+		#ifdef HOLD_BUTTON
+			while(DIO_u8GetPinValue(COL0_PORT,COL0_PIN) == 0);
+			while(DIO_u8GetPinValue(COL1_PORT,COL1_PIN) == 0);
+			while(DIO_u8GetPinValue(COL2_PORT,COL2_PIN) == 0);
+			while(DIO_u8GetPinValue(COL3_PORT,COL3_PIN) == 0);	
+		#endif
 		switch(x) {
 			case 0x07:
 				return keys[i][0];
@@ -48,7 +54,7 @@ u8 KEYPAD_u8GetKey(void) {
 				return keys[i][2];
 			case 0x0E:
 				return keys[i][3];
-		}	
+		}
 	}
 	return 0xFF;
 }
