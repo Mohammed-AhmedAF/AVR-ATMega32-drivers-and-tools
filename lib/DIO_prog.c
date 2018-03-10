@@ -1,7 +1,6 @@
-#include "DIO_interface.h"
 #include "Std_Types.h"
 #include "Macros.h"
-
+#include "DIO_interface.h"
 void DIO_vidSetPortValue(u8 u8PortNumberCpy, u8 u8ValueCpy) {
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
