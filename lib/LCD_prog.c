@@ -112,10 +112,10 @@ void LCD_vidBlinkString(s8 * s8stringCpy,u8 u8timesCpy) {
 void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
 	LCD_vidSendCommand(LCD_RETURN_HOME);
 	if (s8yCpy == 1) {
-			LCD_vidSendCommand(0x80+s8yCpy);
+			LCD_vidSendCommand(0x80+s8yxCpy);
 	}
 	else {
-			LCD_vidSendCommand(0xC0+s8yCpy);
+			LCD_vidSendCommand(0xC0+s8xCpy);
 	}
 }
 
