@@ -48,6 +48,7 @@ u8 EEPROM_u8readByte(u16 u16locationCpy, u8 * u8dataCpy) {
 		if(TWI_u8CheckAck(SLA_W_ACK) == 1) {
 			TWI_vidSendByte((u8)u16locationCpy); //This casting is done, so we take the first 8 bits, that signify the location.
 			if(TWI_u8CheckAck(DATA_TX_ACK) == 1) {
+				TWI_vidSendStart();
 				if(TWI_u8CheckAck(REPEATED_START) == 1) {
 					SET_BIT(slave_w,0);
 					TWI_vidSendByte(slave_w);
