@@ -1,6 +1,5 @@
 #include "Macros.h"
 #include "Std_Types.h"
-#include "DIO_interface.h"
 #include "TWI_interface.h"
 #include <avr/io.h>
 
