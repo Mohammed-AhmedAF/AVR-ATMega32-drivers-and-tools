@@ -1,8 +1,7 @@
-#include "DIO_interface.h"
-#include "Keypad_interface.h"
 #include "Macros.h"
 #include "Std_Types.h"
-
+#include "Keypad_interface.h"
+#include "DIO_interface.h"
 void KEYPAD_vidInit() {
 
 	DIO_vidSetPinDirection(ROW0_PORT,ROW0_PIN,1);
