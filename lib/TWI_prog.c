@@ -30,15 +30,15 @@ void TWI_vidSendStop(void) {
 	//We don't need to worry about checking the flag
 }
 
-u8 TWI_u8receiveWithNoAck(void) {
-	TWCR = (1<TWINT) | (1 < TWEN);
+u8 TWI_u8ReceiveWithNoAck(void) {
+	TWCR = (1<<TWINT) | (1 << TWEN);
 	while(GET_BIT(TWCR,TWINT) == 0); //We wait until the job of receiving is complete;
 	return TWDR;
 }
 
 //This function takes the expected ACK as an input parameter
 //Based on the current job, the microcontoller will check from a list of ACKs.
-u8 TWI_u8checkAck(u8 u8AckCpy) {
+u8 TWI_u8CheckAck(u8 u8AckCpy) {
 	//Masking TWSR
 	u8 u8receivedAck;
 	u8receivedAck = TWSR&(0b11111000);

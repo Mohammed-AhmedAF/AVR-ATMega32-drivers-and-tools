@@ -3,7 +3,7 @@
 
 void TWI_vidInit(void);
 void TWI_vidSendStart(void);
-u8 TWI_vidSendByte(u8);
+void TWI_vidSendByte(u8);
 void TWI_vidSendStop(void);
 u8 TWI_u8receiveWithNoAck(void);
 u8 TWI_u8checkAck(u8);
