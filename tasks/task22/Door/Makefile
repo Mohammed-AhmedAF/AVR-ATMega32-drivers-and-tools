@@ -1,6 +1,6 @@
 MAIN = main.c
 CC = avr-gcc
-SRC = $(MAIN) DIO_prog.c LCD_prog.c KEYPAD_prog.c Services_prog.c Password_prog.c StepperMotor_prog.c
+SRC = $(MAIN) DIO_prog.c LCD_prog.c Keypad_prog.c Services_prog.c Password_prog.c StepperMotor_prog.c
 CFLAGS = -mmcu=atmega32 -I . -O
 
 PRO = avrdude

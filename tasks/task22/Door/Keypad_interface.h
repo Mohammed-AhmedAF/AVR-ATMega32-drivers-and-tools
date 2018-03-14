@@ -8,7 +8,7 @@
 #define ROW2_PORT DIO_PORTB
 #define ROW2_PIN 2
 #define ROW3_PORT DIO_PORTB
-#define ROW3_PIN 3
+#define ROW3_PIN 3	
 
 
 #define COL0_PORT DIO_PORTB

@@ -2,7 +2,7 @@
 #include "Macros.h"
 #include "DIO_interface.h"
 #include "LCD_interface.h"
-#include "KEYPAD_interface.h"
+#include "Keypad_interface.h"
 #include "Services_interface.h"
 #include <util/delay.h>
 
