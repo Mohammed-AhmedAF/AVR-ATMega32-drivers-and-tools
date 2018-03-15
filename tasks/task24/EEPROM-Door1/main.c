@@ -24,12 +24,15 @@ int main(void) {
 	Password_vidReenterPassword();
 	do {
 	u8MatchFlag = Password_vidCheckPasswordMatch(u8PasswordSize);
+	if (u8MatchFlag == 0) {
+		Password_vidReenterPassword();
+	}
 	}while(u8MatchFlag == 0);
 
-	Password_vidSaveID(u8IDSize);
-	Password_vidSavePassword(u8PasswordStart,u8PasswordSize);
+	Password_vidSave(u8IDSize);
 	_delay_ms(2000);
 	Password_vidRetreiveID(u8IDSize);
-	//Password_vidReadPassword(u8PasswordStart,u8PasswordSize);
+	_delay_ms(2000);
+	Password_vidReadPassword(u8IDSize+1,u8PasswordSize);
 	while(1);
 }
