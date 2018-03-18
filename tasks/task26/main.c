@@ -6,6 +6,7 @@
 #include <util/delay.h>
 
 void vidCount(void);
+void vidToggleLED(void);
 
 Task_Type Task1;
 Task_Type Task2;
@@ -21,7 +22,13 @@ void main(void) {
 	Task1.state = RTO_U8TASK_RUNNING;
 	Task1.ptrfun = vidCount;
 
+	Task2.periodicity = 500;
+	Task2.first_delay = 0;
+	Task2.state = RTO_U8TASK_RUNNING;
+	Task2.ptrfun = vidToggleLED;
+
 	RTO_vidCreateTask(&Task1,1);
+	RTO_vidCreateTask(&Task2,2);
 	while(1);
 	
 }
@@ -33,4 +40,8 @@ void vidCount(void) {
 	if (u8Count == 99) {
 		u8Count = 0;
 	}
+}
+
+void vidToggleLED(void) {
+	TOGGLE_BIT(PORTA,0);
 }
