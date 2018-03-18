@@ -15,5 +15,6 @@ typedef struct {
 void RTO_vidInit(void);
 void RTO_vidCreateTask(Task_Type *, u8 Task_Priority);
 void RTO_vidScheduler(void);
+void RTO_vidOVFCount(void);
 
 #endif

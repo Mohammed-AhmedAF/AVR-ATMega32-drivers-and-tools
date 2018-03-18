@@ -2,6 +2,7 @@
 #include "Std_Types.h"
 #include "RTO_interface.h"
 #include "DIO_interface.h"
+#include "Timer_interface.h"
 #include <avr/interrupt.h>
 
 
@@ -15,19 +16,7 @@ void RTO_vidInit(void) {
 		Arr_Task[i] = RTO_NULL;
 
 	}
-
-	SET_BIT(TCCR0,0);
-	CLEAR_BIT(TCCR0,1);
-	CLEAR_BIT(TCCR0,2);
-	CLEAR_BIT(TCCR0,3);
-	CLEAR_BIT(TCCR0,4);
-	CLEAR_BIT(TCCR0,5);
-	CLEAR_BIT(TCCR0,6);
-
-	TCNT0 = 192;
-	SET_BIT(TIMSK,0);
-
-	SET_BIT(SREG,7);
+	Timer_vidInit(RTO_vidOVFCount);
 }
 
 //You can put safety requirements 
@@ -53,9 +42,7 @@ void RTO_vidScheduler(void) {
 		}
 	}
 }
-
-
-ISR(TIMER0_OVF_vect) {
+void RTO_vidOVFCount(void) {
 	OVF_count++;
 	if(OVF_count == 32) {
 		OVF_count = 0;
