@@ -31,7 +31,7 @@ int main(void) {
 	SET_BIT(TCCR0,6);
 	SET_BIT(TCCR0,3);
 
-	SET_BIT(TCCR0,5);
+	SET_BIT(TCCR0,5); //Clear on compate match
 	CLEAR_BIT(TCCR0,4);
 
 	SET_BIT(TCCR0,0); //Setting the Clock with now prescaling
