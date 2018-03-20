@@ -34,7 +34,7 @@ int main(void) {
 	SET_BIT(TCCR0,5);
 	CLEAR_BIT(TCCR0,4);
 
-	SET_BIT(TCCR0,0);
+	SET_BIT(TCCR0,0); //Setting the Clock with now prescaling
 	OCR0 = 0;
 	TCNT0=0;
 
