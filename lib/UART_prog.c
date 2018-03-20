@@ -1,6 +1,6 @@
-#include "DIO_interface.h"
 #include "Std_Types.h"
 #include "Macros.h"
+#include "DIO_interface.h"
 #include "UART_interface.h"
 #include <avr/io.h>
 
