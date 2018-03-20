@@ -9,7 +9,7 @@ void Timer_vidInit(void (*funcPtrCpy)(void)) {
 	
 
 	SET_BIT(TCCR1B,3); //CTC
-	SET_BIT(TCCR1B,0);
+	SET_BIT(TCCR1B,0); //Setting Clk with no prescaling
 	TCNT1 = 192;
 	OCR1A = 255;
 	SET_BIT(TIMSK,4);
