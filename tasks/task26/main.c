@@ -15,12 +15,13 @@ Task_Type Task2;
 Task_Type Task3;
 Task_Type Task4;
 
+
 u8 i;
 void main(void) {
 	//Initialization
 
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN0,STD_HIGH);
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN1,STD_HIGH);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN0,STD_HIGH); //LED1
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN1,STD_HIGH); //LED2
 
 	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN2,STD_LOW);
 	DIO_vidSetPinValue(DIO_PORTA,DIO_PIN2,STD_HIGH);
