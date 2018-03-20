@@ -109,6 +109,18 @@ void LCD_vidBlinkString(s8 * s8stringCpy,u8 u8timesCpy) {
 	while (u8timesCpy > i);
 }
 
+void LCD_vidWriteNumber(u16 u16NumberCpy) {
+	if(u16NumberCpy < 10) {
+		LCD_vidWriteCharacter(u16NumberCpy+'0');
+	}
+	else {
+		if (u16NumberCpy < 100) {
+			LCD_vidWriteCharacter(u16NumberCpy/10+'0');
+			LCD_vidWriteCharacter(u16NumberCpy%10+'0');
+		}
+	}
+}
+
 void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
 	LCD_vidSendCommand(LCD_RETURN_HOME);
 	if (s8yCpy == 1) {

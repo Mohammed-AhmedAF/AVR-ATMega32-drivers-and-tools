@@ -1,7 +1,7 @@
 #ifndef LCD_H
 #define LCD_H
 
-#define LCD_DATA_PORT DIO_PORTD
+#define LCD_DATA_PORT DIO_PORTC
 #define LCD_CTRL_PORT DIO_PORTA
 
 #define LCD_D0 0
@@ -36,4 +36,5 @@ void LCD_vidWriteString(s8*);
 void LCD_vidBlinkString(s8*,u8);
 void LCD_vidWriteSizedString(s8*,u8);
 void LCD_vidGoToXY(s8,s8);
+void LCD_vidWriteNumber(u16);
 #endif
