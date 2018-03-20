@@ -16,8 +16,21 @@ void Timer_vidInit(void (*funcPtrCpy)(void)) {
 
 	SET_BIT(SREG,7);
 	funcPtr = funcPtrCpy;
+
+	#ifdef _TIMER0_FPWM
+	//Fast PWM on Timer 0
+	SET_BIT(TCCR0,6);
+	SET_BIT(TCCR0,3);	
+
+	SET_BIT(TCCR0,5);
+
+	//Setting Clk, no prescaling
+	SET_BIT(TCCR0,0);
+	OCR0 = 0;
+	#endif
 }
 
 ISR(TIMER1_COMPA_vect) {
 	(*funcPtr)();	
 }
+
