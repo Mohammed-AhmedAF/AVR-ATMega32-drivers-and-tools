@@ -48,7 +48,7 @@ void Password_vidShowID(u8 u8IDSize) {
 	}
 }
 
-void Password_vidCheckID(void) {
+u8 Password_u8CheckID(void) {
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 	LCD_vidWriteString("ID: ");
 	i = 0;
@@ -64,19 +64,20 @@ void Password_vidCheckID(void) {
 			u8AskedIDSize++;
 		}
 	}while(1);
-	if (u8AskedIDSize != u8IDSize) {
+	if (u8AskedIDSize != u8IDSize) { //When ID doesn't have the same length as in EEPROM
 		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		LCD_vidWriteString("You're not registerd");
+		LCD_vidWriteString("You're not registerd"); 
+		return 0;
 	}
 	else {
 		for (i = 0; i < u8IDSize; i++) {
 			EEPROM_u8ReadByte(i,&u8Byte);
-			if (id[i] != u8Byte) {
-				Password_vidCheckID();
+			if (id[i] != u8Byte) { //When ID is not the same as in EEPROM
+				return 0;
 			}		
-			else if (i == u8IDSize-1) {
+			else if (i == u8IDSize-1) { //This means ID is the same as in EEPROM
 				LCD_vidGoToXY(0,2);
-				LCD_vidWriteCharacter('.');
+				return 1;
 			}
 		}
 	}

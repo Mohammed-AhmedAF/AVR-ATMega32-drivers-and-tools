@@ -10,6 +10,7 @@
 #include <util/delay.h>
 
 u8 u8Repeat = 0,u8MatchFlag;
+u8 u8IDMatchFlag = 0;
 extern u8 u8IDSize;
 extern u8 u8PasswordSize;
 extern u8 u8PasswordStart;
@@ -31,7 +32,13 @@ int main(void) {
 
 	Password_vidSave(u8IDSize);
 	_delay_ms(2000);
-	Password_vidCheckID();
+	do {
+		u8IDMatchFlag = Password_u8CheckID();
+	}while(u8IDMatchFlag == 0);
+	if (u8IDMatchFlag == 1) {
+		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+
+	}
 	do {
 		u8MatchFlag = Password_vidCheckPassword();
 		if (u8MatchFlag == 1) {
