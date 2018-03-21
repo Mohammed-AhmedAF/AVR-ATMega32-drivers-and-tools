@@ -9,7 +9,10 @@ void Password_vidRetreiveID(u8);
 void Password_vidReenterPassword(void);
 u8 Password_vidCheckPasswordMatch(u8);
 void Password_vidReadPassword(u8,u8);
-
-#define FLAG_LOCATION 200
+void Password_vidModifyFlag(u8);
+void Password_vidCheckFlag(void);
+#define PASSWORD_FLAG_LOCATION 200
+#define PASSWORD_FLAG_SET 1
+#define PASSWORD_FLAG_UNSET 0
 
 #endif
