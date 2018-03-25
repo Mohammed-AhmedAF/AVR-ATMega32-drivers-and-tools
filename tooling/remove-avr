@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ls ~/programming/imt/lib | xargs rm
+if [ $? -eq 0 ];then
+	echo "AVR files removed"
+else 
+	echo "Not removed"
+fi
