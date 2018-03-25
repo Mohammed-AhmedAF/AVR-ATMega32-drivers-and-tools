@@ -5,8 +5,8 @@ void TWI_vidInit(void);
 void TWI_vidSendStart(void);
 void TWI_vidSendByte(u8);
 void TWI_vidSendStop(void);
-u8 TWI_u8receiveWithNoAck(void);
-u8 TWI_u8checkAck(u8);
+u8 TWI_u8ReceiveWithNoAck(void);
+u8 TWI_u8CheckAck(u8);
 
 
 #define START_CONDITION 0x08

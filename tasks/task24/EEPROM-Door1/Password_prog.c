@@ -107,7 +107,7 @@ void Password_vidSavePassword(u8 u8PasswordStart,u8 u8PasswordSize) {
 		}
 
 	}
-	Password_vidModifyFlag(1);
+
 	LCD_vidWriteString("Password saved");
 
 }
@@ -174,22 +174,3 @@ void Password_vidReadPassword(u8 u8PasswordStartCpy, u8 u8PasswordSizeCpy) {
 		}
 	}
 }
-void Password_vidModifyFlag(u8 u8ActionCpy) {
-	//Set flag
-	if(u8ActionCpy == 1) {
-		EEPROM_u8WriteByte(PASSWORD_FLAG_LOCATION,PASSWORD_FLAG_SET);
-	}
-	//Clear flag
-	else {
-		EEPROM_u8WriteByte(PASSWORD_FLAG_LOCATION,PASSWORD_FLAG_UNSET);
-	}
-}
-//void Password_vidCheckFlag(void) {
-//	EEPROM_u8ReadByte(PASSWORD_FLAG_LOCATION,&u8Byte);
-//	if (u8Byte == 1) {
-//	
-//	}
-//	else {
-//	
-//	}
-//}
