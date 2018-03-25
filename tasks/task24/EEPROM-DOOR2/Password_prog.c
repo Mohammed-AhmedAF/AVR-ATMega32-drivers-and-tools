@@ -1,6 +1,7 @@
 #include "Std_Types.h"
 #include "Macros.h"
 #include "LCD_interface.h"
+#include "DIO_interface.h"
 #include "Keypad_interface.h"
 #include "Services_interface.h"
 #include "Password_interface.h"
@@ -18,6 +19,16 @@ u8 u8PasswordStart = 0;
 u8 u8PasswordIndex = 0;
 u8 u8AskedIDSize = 0;
 u8 u8AskedPassSize = 0;
+
+u8 Password_u8CheckSaveFlag(void) {
+	EEPROM_u8ReadByte(PASSWORD_SAVED_PASSWORD_FLAG_LOCATION,&u8Byte);
+	if (u8Byte == PASSWORD_SAVED_FLAG) {
+		return PASSWORD_SAVED_FLAG;
+	}
+	else {
+		return PASSWORD_UNSAVED_FLAG;
+	}
+}
 
 void Password_vidEnterID(void) {
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
@@ -137,12 +148,16 @@ void Password_vidSave(u8 u8IDSize) {
 		u8PasswordStart++;
 		if (flag == 1) {
 			LCD_vidWriteCharacter('!');
+
 		}
 		else {
 			LCD_vidWriteCharacter('/');
 		}
 	}
-	LCD_vidWriteString("Saved");
+	if (flag == 1) {
+		EEPROM_u8WriteByte(PASSWORD_SAVED_PASSWORD_FLAG_LOCATION,PASSWORD_SAVED_FLAG);
+		LCD_vidWriteString("Saved");
+	}
 }
 
 void Password_vidReenterPassword(void) {

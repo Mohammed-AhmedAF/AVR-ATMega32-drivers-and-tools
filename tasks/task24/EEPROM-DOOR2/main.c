@@ -19,38 +19,39 @@ int main(void) {
 	LCD_vidInit();
 	KEYPAD_vidInit();	
 	EEPROM_vidInit();
+	if(Password_u8CheckSaveFlag() == 0 ) {
+		Password_vidEnterID();
+		Password_vidEnterPassword();
+		Password_vidReenterPassword();
+		do {
+			u8MatchFlag = Password_vidCheckPasswordMatch(u8PasswordSize);
+			if (u8MatchFlag == 0) {
+				Password_vidReenterPassword();
+			}
+		}while(u8MatchFlag == 0);
 
-	Password_vidEnterID();
-	Password_vidEnterPassword();
-	Password_vidReenterPassword();
-	do {
-		u8MatchFlag = Password_vidCheckPasswordMatch(u8PasswordSize);
-		if (u8MatchFlag == 0) {
-			Password_vidReenterPassword();
-		}
-	}while(u8MatchFlag == 0);
-
-	Password_vidSave(u8IDSize);
-	_delay_ms(2000);
-	do {
-		u8IDMatchFlag = Password_u8CheckID();
-	}while(u8IDMatchFlag == 0);
-	if (u8IDMatchFlag == 1) {
-		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-
+		Password_vidSave(u8IDSize);
 	}
-	do {
-		u8MatchFlag = Password_vidCheckPassword();
-		if (u8MatchFlag == 1) {
+	else {	
+		do {
+			u8IDMatchFlag = Password_u8CheckID();
+		}while(u8IDMatchFlag == 0);
+		if (u8IDMatchFlag == 1) {
 			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-			LCD_vidWriteString("Welcome");
-			break;
 		}
-		u8Repeat++;
-	}while(u8Repeat < 3);
-	if ((u8Repeat == 3) && (u8MatchFlag == 0)) {
-		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-		LCD_vidWriteString("You're blocked");
+		do {
+			u8MatchFlag = Password_vidCheckPassword();
+			if (u8MatchFlag == 1) {
+				LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+				LCD_vidWriteString("Welcome");
+				break;
+			}
+			u8Repeat++;
+		}while(u8Repeat < 3);
+		if ((u8Repeat == 3) && (u8MatchFlag == 0)) {
+			LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+			LCD_vidWriteString("You're blocked");
+		}
 	}
 	while(1);
 }
