@@ -1,6 +1,7 @@
 #include "Std_Types.h"
 #include "Macros.h"
 #include "LCD_interface.h"
+#include "DIO_interface.h"
 #include "Keypad_interface.h"
 #include "Services_interface.h"
 #include "Password_interface.h"
@@ -18,6 +19,16 @@ u8 u8PasswordStart = 0;
 u8 u8PasswordIndex = 0;
 u8 u8AskedIDSize = 0;
 u8 u8AskedPassSize = 0;
+
+u8 Password_u8CheckSaveFlag(void) {
+	EEPROM_u8ReadByte(PASSWORD_SAVED_PASSWORD_FLAG_LOCATION,&u8Byte);
+	if (u8Byte == PASSWORD_SAVED_FLAG) {
+		return PASSWORD_SAVED_FLAG;
+	}
+	else {
+		return PASSWORD_UNSAVED_FLAG;
+	}
+}
 
 void Password_vidEnterID(void) {
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
@@ -51,8 +62,12 @@ void Password_vidShowID(u8 u8IDSize) {
 u8 Password_u8CheckID(void) {
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 	LCD_vidWriteString("ID: ");
+
+	EEPROM_u8ReadByte(PASSWORD_ID_SIZE_LOCATION,&u8Byte);
+	u8IDSize = u8Byte;
 	i = 0;
 	u8AskedIDSize = 0;
+
 	do {
 		Services_vidWriteCharacter();
 		if (u8keyPressed == '#') {
@@ -83,8 +98,42 @@ u8 Password_u8CheckID(void) {
 	}
 }
 
-u8 Password_vidCheckPassword(void) {
+u8 Password_u8CheckBlock(void) {
+	flag = EEPROM_u8ReadByte(PASSWORD_BLOCKED_FLAG_LOCATION,&u8Byte);
+	if (flag == 1) {
+		if(u8Byte == PASSWORD_BLOCKED) {
+			LCD_vidWriteCharacter('B');
+			_delay_ms(2000);
+			return PASSWORD_BLOCKED;
+		}
+		else {
+			LCD_vidWriteCharacter('N');
+			_delay_ms(2000);
+			return PASSWORD_NOT_BLOCKED;
+		}
+	}
+}
+
+void Password_vidBlockUser(void) {
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+	flag = EEPROM_u8WriteByte(PASSWORD_BLOCKED_FLAG_LOCATION,PASSWORD_BLOCKED);
+	if (flag == 1) {
+		LCD_vidWriteString("BLock flag set");
+		_delay_ms(1000);
+	}
+	else {
+		LCD_vidWriteString("Flag not set");
+		_delay_ms(2000);
+	}
+}
+
+u8 Password_u8CheckPassword(void) {
+	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+	//Getting password size from EEPROM
+	flag =	EEPROM_u8ReadByte(PASSWORD_PASSWORD_SIZE_LOCATION,&u8Byte);
+	if (flag == 1) {
+		u8PasswordSize = u8Byte;
+	}
 	i = 0;
 	u8AskedPassSize = 0;
 	LCD_vidWriteString("Pass: ");
@@ -118,13 +167,10 @@ u8 Password_vidCheckPassword(void) {
 }
 
 void Password_vidSave(u8 u8IDSize) {
-	u8 c;
-	u8 flag;
 	u8PasswordStart = u8IDSize+1;
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 	for (i = 0; i < u8IDSize; i++) {
-		c = id[i];
-		flag = EEPROM_u8WriteByte(i,c);
+		flag = EEPROM_u8WriteByte(i,id[i]);
 		if (flag == 1) {
 			LCD_vidWriteCharacter('!');
 		}
@@ -137,12 +183,35 @@ void Password_vidSave(u8 u8IDSize) {
 		u8PasswordStart++;
 		if (flag == 1) {
 			LCD_vidWriteCharacter('!');
+
 		}
 		else {
 			LCD_vidWriteCharacter('/');
 		}
 	}
-	LCD_vidWriteString("Saved");
+	if (flag == 1) {
+
+		Password_vidSaveSize();
+
+		flag = EEPROM_u8WriteByte(PASSWORD_SAVED_PASSWORD_FLAG_LOCATION,PASSWORD_SAVED_FLAG);
+		if (flag == 0) {
+			LCD_vidWriteCharacter('S');
+		}
+		LCD_vidWriteString("Saved");
+	}
+}
+
+void Password_vidSaveSize(void) {
+	flag = EEPROM_u8WriteByte(PASSWORD_ID_SIZE_LOCATION,u8IDSize);
+	if (flag == 0) {
+		LCD_vidWriteCharacter('I');
+	}
+	_delay_ms(500);
+	flag =	EEPROM_u8WriteByte(PASSWORD_PASSWORD_SIZE_LOCATION,u8PasswordSize);
+	if (flag == 0) {
+		LCD_vidWriteCharacter('P');
+	}
+	_delay_ms(500);
 }
 
 void Password_vidReenterPassword(void) {
@@ -178,7 +247,6 @@ void Password_vidSavePassword(u8 u8PasswordStart,u8 u8PasswordSize) {
 		}
 
 	}
-
 	LCD_vidWriteString("Password saved");
 
 }
@@ -198,10 +266,10 @@ void Password_vidEnterPassword(void) {
 			i++;
 			u8PasswordSize++;
 		}
-
 	}while(1);
 
 }
+
 
 u8 Password_vidCheckPasswordMatch(u8 u8PasswordSizeCpy) {
 	for (i = 0; i < u8PasswordSizeCpy; i++) {
@@ -218,7 +286,7 @@ u8 Password_vidCheckPasswordMatch(u8 u8PasswordSizeCpy) {
 
 void Password_vidRetreiveID(u8 u8IDSize) {
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-	LCD_vidWriteString("ID: ");
+	LCD_vidWriteString("ID is  ");
 	LCD_vidGoToXY(0,2);
 	for (i = 0; i < u8IDSize; i++) {
 		flag = EEPROM_u8ReadByte(i,&u8Byte);
