@@ -103,15 +103,17 @@ u8 Password_u8CheckBlock(void) {
 	if (flag == 1) {
 		if(u8Byte == PASSWORD_BLOCKED) {
 			LCD_vidWriteCharacter('B');
-			_delay_ms(2000);
+			_delay_ms(1000);
 			return PASSWORD_BLOCKED;
 		}
 		else {
 			LCD_vidWriteCharacter('N');
-			_delay_ms(2000);
+			_delay_ms(1000);
 			return PASSWORD_NOT_BLOCKED;
 		}
 	}
+		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+
 }
 
 void Password_vidBlockUser(void) {
