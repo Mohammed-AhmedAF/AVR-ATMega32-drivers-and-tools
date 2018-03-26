@@ -1,3 +1,9 @@
+/* This file is used to clear the flags used in the 
+ * project, by loading it into the AVR whenever I need
+ * to make a new install of the project.
+ *
+ */
+
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
