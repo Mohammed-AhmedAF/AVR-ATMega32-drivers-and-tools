@@ -1,7 +1,7 @@
 #include "Std_Types.h"
+#include "Macros.h"
 #include "DIO_interface.h"
 #include "LCD_interface.h"
-#include "Macros.h"
 #include <util/delay.h>
 
 
@@ -75,24 +75,59 @@ void LCD_vidWriteCharacter(u8 charCpy) {
 	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,1);
 }
 
-void LCD_vidWriteString(u8 * u8String) {	
-	while(*u8String != '\0') {
-		LCD_vidWriteCharacter(*u8String++);
+void LCD_vidWriteString(s8 * s8String) {	
+	while(*s8String != '\0') {
+		u8 ch = *s8String++;
+		LCD_vidWriteCharacter(ch);
+	}
+}
+
+void LCD_vidWriteSizedString(s8 * s8String,u8 u8sizeCpy) {	
+	u8 i = 0;
+	do {
+		u8 ch = *s8String++;
+		LCD_vidWriteCharacter(ch);
+		i++;
+	}while(u8sizeCpy > i);
+}
+
+void LCD_vidBlinkString(s8 * s8stringCpy,u8 u8timesCpy) {
+	u8 i = 0;
+	s8 * s8string;
+	s8string = s8stringCpy;
+	do {
+		_delay_ms(500);	
+		while(*s8string != '\0') {
+			u8 ch = *s8string++;
+			LCD_vidWriteCharacter(ch);
+		}
+		_delay_ms(500);
+		i++;
+		LCD_vidSendCommand(LCD_CLEAR_SCREEN);
+		s8string = s8stringCpy;
+	}
+	while (u8timesCpy > i);
+}
+
+void LCD_vidWriteNumber(u16 u16NumberCpy) {
+	if(u16NumberCpy < 10) {
+		LCD_vidWriteCharacter(u16NumberCpy+'0');
+	}
+	else {
+		if (u16NumberCpy < 100) {
+			LCD_vidWriteCharacter(u16NumberCpy/10+'0');
+			LCD_vidWriteCharacter(u16NumberCpy%10+'0');
+		}
 	}
 }
 
 void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
-	LCD_vidSendCommand(LCD_CLEAR_SCREEN);
 	LCD_vidSendCommand(LCD_RETURN_HOME);
 	if (s8yCpy == 1) {
-		for (s8 i = 0; i < s8xCpy;i++) {
-			LCD_vidSendCommand(0b00010100);
-		}	
+			LCD_vidSendCommand(0x80+s8xCpy);
 	}
 	else {
-		for (s8 i = 0; i < s8xCpy+40; i++) {
-			LCD_vidSendCommand(0b00010100);
-		}
+			LCD_vidSendCommand(0xC0+s8xCpy);
 	}
 }
 

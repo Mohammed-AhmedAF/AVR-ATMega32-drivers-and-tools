@@ -25,6 +25,7 @@ build:
 .PHONY : load
 load: clean generate_ctags build
 	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
+	rm -f *.o *.i
 
 .PHONY : flash
 flash :

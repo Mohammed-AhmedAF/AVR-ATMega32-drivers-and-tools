@@ -15,6 +15,7 @@ void main(void) {
 	LCD_vidInit();	
 	DIO_vidSetPortDirection(DIO_PORTC,0b11111111);
 		ADC_vidInit();
+		LCD_vidWriteString("Hello");
 	while(1) {
 		x = ADC_u8GetValue();
 		res = (x*5)/256;	
@@ -59,12 +60,15 @@ void vidShowResult(void) {
 			x = x/10;
 		}
 	}
+	else if (res > 100) {
+		LCD_vidWriteCharacter('1');
+	}
 	else if (0 < res) {
 		u8 u8Res = res+48;
 		LCD_vidWriteCharacter(u8Res);
 	}
 	else {
-		LCD_vidWriteCharacter('-');
+		LCD_vidWriteCharacter('0');
 		res = res*(-1);
 		vidShowResult();	
 	}
