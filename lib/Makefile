@@ -23,10 +23,11 @@ build:
 	ctags -R
 
 #Added pwd to distinguish between two or more similar projects being
-#developed at the moment
+#developed at the moment. The pwd command itself is not shown when
+#making the project, this is done by prepending the command with @
 .PHONY : load
 load: clean generate_ctags build
-	pwd
+	@pwd
 	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
 	rm -f *.o *.i
 
