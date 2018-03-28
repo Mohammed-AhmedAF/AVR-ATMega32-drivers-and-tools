@@ -22,8 +22,11 @@ build:
 .PHONY : generate_ctags
 	ctags -R
 
+#Added pwd to distinguish between two or more similar projects being
+#developed at the moment
 .PHONY : load
 load: clean generate_ctags build
+	pwd
 	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
 	rm -f *.o *.i
 
