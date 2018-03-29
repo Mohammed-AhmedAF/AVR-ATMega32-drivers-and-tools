@@ -1,4 +1,53 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-cp ~/programming/imt/lib/* ./
-echo "Files copied to $PWD"
+# Developer: Mohamed Ahmed
+# Date: 29 March 2018
+
+
+if [[ $# -eq 0 ]]
+then
+	cp ~/programming/imt/lib/* ./
+	echo "Copied all files"
+else
+	for i in $@
+	do
+		if [[ $i = "makef" ]]
+		then
+			cp ~/programming/imt/lib/Makefile ./
+		fi
+		if [[ $i = "dio" ]]
+		then
+			cp ~/programming/imt/lib/DIO_prog.c ./
+			cp ~/programming/imt/lib/DIO_interface.h ./
+			cp ~/programming/imt/lib/Std_Types.h ./
+			cp ~/programming/imt/lib/Macros.h ./
+		fi
+		if [[ $i = "lcd" ]]
+		then
+			cp ~/programming/imt/lib/LCD_prog.c ./
+			cp ~/programming/imt/lib/LCD_interface.h ./
+		fi
+		if [[ $i = "key" ]]
+		then
+			cp ~/programming/imt/lib/Keypad_prog.c ./
+			cp ~/programming/imt/lib/Keypad_interface.h ./
+			cp ~/programming/imt/lib/Services_prog.c  ./
+			cp ~/programming/imt/lib/Services_interface.h ./
+		fi
+		if [[ $i = "rto" ]]
+		then
+			cp ~/programming/imt/lib/RTO_prog.c ./
+			cp ~/programming/imt/lib/RTO_interface.h ./
+		fi
+		if [[ $i = "twi" ]]
+		then
+			cp ~/programming/imt/lib/TWI_prog.c ./
+			cp ~/programming/imt/lib/TWI_interface.h ./
+		fi
+		if [[ $i = "uart" ]]
+		then
+			cp ~/programming/imt/lib/UART_prog.c ./
+			cp ~/programming/imt/lib/UART_interface.h ./
+		fi
+	done
+fi
