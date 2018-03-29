@@ -54,5 +54,10 @@ else
 			cp ~/programming/imt/lib/UART_prog.c ./
 			cp ~/programming/imt/lib/UART_interface.h ./
 		fi
+		if [[ $i = "7s" ]]
+		then
+			cp ~/programming/imt/lib/SevenSegment_prog.c ./
+			cp ~/programming/imt/lib/SevenSegment_interface.h ./
+		fi
 	done
 fi
