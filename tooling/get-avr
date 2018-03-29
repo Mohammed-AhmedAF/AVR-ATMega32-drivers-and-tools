@@ -59,5 +59,10 @@ else
 			cp ~/programming/imt/lib/SevenSegment_prog.c ./
 			cp ~/programming/imt/lib/SevenSegment_interface.h ./
 		fi
+		if [[ $i = "stepper" ]]
+		then
+			cp ~/programming/imt/lib/StepperMotor_prog.c ./
+			cp ~/programming/imt/lib/StepperMotor_interface.h ./
+		fi
 	done
 fi
