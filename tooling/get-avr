@@ -34,6 +34,11 @@ else
 			cp ~/programming/imt/lib/Services_prog.c  ./
 			cp ~/programming/imt/lib/Services_interface.h ./
 		fi
+		if [[ $i = "eeprom" ]]
+		then 
+			cp ~/programming/imt/lib/EEPROM_prog.c ./
+			cp ~/programming/imt/lib/EEPROM_interface.h ./
+		fi
 		if [[ $i = "rto" ]]
 		then
 			cp ~/programming/imt/lib/RTO_prog.c ./
