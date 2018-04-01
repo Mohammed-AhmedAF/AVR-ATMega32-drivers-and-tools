@@ -64,5 +64,10 @@ else
 			cp ~/programming/imt/lib/StepperMotor_prog.c ./
 			cp ~/programming/imt/lib/StepperMotor_interface.h ./
 		fi
+		if [[ $i = "timer0" ]]
+		then
+			cp ~/programming/imt/lib/TIMER0_prog.c ./
+			cp ~/programming/imt/lib/TIMER0_interface.h ./
+		fi
 	done
 fi
