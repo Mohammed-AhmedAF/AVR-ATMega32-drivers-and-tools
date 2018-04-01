@@ -30,6 +30,12 @@ void INTERRUPTS_vidSetInterruptEnable(u8 u8InterruptEnCpy) {
 	if (u8InterruptEnCpy == INTERRUTPS_OCIE_0) {
 		SET_BIT(TIMSK,1);
 	}
+	if (u8InterruptEnCpy == INTERRUPTS_TOIE_2) {
+		SET_BIT(TIMSK,6);
+	}
+	if (u8InterruptEnCpy == INTERRUPTS_OCIE_2) {
+		SET_BIT(TIMSK,7);
+	}
 }
 
 ISR(TIMER0_OVF_vect) {
