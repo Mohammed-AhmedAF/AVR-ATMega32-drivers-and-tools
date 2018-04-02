@@ -18,6 +18,9 @@
 #define DIO_PIN6 6
 #define DIO_PIN7 7
 
+#define DIO_OUTPUT 1
+#define DIO_INPUT 0
+
 #define DDRA *((u8*) 0x3A)
 #define PORTA *((u8*) 0x3B)
 #define PINA *((u8*) 0x39)
