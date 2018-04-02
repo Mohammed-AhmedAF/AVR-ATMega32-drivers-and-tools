@@ -1,7 +1,7 @@
 #ifndef LCD_H
 #define LCD_H
 
-#define LCD_DATA_PORT DIO_PORTC
+#define LCD_DATA_PORT DIO_PORTD
 #define LCD_CTRL_PORT DIO_PORTA
 
 #define LCD_D0 0
