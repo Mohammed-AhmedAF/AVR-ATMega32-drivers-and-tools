@@ -4,19 +4,19 @@
 #include "DIO_interface.h"
 void KEYPAD_vidInit() {
 
-	DIO_vidSetPinDirection(ROW0_PORT,ROW0_PIN,1);
-	DIO_vidSetPinDirection(ROW1_PORT,ROW1_PIN,1);
-	DIO_vidSetPinDirection(ROW2_PORT,ROW2_PIN,1);
-	DIO_vidSetPinDirection(ROW3_PORT,ROW3_PIN,1);
+	DIO_vidSetPinDirection(ROW0_PORT,ROW0_PIN,DIO_OUTPUT);
+	DIO_vidSetPinDirection(ROW1_PORT,ROW1_PIN,DIO_OUTPUT);
+	DIO_vidSetPinDirection(ROW2_PORT,ROW2_PIN,DIO_OUTPUT);
+	DIO_vidSetPinDirection(ROW3_PORT,ROW3_PIN,DIO_OUTPUT);
 
-	DIO_vidSetPinDirection(COL0_PORT,COL0_PIN,0);	
-	DIO_vidSetPinValue(COL0_PORT,COL0_PIN,1);	
-	DIO_vidSetPinDirection(COL1_PORT,COL1_PIN,0);
-	DIO_vidSetPinValue(COL1_PORT,COL1_PIN,1);
-	DIO_vidSetPinDirection(COL2_PORT,COL2_PIN,0);
-	DIO_vidSetPinValue(COL2_PORT,COL2_PIN,1);
-	DIO_vidSetPinDirection(COL3_PORT,COL3_PIN,0);
-	DIO_vidSetPinValue(COL3_PORT,COL3_PIN,1);
+	DIO_vidSetPinDirection(COL0_PORT,COL0_PIN,DIO_INPUT);	
+	DIO_vidSetPinValue(COL0_PORT,COL0_PIN,STD_HIGH);	
+	DIO_vidSetPinDirection(COL1_PORT,COL1_PIN,DIO_INPUT);
+	DIO_vidSetPinValue(COL1_PORT,COL1_PIN,STD_HIGH);
+	DIO_vidSetPinDirection(COL2_PORT,COL2_PIN,DIO_INPUT);
+	DIO_vidSetPinValue(COL2_PORT,COL2_PIN,STD_HIGH);
+	DIO_vidSetPinDirection(COL3_PORT,COL3_PIN,DIO_INPUT);
+	DIO_vidSetPinValue(COL3_PORT,COL3_PIN,STD_HIGH);
 
 }
 
