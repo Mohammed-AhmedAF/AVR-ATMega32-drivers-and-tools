@@ -29,19 +29,19 @@ s16 s16Intensity = 0;
 void main(void) {
 	//Initialization
 
-	//	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN0,STD_HIGH); //LED1
-	//	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN1,STD_HIGH); //LED2
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN3,STD_HIGH); //Intensity-controlled LED
+	//	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN0,DIO_OUTPUT); //LED1
+	//	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN1,DIO_OUTPUT); //LED2
+	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN3,DIO_OUTPUT); //Intensity-controlled LED
 
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN0,STD_LOW); //Button for toggling LEDs
-	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN0,STD_HIGH);
+	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN0,DIO_LOW); //Button for toggling LEDs
+	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN0,DIO_OUTPUT);
 
 	//Two buttons for intensity control
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN1,STD_LOW); 
-	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN1,STD_HIGH);
+	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN1,DIO_LOW); 
+	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN1,DIO_OUTPUT);
 
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN2,STD_LOW);
-	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN2,STD_HIGH);
+	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN2,DIO_LOW);
+	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN2,DIO_OUTPUT);
 
 
 	SevenSegment_vidInit(DIO_PORTD,DIO_PORTC);
