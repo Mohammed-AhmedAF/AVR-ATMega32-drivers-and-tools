@@ -5,11 +5,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-void (* ISRFunc) (void);
-u8 u8WGM = 0;
-void Timer0_vidInit(u8 u8WGMCpy, u8 u8COMCpy, u8 u8ClkCpy) {
+void TIMER0_vidInit(u8 u8WGMCpy, u8 u8COMCpy, u8 u8ClkCpy) {
 	//Configuration Wave Generation Mode
-	u8WGM = u8WGMCpy;
 	if (u8WGMCpy == TIMER0_WGM_NORMAL) {
 		CLEAR_BIT(TCCR0,6);
 		CLEAR_BIT(TCCR0,3);
@@ -85,23 +82,11 @@ void Timer0_vidInit(u8 u8WGMCpy, u8 u8COMCpy, u8 u8ClkCpy) {
 		SET_BIT(TCCR0,2);
 	}
 }
-//The function vidPutISR will take code that
-//will be executed inside the ISR, it will
-//also be responsible for setting the timer/counter
-//OFV or Compare flags
-void TIMER0_vidPutISR(void (*ptrFunc) ()) {
-	ISRFunc = ptrFunc;
 
-	if (u8WGM == TIMER0_WGM_NORMAL) {
-		SET_BIT(TIMSK,0);
-	}
-	if (u8WGM == TIMER0_WGM_CTC) {
-		SET_BIT(TIMSK,1);
-	}
+void TIMER0_vidSetTCRegister(u8 u8TCNTCpy) {
+	TCNT0 = u8TCNTCpy;
 }
 
-ISR(TIMER0_OVF_vect) {
-	ISRFunc();
+void TIMER0_vidSetOCRegister(u8 u8OCRCpy) {
+	OCR0 = u8OCRCpy;
 }
-
-

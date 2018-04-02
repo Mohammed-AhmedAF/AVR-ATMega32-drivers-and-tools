@@ -1,7 +1,9 @@
 #ifndef _TIMER0_INTERFACE_H
 #define _TIMER0_INTERFACE_H
-void Timer0_vidInit(u8,u8,u8);
+void TIMER0_vidInit(u8,u8,u8);
 void TIMER0_vidPutISR(void (*ptrFunc)());
+void TIMER0_vidSetTCRegister(u8);
+void TIMER0_vidSetOCRegister(u8);
 
 #define TIMER0_WGM_NORMAL 0
 #define TIMER0_WGM_CTC 1
