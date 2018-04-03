@@ -14,10 +14,10 @@ void vidLed500(void);
 void vidCheckButton(void);
 
 int main(void) {
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN0,1);
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN1,1);
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN3,0);
-	DIO_vidSetPinValue(DIO_PORTA,DIO_PIN3,1);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_OUTPUT);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN1,DIO_OUTPUT);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN3,DIO_INPUT);
+	DIO_vidSetPinValue(DIO_PORTA,DIO_PIN3,STD_HIGH);
 
 
 	RTO_vidInit();
