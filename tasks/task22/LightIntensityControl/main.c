@@ -22,7 +22,7 @@ u8 i = 0;
 void vidAsk(void);
 u8 vidInsertValue(u8 [], u8);
 int main(void) {
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN3,STD_HIGH);
+	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN3,DIO_OUTPUT);
 	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN3,STD_LOW);
 	LCD_vidInit();
 	KEYPAD_vidInit();

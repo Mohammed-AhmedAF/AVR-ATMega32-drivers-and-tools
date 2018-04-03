@@ -1,6 +1,6 @@
 #ifndef DIO_H
 #define DIO_H
-#include "Std_Types.h"
+
 
 #define F_CPU (8000000UL)
 
@@ -17,6 +17,9 @@
 #define DIO_PIN5 5
 #define DIO_PIN6 6
 #define DIO_PIN7 7
+
+#define DIO_OUTPUT 1
+#define DIO_INPUT 0
 
 #define DDRA *((u8*) 0x3A)
 #define PORTA *((u8*) 0x3B)
