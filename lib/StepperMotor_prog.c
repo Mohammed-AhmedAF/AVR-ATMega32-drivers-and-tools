@@ -7,10 +7,10 @@ u8 values[4] = {0x01,0x02,0x04,0x08};
 u8 value = 0;
 u8 i = 0;
 void StepperMotor_vidInit() {
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN4,1);
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN5,1);
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN6,1);
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN7,1);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN4,DIO_OUTPUT);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN5,DIO_OUTPUT);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN6,DIO_OUTPUT);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN7,DIO_OUTPUT);
 }
 
 void StepperMotor_vidMove() {
