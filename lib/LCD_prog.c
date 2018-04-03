@@ -6,19 +6,19 @@
 
 
 void LCD_vidInit(void) {
-	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D0,1);
-	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D1,1);
-	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D2,1);
-	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D3,1);
-	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D4,1);
-	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D5,1);
-	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D6,1);
-	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D7,1);
+	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D0,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D1,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D2,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D3,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D4,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D5,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D6,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_DATA_PORT,LCD_D7,DIO_OUTPUT);
 
 
-	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_E,1);
-	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_RS,1);
-	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_RW,1);
+	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_E,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_RS,DIO_OUTPUT);
+	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_RW,DIO_OUTPUT);
 	/*
 	   LCD_vidSendCommand(LCD_8MODE_2L);
 	   _delay_ms(2);
