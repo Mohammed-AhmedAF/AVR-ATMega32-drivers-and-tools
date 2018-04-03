@@ -69,7 +69,17 @@ else
 			cp ~/programming/imt/lib/TIMER0_prog.c ./
 			cp ~/programming/imt/lib/TIMER0_interface.h ./
 		fi
-		if [[ $i = "interrupts" || $i = "INTERRUPTS" || $i = "interrupt"]]
+		if [[ $i = "timer1" ]] 
+		then 
+			cp ~/programming/imt/lib/TIMER1_prog.c ./
+			cp ~/programming/imt/lib/TIMER1_interface.h ./
+		fi
+		if [[ $i = "timer2" ]]
+		then
+			cp ~/programming/imt/lib/TIMER2_prog.c ./
+			cp ~/programming/imt/lib/TIMER2_interface.h ./
+		fi
+		if [[ $i = "interrupts" || $i = "INTERRUPTS" || $i = "interrupt" ]]
 		then
 			cp ~/programming/imt/lib/INTERRUPTS_prog.c ./
 			cp ~/programming/imt/lib/INTERRUPTS_interface.h ./
