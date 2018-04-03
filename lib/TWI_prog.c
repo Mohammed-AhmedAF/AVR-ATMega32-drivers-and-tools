@@ -49,22 +49,3 @@ u8 TWI_u8CheckAck(u8 u8AckCpy) {
 		return 0;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
