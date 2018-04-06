@@ -27,12 +27,12 @@ else
 			cp ~/programming/imt/lib/LCD_prog.c ./
 			cp ~/programming/imt/lib/LCD_interface.h ./
 		fi
-		if [[ $i = "key" ]]
+		if [[ $i = "key" || $i = "keypad" ]]
 		then
-			cp ~/programming/imt/lib/Keypad_prog.c ./
-			cp ~/programming/imt/lib/Keypad_interface.h ./
-			cp ~/programming/imt/lib/Services_prog.c  ./
-			cp ~/programming/imt/lib/Services_interface.h ./
+			cp ~/programming/imt/lib/KEYPAD_prog.c ./
+			cp ~/programming/imt/lib/KEYPAD_interface.h ./
+			cp ~/programming/imt/lib/SERVICES_prog.c  ./
+			cp ~/programming/imt/lib/SERVICES_interface.h ./
 		fi
 		if [[ $i = "eeprom" ]]
 		then 
