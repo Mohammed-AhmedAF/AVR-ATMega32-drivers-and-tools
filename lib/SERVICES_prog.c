@@ -2,11 +2,11 @@
 #include "Macros.h"
 #include "DIO_interface.h"
 #include "LCD_interface.h"
-#include "Keypad_interface.h"
-#include "Services_interface.h"
+#include "KEYPAD_interface.h"
+#include "SERVICES_interface.h"
 #include <util/delay.h>
 
-void Services_vidWriteCharacter(void) {
+void SERVICES_vidWriteCharacter(void) {
 	u8keyPressed = 0xFF;
 	do {
 		u8keyPressed = KEYPAD_u8GetKey();
