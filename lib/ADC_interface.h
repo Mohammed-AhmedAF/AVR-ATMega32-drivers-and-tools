@@ -3,6 +3,7 @@
 void ADC_vidInit(u8,u8,u8,u8);
 void ADC_vidStartConversion(void);
 void ADC_vidSetAutoTrigger(void);
+u8 ADC_u8GetValue(void);
 u8 ADC_u8GetADCH(void);
 u8 ADC_u8GetADCL(void);
 
