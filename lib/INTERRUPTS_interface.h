@@ -12,6 +12,11 @@
 #define INTERRUPTS_OCIEA_1 4
 #define INTERRUPTS_TICIE_1 5
 
+//Defininitions of ISR switches go under here
+
+
+//
+
 void INTERRUPTS_vidSetInterruptEnable(u8);
 void INTERRUPTS_vidPutISRFunction(void (*ptrFunc) (void));
 void INTERRUPTS_vidSetInterruptEnable(u8);
