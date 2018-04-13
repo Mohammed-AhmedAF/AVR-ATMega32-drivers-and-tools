@@ -1,5 +1,5 @@
-#ifndef DIO_H
-#define DIO_H
+#ifndef _DIO_INTERFACE_H
+#define _DIO_INTERFACE_H
 
 
 #define F_CPU (8000000UL)
