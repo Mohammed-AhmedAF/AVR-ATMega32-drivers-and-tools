@@ -1,3 +1,7 @@
+/*
+ * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ */
+
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"

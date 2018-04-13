@@ -1,3 +1,7 @@
+/*
+ * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ */
+
 #ifndef _TIMER0_INTERFACE_H
 #define _TIMER0_INTERFACE_H
 void TIMER0_vidInit(u8,u8,u8);
