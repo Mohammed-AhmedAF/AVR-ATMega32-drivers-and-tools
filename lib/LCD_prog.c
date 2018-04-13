@@ -1,3 +1,7 @@
+//
+// Author: Mohammed Ahmed Abd Al-Fattah
+//
+
 #include "Std_Types.h"
 #include "DIO_interface.h"
 #include "LCD_interface.h"

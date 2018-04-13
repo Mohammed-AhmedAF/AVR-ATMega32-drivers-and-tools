@@ -1,3 +1,7 @@
+/*
+ * Author: Mohamed Ahmed Abd Al-Fattah
+ */
+
 #ifndef LCD_H
 #define LCD_H
 
