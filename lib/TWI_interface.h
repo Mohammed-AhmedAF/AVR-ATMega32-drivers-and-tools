@@ -1,4 +1,6 @@
-
+/*
+ * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ */
 
 #ifndef _TWI_INTERFACE_H
 #define _TWI_INTERFACE_H

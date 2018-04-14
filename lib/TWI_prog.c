@@ -1,3 +1,7 @@
+/*
+ * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ */
+
 #include "Macros.h"
 #include "Std_Types.h"
 #include "TWI_interface.h"
