@@ -1,5 +1,7 @@
-#ifndef TWI_INTERFACE
-#define TWI_INTERFACE
+
+
+#ifndef _TWI_INTERFACE_H
+#define _TWI_INTERFACE_H
 
 void TWI_vidInit(void);
 void TWI_vidSendStart(void);
