@@ -13,27 +13,27 @@ void SevenSegment_vidInit(u8 u8port1Cpy,u8 u8port2Cpy) {
 	u8port0 = u8port2Cpy;
 	u8port1 = u8port1Cpy;
 	/*Display 0*/	
-	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN0,1);
-	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN1,1);
-	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN2,1);
-	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN3,1);
-	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN4,1);
-	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN5,1);
-	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN6,1);
-	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN7,1);
+	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN0,DIO_OUT);
+	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN1,DIO_OUT);
+	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN2,DIO_OUT);
+	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN3,DIO_OUT);
+	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN4,DIO_OUT);
+	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN5,DIO_OUT);
+	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN6,DIO_OUT);
+	DIO_vidSetPinDirection(u8port1Cpy,DIO_PIN7,DIO_OUT);
 
 	/*Display 1*/
-	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN0,1);
-	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN1,1);
-	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN2,1);
-	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN3,1);
-	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN4,1);
-	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN5,1);
-	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN6,1);
-	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN7,1);
+	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN0,DIO_OUT);
+	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN1,DIO_OUT);
+	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN2,DIO_OUT);
+	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN3,DIO_OUT);
+	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN4,DIO_OUT);
+	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN5,DIO_OUT);
+	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN6,DIO_OUT);
+	DIO_vidSetPinDirection(u8port2Cpy,DIO_PIN7,DIO_OUT);
 
-	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN0,1);
-	DIO_vidSetPinDirection(DIO_PORTC,DIO_PIN0,1);
+	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_OUT);
+	DIO_vidSetPinDirection(DIO_PORTC,DIO_PIN0,DIO_OUT);
 	SET_BIT(PORTA,0);
 	SET_BIT(PORTC,0);
 
