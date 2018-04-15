@@ -14,75 +14,72 @@ else
 		if [[ $i = "makef" ]]
 		then
 			cp ~/programming/imt/lib/Makefile ./
-		fi
-		if [[ $i = "dio" ]]
+		elif [[ $i = "dio" ]]
 		then
 			cp ~/programming/imt/lib/DIO_prog.c ./
 			cp ~/programming/imt/lib/DIO_interface.h ./
 			cp ~/programming/imt/lib/Std_Types.h ./
 			cp ~/programming/imt/lib/Macros.h ./
-		fi
-		if [[ $i = "lcd" ]]
+		elif [[ $i = "lcd" ]]
 		then
 			cp ~/programming/imt/lib/LCD_prog.c ./
 			cp ~/programming/imt/lib/LCD_interface.h ./
-		fi
-		if [[ $i = "key" || $i = "keypad" ]]
+		elif [[ $i = "key" || $i = "keypad" ]]
 		then
 			cp ~/programming/imt/lib/KEYPAD_prog.c ./
 			cp ~/programming/imt/lib/KEYPAD_interface.h ./
 			cp ~/programming/imt/lib/SERVICES_prog.c  ./
 			cp ~/programming/imt/lib/SERVICES_interface.h ./
-		fi
-		if [[ $i = "eeprom" ]]
+		elif [[ $i = "eeprom" ]]
 		then 
 			cp ~/programming/imt/lib/EEPROM_prog.c ./
 			cp ~/programming/imt/lib/EEPROM_interface.h ./
-		fi
-		if [[ $i = "rto" ]]
+		elif [[ $i = "rto" ]]
 		then
 			cp ~/programming/imt/lib/RTO_prog.c ./
 			cp ~/programming/imt/lib/RTO_interface.h ./
-		fi
-		if [[ $i = "twi" ]]
+		elif [[ $i = "twi" ]]
 		then
 			cp ~/programming/imt/lib/TWI_prog.c ./
 			cp ~/programming/imt/lib/TWI_interface.h ./
-		fi
-		if [[ $i = "uart" ]]
+		elif [[ $i = "uart" ]]
 		then
 			cp ~/programming/imt/lib/UART_prog.c ./
 			cp ~/programming/imt/lib/UART_interface.h ./
-		fi
-		if [[ $i = "7s" ]]
+		elif [[ $i = "7s" ]]
 		then
 			cp ~/programming/imt/lib/SevenSegment_prog.c ./
 			cp ~/programming/imt/lib/SevenSegment_interface.h ./
-		fi
-		if [[ $i = "stepper" ]]
+		elif [[ $i = "stepper" ]]
 		then
 			cp ~/programming/imt/lib/StepperMotor_prog.c ./
 			cp ~/programming/imt/lib/StepperMotor_interface.h ./
-		fi
-		if [[ $i = "timer0" ]]
+		elif [[ $i = "timer0" ]]
 		then
 			cp ~/programming/imt/lib/TIMER0_prog.c ./
 			cp ~/programming/imt/lib/TIMER0_interface.h ./
-		fi
-		if [[ $i = "timer1" ]] 
+		elif [[ $i = "timer1" ]] 
 		then 
 			cp ~/programming/imt/lib/TIMER1_prog.c ./
 			cp ~/programming/imt/lib/TIMER1_interface.h ./
-		fi
-		if [[ $i = "timer2" ]]
+		elif [[ $i = "timer2" ]]
 		then
 			cp ~/programming/imt/lib/TIMER2_prog.c ./
 			cp ~/programming/imt/lib/TIMER2_interface.h ./
-		fi
-		if [[ $i = "interrupts" || $i = "INTERRUPTS" || $i = "interrupt" ]]
+		elif [[ $i = "interrupts" || $i = "INTERRUPTS" || $i = "interrupt" ]]
 		then
 			cp ~/programming/imt/lib/INTERRUPTS_prog.c ./
 			cp ~/programming/imt/lib/INTERRUPTS_interface.h ./
+		elif [[ $i = "adc" || $i = "ADC" ]]
+		then
+			cp ~/programming/imt/lib/ADC_prog.c ./
+			cp ~/programming/imt/lib/ADC_interface.h ./
+		elif [[ $i = "spi" || $i = "SPI" ]]
+		then
+			cp ~/programming/imt/lib/SPI_prog.c ./
+			cp ~/programming/imt/lib/SPI_interface.h ./
+		else
+			echo "Error: Could not process $i."
 		fi
 	done
 fi
