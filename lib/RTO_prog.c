@@ -2,7 +2,8 @@
 #include "Std_Types.h"
 #include "RTO_interface.h"
 #include "DIO_interface.h"
-#include "Timer_interface.h"
+#include "TIMER0_interface.h"
+#include "INTERRUPTS_interface.h"
 #include <avr/interrupt.h>
 
 
@@ -16,7 +17,10 @@ void RTO_vidInit(void) {
 		Arr_Task[i] = RTO_NULL;
 
 	}
-	Timer_vidInit(RTO_vidOVFCount);
+	TIMER0_vidInit(TIMER0_WGM_NORMAL,TIMER0_COM_NORMAL,TIMER0_CLK_1);
+	INTERRUPTS_vidSetInterruptEnable(INTERRUPTS_TOIE_0);
+	INTERRUPTS_vidSetGlobalInterruptFlag();
+	INTERRUPTS_vidPutISRFunction(RTO_vidOVFCount);
 }
 
 //You can put safety requirements 
