@@ -50,7 +50,7 @@ void RTO_vidOVFCount(void) {
 	OVF_count++;
 	if(OVF_count == 32) {
 		OVF_count = 0;
-		TCNT0 = 192;
+		TIMER0_vidSetTCRegister(192);
 		RTO_vidScheduler();
 	}
 }
