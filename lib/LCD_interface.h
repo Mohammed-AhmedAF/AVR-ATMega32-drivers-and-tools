@@ -2,8 +2,8 @@
  * Author: Mohamed Ahmed Abd Al-Fattah
  */
 
-#ifndef LCD_H
-#define LCD_H
+#ifndef _LCD_INTERFACE_H
+#define _LCD_INTERFACE_H
 
 #define LCD_DATA_PORT DIO_PORTD
 #define LCD_CTRL_PORT DIO_PORTA
