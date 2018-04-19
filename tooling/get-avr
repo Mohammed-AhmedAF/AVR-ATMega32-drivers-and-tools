@@ -78,8 +78,13 @@ else
 		then
 			cp ~/programming/imt/lib/SPI_prog.c ./
 			cp ~/programming/imt/lib/SPI_interface.h ./
+		elif [[ $i = "services" || $i = "SERVICES" ]]
+		then
+			cp ~/programming/imt/lib/SERVICES_prog.c ./
+			cp ~/programming/imt/lib/SERVICES_interface.h ./
 		else
 			echo "Error: Could not process $i."
 		fi
+
 	done
 fi
