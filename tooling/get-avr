@@ -3,85 +3,86 @@
 # Developer: Mohamed Ahmed
 # Date: 29 March 2018
 
+AVR_LIB_PATH=$HOME/programming/imt/lib
 
 if [[ $# -eq 0 ]]
 then
-	cp ~/programming/imt/lib/* ./
+	cp ~$AVR_LIB_PATH/* ./
 	echo "Copied all files"
 else
 	for i in $@
 	do
 		if [[ $i = "makef" ]]
 		then
-			cp ~/programming/imt/lib/Makefile ./
+			cp $AVR_LIB_PATH/Makefile ./
 		elif [[ $i = "dio" ]]
 		then
-			cp ~/programming/imt/lib/DIO_prog.c ./
-			cp ~/programming/imt/lib/DIO_interface.h ./
-			cp ~/programming/imt/lib/Std_Types.h ./
-			cp ~/programming/imt/lib/Macros.h ./
+ 			cp $AVR_LIB_PATH/DIO_prog.c ./
+ 			cp $AVR_LIB_PATH/DIO_interface.h ./
+ 			cp $AVR_LIB_PATH/Std_Types.h ./
+ 			cp $AVR_LIB_PATH/Macros.h ./
 		elif [[ $i = "lcd" ]]
 		then
-			cp ~/programming/imt/lib/LCD_prog.c ./
-			cp ~/programming/imt/lib/LCD_interface.h ./
+			cp $AVR_LIB_PATH/LCD_prog.c ./
+			cp $AVR_LIB_PATH/LCD_interface.h ./
 		elif [[ $i = "key" || $i = "keypad" ]]
 		then
-			cp ~/programming/imt/lib/KEYPAD_prog.c ./
-			cp ~/programming/imt/lib/KEYPAD_interface.h ./
-			cp ~/programming/imt/lib/SERVICES_prog.c  ./
-			cp ~/programming/imt/lib/SERVICES_interface.h ./
+			cp $AVR_LIB_PATH/KEYPAD_prog.c ./
+			cp $AVR_LIB_PATH/KEYPAD_interface.h ./
+			cp $AVR_LIB_PATH/SERVICES_prog.c  ./
+			cp $AVR_LIB_PATH/SERVICES_interface.h ./
 		elif [[ $i = "eeprom" ]]
 		then 
-			cp ~/programming/imt/lib/EEPROM_prog.c ./
-			cp ~/programming/imt/lib/EEPROM_interface.h ./
+			cp $AVR_LIB_PATH/EEPROM_prog.c ./
+			cp $AVR_LIB_PATH/EEPROM_interface.h ./
 		elif [[ $i = "rto" ]]
 		then
-			cp ~/programming/imt/lib/RTO_prog.c ./
-			cp ~/programming/imt/lib/RTO_interface.h ./
+			cp $AVR_LIB_PATH/RTO_prog.c ./
+			cp $AVR_LIB_PATH/RTO_interface.h ./
 		elif [[ $i = "twi" ]]
 		then
-			cp ~/programming/imt/lib/TWI_prog.c ./
-			cp ~/programming/imt/lib/TWI_interface.h ./
+			cp $AVR_LIB_PATH/TWI_prog.c ./
+			cp $AVR_LIB_PATH/TWI_interface.h ./
 		elif [[ $i = "uart" ]]
 		then
-			cp ~/programming/imt/lib/UART_prog.c ./
-			cp ~/programming/imt/lib/UART_interface.h ./
+			cp $AVR_LIB_PATH/UART_prog.c ./
+			cp $AVR_LIB_PATH/UART_interface.h ./
 		elif [[ $i = "7s" ]]
 		then
-			cp ~/programming/imt/lib/SevenSegment_prog.c ./
-			cp ~/programming/imt/lib/SevenSegment_interface.h ./
+			cp $AVR_LIB_PATH/SevenSegment_prog.c ./
+			cp $AVR_LIB_PATH/SevenSegment_interface.h ./
 		elif [[ $i = "stepper" ]]
 		then
-			cp ~/programming/imt/lib/StepperMotor_prog.c ./
-			cp ~/programming/imt/lib/StepperMotor_interface.h ./
+			cp $AVR_LIB_PATH/StepperMotor_prog.c ./
+			cp $AVR_LIB_PATH/StepperMotor_interface.h ./
 		elif [[ $i = "timer0" ]]
 		then
-			cp ~/programming/imt/lib/TIMER0_prog.c ./
-			cp ~/programming/imt/lib/TIMER0_interface.h ./
+			cp $AVR_LIB_PATH/TIMER0_prog.c ./
+			cp $AVR_LIB_PATH/TIMER0_interface.h ./
 		elif [[ $i = "timer1" ]] 
 		then 
-			cp ~/programming/imt/lib/TIMER1_prog.c ./
-			cp ~/programming/imt/lib/TIMER1_interface.h ./
+			cp $AVR_LIB_PATH/TIMER1_prog.c ./
+			cp $AVR_LIB_PATH/TIMER1_interface.h ./
 		elif [[ $i = "timer2" ]]
 		then
-			cp ~/programming/imt/lib/TIMER2_prog.c ./
-			cp ~/programming/imt/lib/TIMER2_interface.h ./
+			cp $AVR_LIB_PATH/TIMER2_prog.c ./
+			cp $AVR_LIB_PATH/TIMER2_interface.h ./
 		elif [[ $i = "interrupts" || $i = "INTERRUPTS" || $i = "interrupt" ]]
 		then
-			cp ~/programming/imt/lib/INTERRUPTS_prog.c ./
-			cp ~/programming/imt/lib/INTERRUPTS_interface.h ./
+			cp $AVR_LIB_PATH/INTERRUPTS_prog.c ./
+			cp $AVR_LIB_PATH/INTERRUPTS_interface.h ./
 		elif [[ $i = "adc" || $i = "ADC" ]]
 		then
-			cp ~/programming/imt/lib/ADC_prog.c ./
-			cp ~/programming/imt/lib/ADC_interface.h ./
+			cp $AVR_LIB_PATH/ADC_prog.c ./
+			cp $AVR_LIB_PATH/ADC_interface.h ./
 		elif [[ $i = "spi" || $i = "SPI" ]]
 		then
-			cp ~/programming/imt/lib/SPI_prog.c ./
-			cp ~/programming/imt/lib/SPI_interface.h ./
+			cp $AVR_LIB_PATH/SPI_prog.c ./
+			cp $AVR_LIB_PATH/SPI_interface.h ./
 		elif [[ $i = "services" || $i = "SERVICES" ]]
 		then
-			cp ~/programming/imt/lib/SERVICES_prog.c ./
-			cp ~/programming/imt/lib/SERVICES_interface.h ./
+			cp $AVR_LIB_PATH/SERVICES_prog.c ./
+			cp $AVR_LIB_PATH/SERVICES_interface.h ./
 		else
 			echo "Error: Could not process $i."
 		fi
