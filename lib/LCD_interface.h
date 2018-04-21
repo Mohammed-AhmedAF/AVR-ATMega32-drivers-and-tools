@@ -43,4 +43,18 @@ void LCD_vidGoToXY(s8,s8);
 void LCD_vidWriteNumber(u16);
 void LCD_vidCreateCustomChar(u8 *,u8);
 void LCD_vidWriteCustomChar(u8);
+
+
+/******Custom Characters*****/
+#define LCD_CHAR_UPARROW {0x04,	0x0E, 0x1F, 0x04, 0x04,	0x04, 0x04, 0x04}
+#define LCD_CHAR_DOWNARROW {0x04, 0x04, 0x04, 0x04, 0x04, 0x1F, 0x0E, 0x04}
+
+#define LCD_CUSTOMCHAR_LOCATION_0 0
+#define LCD_CUSTOMCHAR_LOCATION_1 1
+#define LCD_CUSTOMCHAR_LOCATION_2 2
+#define LCD_CUSTOMCHAR_LOCATION_3 3
+#define LCD_CUSTOMCHAR_LOCATION_4 4
+#define LCD_CUSTOMCHAR_LOCATION_5 5
+#define LCD_CUSTOMCHAR_LOCATION_6 6
+#define LCD_CUSTOMCHAR_LOCATION_7 7
 #endif

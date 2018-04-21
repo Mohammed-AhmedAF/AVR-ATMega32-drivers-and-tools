@@ -135,14 +135,6 @@ void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
 	}
 }
 
-/*
- * In order to used custom characters, those characters should be 
- * created first using vidCreateCustomChar, then before printing 
- * any special characters, the function vidSendCommand should be 
- * used with command 0x80. Use vidWriteCustomChar to display the 
- * characters.
- */
-
 void LCD_vidCreateCustomChar(u8 * u8CharPtrCpy, u8 u8LocationCpy) {
 	u8 i = 0;
 	LCD_vidSendCommand(0x40+(u8LocationCpy*8)); //Setting to CGRAM address
