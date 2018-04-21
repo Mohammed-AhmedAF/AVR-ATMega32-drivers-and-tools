@@ -1,4 +1,4 @@
-//
+// File: LCD_prog.c
 // Author: Mohammed Ahmed Abd Al-Fattah
 //
 
@@ -133,5 +133,19 @@ void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
 	else {
 			LCD_vidSendCommand(0xC0+s8xCpy);
 	}
+}
+
+void LCD_vidCreateCustomChar(u8 * u8CharPtrCpy, u8 u8LocationCpy) {
+	u8 i = 0;
+	LCD_vidSendCommand(0x40+(u8LocationCpy*8)); //Setting to CGRAM address
+	while (i != 8) {
+		LCD_vidWriteCharacter(*u8CharPtrCpy++);
+		i++;
+	}
+	LCD_vidWriteCharacter(0x00+u8LocationCpy);
+}
+
+void LCD_vidWriteCustomChar(u8 u8LocationCpy) {
+	LCD_vidWriteCharacter(0x00+u8LocationCpy);
 }
 
