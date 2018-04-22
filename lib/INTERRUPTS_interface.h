@@ -35,5 +35,6 @@ void INTERRUPTS_vidClearGlobalInterruptFlag(void);
 void INTERRUPTS_vidSetSenseControl(u8,u8);
 void INTERRUPTS_vidClearInterruptEnable(u8);
 u8 INTERRUPTS_u8CheckExtInterruptFlag(u8);
+void INTERRUPTS_vidClearExtInterruptFlag(u8);
 
 #endif
