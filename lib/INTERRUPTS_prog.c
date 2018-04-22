@@ -60,6 +60,44 @@ void INTERRUPTS_vidSetInterruptEnable(u8 u8InterruptEnCpy) {
 
 }
 
+void INTERRUPTS_vidClearInterruptEnable(u8 u8InterruptEnCpy) {
+	//External Interrupts
+	if (u8InterruptEnCpy == INTERRUPTS_INT_0) {
+		CLEAR_BIT(GICR,6);
+	}
+	else if (u8InterruptEnCpy == INTERRUPTS_INT_1) {
+		CLEAR_BIT(GICR,7);
+	}
+	//TIMER0 Interrupts
+	if (u8InterruptEnCpy == INTERRUPTS_TOIE_0) {
+		CLEAR_BIT(TIMSK,0);
+	}
+	else if (u8InterruptEnCpy == INTERRUPTS_OCIE_0) {
+		CLEAR_BIT(TIMSK,1);
+	}
+	//TIMER2 Interrupts
+	if (u8InterruptEnCpy == INTERRUPTS_TOIE_2) {
+		CLEAR_BIT(TIMSK,6);
+	}
+	else if (u8InterruptEnCpy == INTERRUPTS_OCIE_2) {
+		CLEAR_BIT(TIMSK,7);
+	}
+	//TIMER1 Interrupts
+	if (u8InterruptEnCpy == INTERRUPTS_TOIE_1) {
+		CLEAR_BIT(TIMSK,2);
+	}
+	if (u8InterruptEnCpy == INTERRUPTS_OCIEB_1) {
+		CLEAR_BIT(TIMSK,3);
+	}
+	if (u8InterruptEnCpy == INTERRUPTS_OCIEA_1) {
+		CLEAR_BIT(TIMSK,4);
+	}
+	if (u8InterruptEnCpy == INTERRUPTS_TICIE_1) {
+		CLEAR_BIT(TIMSK,5); //Input Capture Interrupt Enable
+	}
+
+}
+
 void INTERRUPTS_vidSetSenseControl(u8 u8ExtInterruptNumCpy,u8 u8SenseControlCpy) {
 	switch(u8ExtInterruptNumCpy) {
 		case INTERRUPTS_INT_1:
