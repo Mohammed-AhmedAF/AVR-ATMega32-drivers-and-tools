@@ -23,6 +23,13 @@ void INTERRUPTS_vidPutISRFunction(void (*ptrFunc) ()) {
 //also be responsible for setting the timer/counter
 //OFV or Compare flags
 void INTERRUPTS_vidSetInterruptEnable(u8 u8InterruptEnCpy) {
+	//External Interrupts
+	if (u8InterruptEnCpy == INTERRUPTS_INT_0) {
+		SET_BIT(GICR,6);
+	}
+	else if (u8InterruptEnCpy == INTERRUPTS_INT_1) {
+		SET_BIT(GICR,7);
+	}
 	//TIMER0 Interrupts
 	if (u8InterruptEnCpy == INTERRUPTS_TOIE_0) {
 		SET_BIT(TIMSK,0);
@@ -52,6 +59,59 @@ void INTERRUPTS_vidSetInterruptEnable(u8 u8InterruptEnCpy) {
 	}
 
 }
+
+void INTERRUPTS_vidSetSenseControl(u8 u8ExtInterruptNumCpy,u8 u8SenseControlCpy) {
+	switch(u8ExtInterruptNumCpy) {
+		case INTERRUPTS_INT_1:
+			if (u8SenseControlCpy == INTERRUPTS_SC_LOWLEVEL) {
+				CLEAR_BIT(MCUCR,3);
+				CLEAR_BIT(MCUCR,2);
+			}
+			else if (u8SenseControlCpy == INTERRUPTS_SC_ANYCHANGE) {
+				CLEAR_BIT(MCUCR,3);
+				SET_BIT(MCUCR,2);
+			}
+			else if (u8SenseControlCpy == INTERRUPTS_SC_FALLING) {
+				SET_BIT(MCUCR,3);
+				CLEAR_BIT(MCUCR,2);
+			}
+			else if (u8SenseControlCpy == INTERRUPTS_SC_RISING) {
+				SET_BIT(MCUCR,3);
+				SET_BIT(MCUCR,2);
+			}
+			break;
+		case INTERRUPTS_INT_0:
+			if (u8SenseControlCpy == INTERRUPTS_SC_LOWLEVEL) {
+				CLEAR_BIT(MCUCR,1);
+				CLEAR_BIT(MCUCR,0);
+			}
+			else if (u8SenseControlCpy == INTERRUPTS_SC_ANYCHANGE) {
+				CLEAR_BIT(MCUCR,1);
+				SET_BIT(MCUCR,0);
+			}
+			else if (u8SenseControlCpy == INTERRUPTS_SC_FALLING) {
+				SET_BIT(MCUCR,1);
+				CLEAR_BIT(MCUCR,0);
+			}
+			else if (u8SenseControlCpy == INTERRUPTS_SC_RISING) {
+				SET_BIT(MCUCR,1);
+				SET_BIT(MCUCR,0);
+			}
+			break;
+	}
+
+}
+#ifdef EXTERNAL_INTERRUPT_0
+ISR(INT0_vect) {
+	ISRFunc();
+}
+#endif
+
+#ifdef EXTERNAL_INTERRUPT_1
+ISR(INT1_vect) {
+	ISRFunc();
+}
+#endif
 
 #ifdef TIMER0_OVF_VECT
 ISR(TIMER0_OVF_vect) {
