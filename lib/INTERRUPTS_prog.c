@@ -139,6 +139,20 @@ void INTERRUPTS_vidSetSenseControl(u8 u8ExtInterruptNumCpy,u8 u8SenseControlCpy)
 	}
 
 }
+
+u8 INTERRUPTS_u8CheckExtInterruptFlag(u8 u8ExtInterruptNumCpy) {
+	switch(u8ExtInterruptNumCpy) {
+		case INTERRUPTS_INT_0:
+			return GET_BIT(GIFR,6);
+			break;
+		case INTERRUPTS_INT_1:
+			return GET_BIT(GIFR,7);
+			break;
+		case INTERRUPTS_INT_2:
+			return GET_BIT(GIFR,5);
+	}
+}
+
 #ifdef EXTERNAL_INTERRUPT_0
 ISR(INT0_vect) {
 	ISRFunc();
