@@ -150,6 +150,21 @@ u8 INTERRUPTS_u8CheckExtInterruptFlag(u8 u8ExtInterruptNumCpy) {
 			break;
 		case INTERRUPTS_INT_2:
 			return GET_BIT(GIFR,5);
+			break;
+	}
+}
+
+void INTERRUPTS_vidClearExtInterruptFlag(u8 u8ExtInterruptNumCpy) {
+	switch(u8ExtInterruptNumCpy) {
+		case INTERRUPT_INT_0:
+			SET_BIT(GIFR,6);
+			break;
+		case INTERRUPT_INT_1:
+			SET_BIT(GIFR,7);
+			break;
+		case INTERRUPT_INT_2:
+			SET_BIT(GIFR,5);
+			break;
 	}
 }
 
