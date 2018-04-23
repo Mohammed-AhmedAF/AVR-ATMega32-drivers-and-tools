@@ -14,6 +14,7 @@
 #define INTERRUPTS_TICIE_1 5
 #define INTERRUPTS_INT_0 8
 #define INTERRUPTS_INT_1 9
+#define INTERRUPTS_INT_2 10
 
 /*External Interrupts Sense Control definitions*/
 #define INTERRUPTS_SC_LOWLEVEL 0
