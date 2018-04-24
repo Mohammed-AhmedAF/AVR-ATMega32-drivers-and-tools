@@ -7,7 +7,7 @@ AVR_LIB_PATH=$HOME/programming/imt/lib
 
 if [[ $# -eq 0 ]]
 then
-	cp ~$AVR_LIB_PATH/* ./
+	cp $AVR_LIB_PATH/* ./
 	echo "Copied all files"
 else
 	for i in $@
