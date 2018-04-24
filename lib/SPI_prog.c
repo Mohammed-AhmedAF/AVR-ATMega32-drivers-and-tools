@@ -1,5 +1,6 @@
 /*
  * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ * File: SPI driver
  */
 
 #include "Std_Types.h"
@@ -7,7 +8,7 @@
 #include "DIO_interface.h"
 #include "SPI_inteface.h"
 
-void SPI_vidInitMater(u8 u8ClockPolarity, u8 u8ClockPhase, u8 u8ClockFrequency) {
+void SPI_vidInitMaster(u8 u8ClockPolarity, u8 u8ClockPhase, u8 u8ClockFrequency) {
 
 	//Enabling SPI
 	SET_BIT(SPCR,6); //SPE: SPI Enable
