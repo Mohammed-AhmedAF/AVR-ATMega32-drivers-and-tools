@@ -153,3 +153,11 @@ u8 SPI_u8TransferByte(u8 u8ByteCpy) {
 	return SPDR;
 
 }
+
+void SPI_vidEnableInterrupt(void) {
+	SET_BIT(SPCR,7);
+}
+
+void SPI_vidDisableInterrupt(void) {
+	CLEAR_BIT(SPCR,7);
+}

@@ -8,6 +8,8 @@
 void SPI_vidInitMaster(u8,u8,u8);
 void SPI_vidInitSlave(u8,u8,u8);
 u8 SPI_u8TransferByte(u8);
+void SPI_vidEnableInterrupt(void);
+void SPI_vidDisableInterrupt(void);
 
 #define SPI_CLK_RISING 0
 #define SPI_CLK_FALLING 1
