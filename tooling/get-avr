@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Developer: Mohamed Ahmed
-# Date: 29 March 2018
+# Date: 18 February 2018
 
 AVR_LIB_PATH=$HOME/programming/imt/lib
 
