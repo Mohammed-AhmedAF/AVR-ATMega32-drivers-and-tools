@@ -18,7 +18,7 @@ else
 		elif [[ $i = "std" ]]
 		then
 			cp $AVR_LIB_PATH/Std_Types.h ./
-		elif [[ $i = "macors" ]]
+		elif [[ $i = "macros" ]]
 		then 
 			cp $AVR_LIB_PATH/Macros.h ./
 		elif [[ $i = "dio" ]]
