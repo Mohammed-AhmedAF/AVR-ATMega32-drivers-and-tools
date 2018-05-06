@@ -5,6 +5,16 @@
 
 AVR_LIB_PATH=$HOME/programming/imt/lib
 
+while getopts 'h' OPTIONS; do
+	case $OPTIONS in
+		-h)
+			echo "Usage: get-avr <Name_of_Module>"
+			echo "Example: get-avr spi"
+		;;
+	esac
+done
+
+
 if [[ $# -eq 0 ]]
 then
 	cp $AVR_LIB_PATH/* ./
@@ -89,6 +99,7 @@ else
 		then
 			cp $AVR_LIB_PATH/SERVICES_prog.c ./
 			cp $AVR_LIB_PATH/SERVICES_interface.h ./
+
 		else
 			echo "Error: Could not process $i."
 		fi
