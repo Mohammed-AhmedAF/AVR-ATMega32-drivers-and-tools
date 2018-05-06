@@ -8,6 +8,7 @@ AVR_LIB_PATH=$HOME/programming/imt/lib
 while getopts 'h' OPTIONS; do
 	case $OPTIONS in
 		-h)
+			echo "get-avr tool is used to bring module files to the current working directory."
 			echo "Usage: get-avr <Name_of_Module>"
 			echo "Example: get-avr spi"
 		;;
