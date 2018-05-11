@@ -1,3 +1,11 @@
+#
+# Author: Mohammed Ahmed Abd Al-Fattah
+# File: Makefile
+# Purpose: This is a makefile used to compile and load avr projects.
+# The preticular microcontroller I am using this file with is the 
+# Atmega32.
+#
+
 MAIN = main.c
 CC = avr-gcc
 SRC = $(MAIN) DIO_prog.c
