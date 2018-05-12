@@ -48,7 +48,7 @@ else
 			cp $AVR_LIB_PATH/KEYPAD_interface.h ./
 			cp $AVR_LIB_PATH/SERVICES_prog.c  ./
 			cp $AVR_LIB_PATH/SERVICES_interface.h ./
-		elif [[ $i = "eeprom" ]]
+		elif [[ $i = "eeprom" || $i = "EEPROM" ]]
 		then 
 			cp $AVR_LIB_PATH/EEPROM_prog.c ./
 			cp $AVR_LIB_PATH/EEPROM_interface.h ./
@@ -56,11 +56,11 @@ else
 		then
 			cp $AVR_LIB_PATH/RTO_prog.c ./
 			cp $AVR_LIB_PATH/RTO_interface.h ./
-		elif [[ $i = "twi" ]]
+		elif [[ $i = "twi" || $i = "TWI" ]]
 		then
 			cp $AVR_LIB_PATH/TWI_prog.c ./
 			cp $AVR_LIB_PATH/TWI_interface.h ./
-		elif [[ $i = "uart" ]]
+		elif [[ $i = "uart" || $i = "UART" ]]
 		then
 			cp $AVR_LIB_PATH/UART_prog.c ./
 			cp $AVR_LIB_PATH/UART_interface.h ./

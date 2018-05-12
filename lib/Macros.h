@@ -1,5 +1,5 @@
-#ifndef MACROS_H
-#define MACROS_H
+#ifndef _MACROS_H
+#define _MACROS_H
 
 #define SET_BIT(reg,bit) reg |= (1<<bit)
 #define CLEAR_BIT(reg,bit) reg &= ~(1<<bit)
