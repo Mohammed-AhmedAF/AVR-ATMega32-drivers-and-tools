@@ -38,7 +38,7 @@ else
  			cp $AVR_LIB_PATH/DIO_interface.h ./
  			cp $AVR_LIB_PATH/Std_Types.h ./
  			cp $AVR_LIB_PATH/Macros.h ./
-		elif [[ $i = "lcd" ]]
+		elif [[ $i = "lcd" ||  $i = "LCD" ]]
 		then
 			cp $AVR_LIB_PATH/LCD_prog.c ./
 			cp $AVR_LIB_PATH/LCD_interface.h ./
