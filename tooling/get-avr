@@ -26,10 +26,10 @@ else
 		if [[ $i = "makef" ]]
 		then
 			cp $AVR_LIB_PATH/Makefile ./
-		elif [[ $i = "std" ]]
+		elif [[ $i = "std" || $i = "Std" ]]
 		then
 			cp $AVR_LIB_PATH/Std_Types.h ./
-		elif [[ $i = "macros" ]]
+		elif [[ $i = "macros" || $i = "Macros" ]]
 		then 
 			cp $AVR_LIB_PATH/Macros.h ./
 		elif [[ $i = "dio" ]]
