@@ -62,7 +62,7 @@ u8 DIO_u8GetPortValue(u8 u8PortNumberCpy) {
 void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
-			if (u8ValueCpy == 1) {
+			if (u8ValueCpy == STD_HIGH) {
 				SET_BIT(PORTA,u8PinNumberCpy);
 			}
 			else {
@@ -70,7 +70,7 @@ void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
 			}
 			break;
 		case DIO_PORTB:
-			if (u8ValueCpy == 1) {
+			if (u8ValueCpy == STD_HIGH) {
 				SET_BIT(PORTB,u8PinNumberCpy);
 			}
 			else {
@@ -78,7 +78,7 @@ void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
 			}	
 			break;
 		case DIO_PORTC:
-			if (u8ValueCpy == 1) {
+			if (u8ValueCpy == STD_HIGH) {
 				SET_BIT(PORTC,u8PinNumberCpy);
 			}
 			else {
@@ -86,7 +86,7 @@ void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
 			}						
 			break;
 		case DIO_PORTD:
-			if (u8ValueCpy == 1) {
+			if (u8ValueCpy == STD_HIGH) {
 				SET_BIT(PORTD,u8PinNumberCpy);
 			}
 			else {
