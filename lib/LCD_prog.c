@@ -102,8 +102,8 @@ void LCD_vidBlinkString(s8 * s8stringCpy,u8 u8timesCpy) {
 	do {
 		_delay_ms(500);	
 		while(*s8string != '\0') {
-			u8 ch = *s8string++;
-			LCD_vidWriteCharacter(ch);
+			LCD_vidWriteCharacter(*s8string);
+			*(s8string++);
 		}
 		_delay_ms(500);
 		i++;
