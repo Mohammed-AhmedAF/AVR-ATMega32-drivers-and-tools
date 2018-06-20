@@ -81,8 +81,8 @@ void LCD_vidWriteCharacter(u8 charCpy) {
 
 void LCD_vidWriteString(s8 * s8String) {	
 	while(*s8String != '\0') {
-		u8 ch = *s8String++;
-		LCD_vidWriteCharacter(ch);
+		LCD_vidWriteCharacter(*s8String);
+		*(s8String++);
 	}
 }
 
