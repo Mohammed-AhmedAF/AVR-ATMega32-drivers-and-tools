@@ -51,11 +51,11 @@ void LCD_vidSendCommand(u8 commandCpy) {
 	DIO_vidSetPinValue(LCD_DATA_PORT,LCD_D6,GET_BIT(commandCpy,6));
 	DIO_vidSetPinValue(LCD_DATA_PORT,LCD_D7,GET_BIT(commandCpy,7));
 
-	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,1);
+	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,STD_HIGH);
 	_delay_ms(2);
-	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,0);
+	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,STD_LOW);
 	_delay_ms(2);
-	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,1);
+	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,STD_HIGH);
 	_delay_ms(2);
 }
 
@@ -72,11 +72,11 @@ void LCD_vidWriteCharacter(u8 charCpy) {
 	DIO_vidSetPinValue(LCD_DATA_PORT,LCD_D6,GET_BIT(charCpy,6));
 	DIO_vidSetPinValue(LCD_DATA_PORT,LCD_D7,GET_BIT(charCpy,7));
 
-	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,1);
+	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,STD_HIGH);
 	_delay_ms(2);
-	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,0);
+	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,STD_LOW);
 	_delay_ms(2);
-	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,1);
+	DIO_vidSetPinValue(LCD_CTRL_PORT,LCD_E,STD_HIGH);
 }
 
 void LCD_vidWriteString(s8 * s8String) {	
