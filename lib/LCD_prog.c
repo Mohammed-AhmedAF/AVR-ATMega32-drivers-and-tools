@@ -3,9 +3,9 @@
 //
 
 #include "Std_Types.h"
+#include "Macros.h"
 #include "DIO_interface.h"
 #include "LCD_interface.h"
-#include "Macros.h"
 #include <util/delay.h>
 
 
