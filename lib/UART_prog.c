@@ -1,5 +1,5 @@
-#include "Std_Types.h"
 #include "Macros.h"
+#include "Std_Types.h"
 #include "DIO_interface.h"
 #include "UART_interface.h"
 #include <avr/io.h>
