@@ -6,14 +6,14 @@
 u8 values[4] = {0x01,0x02,0x04,0x08};
 u8 value = 0;
 u8 i = 0;
-void StepperMotor_vidInit() {
+void StepperMotor_vidInit(void) {
 	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN4,DIO_OUTPUT);
 	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN5,DIO_OUTPUT);
 	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN6,DIO_OUTPUT);
 	DIO_vidSetPinDirection(DIO_PORTA,DIO_PIN7,DIO_OUTPUT);
 }
 
-void StepperMotor_vidMove() {
+void StepperMotor_vidMove(void) {
 	for (i = 0;i<4;i++) {
 		value = values[i];
 		DIO_vidSetPinValue(DIO_PORTA,DIO_PIN4,GET_BIT(value,0));
