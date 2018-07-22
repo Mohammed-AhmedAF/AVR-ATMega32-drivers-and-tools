@@ -137,7 +137,7 @@ void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
 
 void LCD_vidCreateCustomChar(u8 * u8CharPtrCpy, u8 u8LocationCpy) {
 	u8 i = 0;
-	LCD_vidSendCommand(0x40+(u8LocationCpy*8)); //Setting to CGRAM address
+	LCD_vidSendCommand(0x40+(u8LocationCpy*8)); /*Setting to CGRAM address8*/
 	while (i != 8) {
 		LCD_vidWriteCharacter(*u8CharPtrCpy++);
 		i++;
