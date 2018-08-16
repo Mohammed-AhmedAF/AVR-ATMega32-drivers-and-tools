@@ -1,3 +1,8 @@
+/*
+ * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ * Purpose: UART driver for Atmega32
+ */
+
 #include "Macros.h"
 #include "Std_Types.h"
 #include "DIO_interface.h"
@@ -6,7 +11,7 @@
 
 void UART_vidInit(void) {	
 
-	//Setting both Receive Enabel and Transmit Enable
+	//Setting both Receive Enable and Transmit Enable
 	SET_BIT(UCSRB,4);
 	SET_BIT(UCSRB,3);
 
@@ -51,5 +56,5 @@ void UART_vidSendString(u8 * u8pStringCpy) {
 }
 
 void UART_vidSendLine(void) {
-	UART_vidSendString("\n\r******\n\r");
+	UART_vidSendString("\n\r******\n\r);
 }
