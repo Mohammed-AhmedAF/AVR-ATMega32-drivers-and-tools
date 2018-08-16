@@ -1,5 +1,6 @@
 /*
  * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ * Purpose: I2C driver for Atmega32
  */
 
 #include "Macros.h"
