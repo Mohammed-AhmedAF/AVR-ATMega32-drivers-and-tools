@@ -1,7 +1,15 @@
+/*
+ * Author: Mohammed Ahmed Abd Al-Fattah
+ * Purpose: Keypad driver for Atmega32 MCU
+ *
+ */
+
+
 #include "Macros.h"
 #include "Std_Types.h"
 #include "KEYPAD_interface.h"
 #include "DIO_interface.h"
+
 void KEYPAD_vidInit() {
 
 	DIO_vidSetPinDirection(ROW0_PORT,ROW0_PIN,DIO_OUTPUT);
