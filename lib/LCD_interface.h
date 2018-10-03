@@ -41,5 +41,5 @@ void LCD_vidBlinkString(s8*,u8);
 void LCD_vidWriteSizedString(s8*,u8);
 void LCD_vidGoToXY(s8,s8);
 void LCD_vidWriteNumber(u16);
-void LCD_vidWriteInPlace(s8,u8);
+void LCD_vidWriteInPlace(u8,u8);
 #endif
