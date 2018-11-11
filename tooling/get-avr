@@ -36,6 +36,7 @@ else
 		then
  			cp $AVR_LIB_PATH/DIO_prog.c ./
  			cp $AVR_LIB_PATH/DIO_interface.h ./
+			cp $AVR_LIB_PATH/DIO_private.h ./
  			cp $AVR_LIB_PATH/Std_Types.h ./
  			cp $AVR_LIB_PATH/Macros.h ./
 		elif [[ $i = "lcd" ||  $i = "LCD" ]]
@@ -76,6 +77,7 @@ else
 		then
 			cp $AVR_LIB_PATH/TIMER0_prog.c ./
 			cp $AVR_LIB_PATH/TIMER0_interface.h ./
+			cp $AVR_LIB_PATH/TIMER0_private.h ./
 		elif [[ $i = "timer1" ]] 
 		then 
 			cp $AVR_LIB_PATH/TIMER1_prog.c ./
