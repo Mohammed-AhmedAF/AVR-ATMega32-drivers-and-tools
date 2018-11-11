@@ -4,6 +4,7 @@
 
 #include "Std_Types.h"
 #include "Macros.h"
+#include "DIO_private.h"
 #include "DIO_interface.h"
 
 void DIO_vidSetPortValue(u8 u8PortNumberCpy, u8 u8ValueCpy) {
