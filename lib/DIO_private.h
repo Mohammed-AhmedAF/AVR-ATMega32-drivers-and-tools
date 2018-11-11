@@ -1,4 +1,5 @@
 #ifndef _DIO_PRIVATE_H
+#define _DIO_PRIVATE_H
 
 #define DDRA *((u8*) 0x3A)
 #define PORTA *((u8*) 0x3B)
@@ -16,4 +17,4 @@
 #define PORTD *((u8*) 0x32)
 #define PIND *((u8*) 0x30)
 
-#define _DIO_PRIVATE_H
+#endif
