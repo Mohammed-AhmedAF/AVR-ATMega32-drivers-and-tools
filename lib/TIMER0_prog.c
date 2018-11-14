@@ -5,9 +5,8 @@
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
+#include "TIMER0_private.h"
 #include "TIMER0_interface.h"
-#include <avr/io.h>
-#include <avr/interrupt.h>
 
 void TIMER0_vidInit(u8 u8WGMCpy, u8 u8COMCpy, u8 u8ClkCpy) {
 	//Configuration Wave Generation Mode
@@ -16,8 +15,8 @@ void TIMER0_vidInit(u8 u8WGMCpy, u8 u8COMCpy, u8 u8ClkCpy) {
 		CLEAR_BIT(TCCR0,3);
 	}
 	if (u8WGMCpy == TIMER0_WGM_CTC) {
-		SET_BIT(TCCR0,6);
-		CLEAR_BIT(TCCR0,3);
+		CLEAR_BIT(TCCR0,6);
+		SET_BIT(TCCR0,3);
 	}
 	if (u8WGMCpy == TIMER0_WGM_PWM) {
 		CLEAR_BIT(TCCR0,6);
