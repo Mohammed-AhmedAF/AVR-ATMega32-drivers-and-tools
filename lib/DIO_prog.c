@@ -1,5 +1,6 @@
 /*
  * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ * Purpose: DIO driver for AVR Atmega32
  */
 
 #include "Std_Types.h"
