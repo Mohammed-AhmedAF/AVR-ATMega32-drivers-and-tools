@@ -1,8 +1,15 @@
+/*
+ * Author: Mohamed Ahmed Abd Al-Fattah
+ * Purpose: ADC driver for AVR Atmega32
+ *
+ *
+ */
+
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
+#include "ADC_private.h"
 #include "ADC_interface.h"
-#include <avr/io.h>
 
 
 //ADC_vidInit just used to initialize basic operation
