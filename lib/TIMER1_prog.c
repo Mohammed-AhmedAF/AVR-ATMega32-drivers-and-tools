@@ -1,3 +1,9 @@
+/*
+ * Authorship: Mohamed Ahmed Abd Al-Fattah
+ * Purpose: TIMER1 driver for AVR Atmega32
+ *
+ */
+
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
