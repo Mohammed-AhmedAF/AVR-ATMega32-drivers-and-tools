@@ -1,6 +1,7 @@
-// File: LCD_prog.c
-// Author: Mohammed Ahmed Abd Al-Fattah
-//
+/* File: LCD_prog.c
+ * Author: Mohammed Ahmed Abd Al-Fattah
+ * Purpose: LCD driver that works with AVR Atmega32
+ */
 
 #include "Std_Types.h"
 #include "Macros.h"
@@ -154,3 +155,7 @@ void LCD_vidWriteCustomChar(u8 u8LocationCpy) {
 	LCD_vidWriteCharacter(0x00+u8LocationCpy);
 }
 
+void LCD_vidWriteInPlace(u8 u8xCpy, u8 u8CharCpy) {
+	LCD_vidSendCommand(0x10+u8xCpy);
+	LCD_vidWriteChar(u8CharCpy);
+}
