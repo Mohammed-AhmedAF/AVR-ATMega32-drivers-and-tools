@@ -45,7 +45,9 @@ u8 KEYPAD_u8GetKey(void) {
 		x |= (DIO_u8GetPinValue(COL1_PORT,COL1_PIN) << 1);
 		x |= (DIO_u8GetPinValue(COL2_PORT,COL2_PIN) << 2);
 		x |= (DIO_u8GetPinValue(COL3_PORT,COL3_PIN) << 3);
-		
+		/*This macro, if defined, will not print a character until
+		 *the button is depressed.
+		 **/		
 		#ifdef HOLD_BUTTON
 			while(DIO_u8GetPinValue(COL0_PORT,COL0_PIN) == 0);
 			while(DIO_u8GetPinValue(COL1_PORT,COL1_PIN) == 0);
