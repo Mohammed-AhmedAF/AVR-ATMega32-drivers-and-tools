@@ -34,7 +34,7 @@ else
 		elif [[ $i = "macros" || $i = "Macros" ]]
 		then 
 			cp $AVR_LIB_PATH/Macros.h ./
-		elif [[ $i = "dio" ]]
+		elif [[ $i = "dio" || $i = "DIO " ]]
 		then
  			cp $AVR_LIB_PATH/DIO_prog.c ./
  			cp $AVR_LIB_PATH/DIO_interface.h ./
@@ -75,16 +75,16 @@ else
 		then
 			cp $AVR_LIB_PATH/StepperMotor_prog.c ./
 			cp $AVR_LIB_PATH/StepperMotor_interface.h ./
-		elif [[ $i = "timer0" ]]
+		elif [[ $i = "timer0" || $i = "TIMER0" ]]
 		then
 			cp $AVR_LIB_PATH/TIMER0_prog.c ./
 			cp $AVR_LIB_PATH/TIMER0_interface.h ./
 			cp $AVR_LIB_PATH/TIMER0_private.h ./
-		elif [[ $i = "timer1" ]] 
+		elif [[ $i = "timer1" || $i = "TIMER1" ]] 
 		then 
 			cp $AVR_LIB_PATH/TIMER1_prog.c ./
 			cp $AVR_LIB_PATH/TIMER1_interface.h ./
-		elif [[ $i = "timer2" ]]
+		elif [[ $i = "timer2" || $i = "TIMER2" ]]
 		then
 			cp $AVR_LIB_PATH/TIMER2_prog.c ./
 			cp $AVR_LIB_PATH/TIMER2_interface.h ./
