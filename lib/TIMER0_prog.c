@@ -1,5 +1,6 @@
 /*
  * Author: Mohammed Ahmed Abd Al-Fattah Mahmoud
+ * Purpose: TIMER0 driver for AVR Atmega32 MCU
  */
 
 #include "Std_Types.h"
