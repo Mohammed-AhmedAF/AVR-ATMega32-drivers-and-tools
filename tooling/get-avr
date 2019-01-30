@@ -84,6 +84,7 @@ else
 		then 
 			cp $AVR_LIB_PATH/TIMER1_prog.c ./
 			cp $AVR_LIB_PATH/TIMER1_interface.h ./
+			cp $AVR_LIB_PATH/TIMER1_private.h ./
 		elif [[ $i = "timer2" || $i = "TIMER2" ]]
 		then
 			cp $AVR_LIB_PATH/TIMER2_prog.c ./
