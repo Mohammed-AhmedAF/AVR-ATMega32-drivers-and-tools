@@ -1,3 +1,10 @@
+/* 
+ * Author: Mohamed Ahmed Abd Al-Fattah
+ * Purpuse: Timer2 driver for AVR Atmega32 MCU
+ *
+ */
+
+
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
