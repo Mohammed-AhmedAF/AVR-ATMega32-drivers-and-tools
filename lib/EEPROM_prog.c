@@ -1,3 +1,11 @@
+/* 
+ * Author: Mohamed Ahmed Abd Al-Fattah
+ * Purpose: EEPROM driver
+ *
+ */
+
+
+
 #include"Macros.h"
 #include"Std_Types.h"
 #include"TWI_interface.h"
