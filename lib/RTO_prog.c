@@ -1,3 +1,10 @@
+/*
+ * Author: Mohamed Ahmed Abd Al-Fattah
+ * Purpose: A simple Real Time OS kernel
+ *
+ */
+
+
 #include "Macros.h"
 #include "Std_Types.h"
 #include "RTO_interface.h"
