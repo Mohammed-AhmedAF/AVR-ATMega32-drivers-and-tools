@@ -49,13 +49,13 @@ void TIMER0_vidInit(u8 u8WGMCpy, u8 u8COMCpy, u8 u8ClkCpy) {
 			break;
 	}
 	//Configuring Clock
-	switch(u8ClckCpy) {
+	switch(u8ClkCpy) {
 		case TIMER0_CLK_0:
 			CLEAR_BIT(TCCR0,0);
 			CLEAR_BIT(TCCR0,1);
 			CLEAR_BIT(TCCR0,2);
 			break;
-		case TIMER0_CLK_1):
+		case TIMER0_CLK_1:
 			SET_BIT(TCCR0,0);
 			CLEAR_BIT(TCCR0,1);
 			CLEAR_BIT(TCCR0,2);
