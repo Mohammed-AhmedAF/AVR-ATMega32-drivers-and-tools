@@ -1,3 +1,9 @@
+/*
+ * Author: Mohamed Ahmed Abd Al-Fattah
+ * Purpose: Service file that works alonside KEYPAD
+ *
+ */
+
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
