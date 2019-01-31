@@ -101,6 +101,7 @@ else
 		then
 			cp $AVR_LIB_PATH/SPI_prog.c ./
 			cp $AVR_LIB_PATH/SPI_interface.h ./
+			cp $AVR_LIB_PATH/SPI_private.h ./
 		elif [[ $i = "services" || $i = "SERVICES" ]]
 		then
 			cp $AVR_LIB_PATH/SERVICES_prog.c ./
