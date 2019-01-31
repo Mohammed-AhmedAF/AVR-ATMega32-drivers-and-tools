@@ -15,12 +15,12 @@
 
 
 
-Task_Type * Arr_Task[RTO_U8MAXTASKNUM];
+Task_Type * Arr_Task[RTO_MAXTASKNUM];
 
 u32 OVF_count = 0;
 u8 i;
 void RTO_vidInit(void) {
-	for (i = 0; i < RTO_U8MAXTASKNUM; i++) {
+	for (i = 0; i < RTO_MAXTASKNUM; i++) {
 		Arr_Task[i] = RTO_NULL;
 
 	}
@@ -39,9 +39,9 @@ void RTO_vidScheduler(void) {
 	//This for loob will be converted to a function
 	//Called RTO_vidScheduler
 	u8 i;
-	for (i = 0; i <RTO_U8MAXTASKNUM; i++) { //2: The number of tasks could be defined as a macro
+	for (i = 0; i < RTO_MAXTASKNUM; i++) { //2: The number of tasks could be defined as a macro
 		if(Arr_Task[i] != RTO_NULL) {
-			if(Arr_Task[i]->state == RTO_U8TASK_RUNNING) {
+			if(Arr_Task[i]->state == RTO_TASK_RUNNING) {
 				if(Arr_Task[i]->first_delay == 0) {
 					Arr_Task[i]->ptrfun();
 					Arr_Task[i]->first_delay = Arr_Task[i]->periodicity-1;

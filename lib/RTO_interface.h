@@ -1,9 +1,10 @@
 #ifndef _RTO_INTERFACE_H
 #define _RTO_INTERFACE_H
+
 #define RTO_NULL  0
-#define RTO_U8MAXTASKNUM 20
-#define RTO_U8TASK_RUNNING 1
-#define RTO_U8TASK_PAUSED 0
+#define RTO_MAXTASKNUM 20
+#define RTO_TASK_RUNNING 1
+#define RTO_TASK_PAUSED 0
 
 typedef struct {
 	u32 first_delay;
