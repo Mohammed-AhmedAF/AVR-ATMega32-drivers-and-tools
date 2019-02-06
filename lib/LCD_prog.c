@@ -157,5 +157,5 @@ void LCD_vidWriteCustomChar(u8 u8LocationCpy) {
 
 void LCD_vidWriteInPlace(u8 u8xCpy, u8 u8CharCpy) {
 	LCD_vidSendCommand(0x10+u8xCpy);
-	LCD_vidWriteChar(u8CharCpy);
+	LCD_vidWriteCharacter(u8CharCpy);
 }
