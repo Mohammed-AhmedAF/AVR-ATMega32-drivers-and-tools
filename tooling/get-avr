@@ -25,7 +25,7 @@ then
 else
 	for i in $@
 	do
-		if [[ $i = "makef" ]]
+		if [[ $i = "makef" || $i = "makefile" || $i = "Makefile" ]]
 		then
 			cp $AVR_LIB_PATH/Makefile ./
 		elif [[ $i = "std" || $i = "Std" ]]
@@ -43,7 +43,7 @@ else
  			cp $AVR_LIB_PATH/Macros.h ./
 		elif [[ $i = "lcd" ||  $i = "LCD" ]]
 		then
-			cp $AVR_LIB_PATH/LCD_prog.c ./
+			cp $AVR_LIB_PATH/LCD_program.c ./
 			cp $AVR_LIB_PATH/LCD_interface.h ./
 		elif [[ $i = "key" || $i = "keypad" ]]
 		then
