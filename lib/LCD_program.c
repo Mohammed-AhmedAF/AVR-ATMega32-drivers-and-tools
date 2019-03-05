@@ -1,6 +1,12 @@
-/* File: LCD_prog.c
- * Author: Mohammed Ahmed Abd Al-Fattah
- * Purpose: LCD driver that works with AVR Atmega32
+// File: LCD_prog.c
+// Author: Mohammed Ahmed Abd Al-Fattah
+//
+
+/*
+ * RS: Register Select, Data/Instruction select, driven
+ * high for data, and low for instruction.
+ *
+ *
  */
 
 #include "Std_Types.h"
@@ -24,13 +30,7 @@ void LCD_vidInit(void) {
 	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_E,DIO_OUTPUT);
 	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_RS,DIO_OUTPUT);
 	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_RW,DIO_OUTPUT);
-	/*
-	   LCD_vidSendCommand(LCD_8MODE_2L);
-	   _delay_ms(2);
-	   LCD_vidSendCommand(LCD_ON_NOCURSOR);
-	   _delay_ms(2);
-	   LCD_vidSendCommand(LCD_CLEAR_SCREEN);
-	   */
+	
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN); /*Clear screen*/
 	LCD_vidSendCommand(LCD_RETURN_HOME); /*Move to home*/
 	LCD_vidSendCommand(0b00000110); /*Set entry mode*/
@@ -131,16 +131,27 @@ void LCD_vidWriteNumber(u16 u16NumberCpy) {
 	}
 }
 
-void LCD_vidGoToXY(s8 s8xCpy, s8 s8yCpy) {
-	LCD_vidSendCommand(LCD_RETURN_HOME);
-	if (s8yCpy == 1) {
-			LCD_vidSendCommand(0x80+s8xCpy);
+void LCD_vidGoToXY(u8 u8xCpy, u8 u8yCpy) {
+	#define LCD_SET_CURSOR_LOCATION 0x80
+	u8 u8address;
+	switch(u8yCpy) {
+		case 0:
+			u8address = u8xCpy;
+			break;
+		case 1:
+			u8address = u8xCpy+0xC0;
+			break;
+		case 2:
+			u8address = u8xCpy+0x94;
+			break;
+		case 3:
+			u8address = u8xCpy+0xD4;
+			break;
 	}
-	else {
-			LCD_vidSendCommand(0xC0+s8xCpy);
-	}
+	LCD_vidSendCommand(u8address | 0x80);
 }
 
+#define SET_CURSOR_LOCATION
 void LCD_vidCreateCustomChar(u8 * u8CharPtrCpy, u8 u8LocationCpy) {
 	u8 i = 0;
 	LCD_vidSendCommand(0x40+(u8LocationCpy*8)); /*Setting to CGRAM address8*/
@@ -155,7 +166,10 @@ void LCD_vidWriteCustomChar(u8 u8LocationCpy) {
 	LCD_vidWriteCharacter(0x00+u8LocationCpy);
 }
 
-void LCD_vidWriteInPlace(u8 u8xCpy, u8 u8CharCpy) {
-	LCD_vidSendCommand(0x10+u8xCpy);
+/*This function has been reedited to allow writing a character
+ *on a specific row and a specific column.
+ * */
+void LCD_vidWriteInPlace(u8 u8xCpy,u8 u8yCpy, u8 u8CharCpy) {
+	LCD_vidGoToXY(u8xCpy,u8yCpy);
 	LCD_vidWriteCharacter(u8CharCpy);
 }
