@@ -2,8 +2,8 @@
 # Author: Mohammed Ahmed Abd Al-Fattah
 # File: Makefile
 # Purpose: This is a makefile used to compile and load avr projects.
-# The particular microcontroller I am using this file with is the 
-# Atmega32.
+# The particular microcontroller family I am using this file with is the 
+# AVR ATmega16/32 families of microcontrollers.
 #
 
 MAIN = main.c
