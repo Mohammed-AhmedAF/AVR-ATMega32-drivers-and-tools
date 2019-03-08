@@ -9,7 +9,8 @@
 MAIN = main.c
 CC = avr-gcc
 SRC = $(MAIN) DIO_prog.c
-CFLAGS = -mmcu=atmega32 -I . -O3
+MICROCONTROLLER = atmega16
+CFLAGS = -mmcu=$(MICROCONTROLLER) -I . -O3
 
 PRO = avrdude
 
@@ -36,12 +37,12 @@ build:
 .PHONY : load
 load: clean generate_ctags build
 	@pwd
-	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
+	$(PRO) -p $(MICROCONTROLLER) -c usbasp -U flash:w:main.o
 	rm -f *.o *.i
 
 .PHONY : flash
 flash :
-	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
+	$(PRO) -p $(MICROCONTROLLER) -c usbasp -U flash:w:main.o
 
 .PHONY : convert
 convert: clean
