@@ -6,6 +6,7 @@
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
+#include "SPI_private.h"
 #include "SPI_inteface.h"
 
 void SPI_vidInitMaster(u8 u8ClockPolarity, u8 u8ClockPhase, u8 u8ClockFrequency) {
