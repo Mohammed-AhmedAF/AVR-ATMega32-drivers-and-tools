@@ -56,5 +56,5 @@ void UART_vidSendString(u8 * u8pStringCpy) {
 }
 
 void UART_vidSendLine(void) {
-	UART_vidSendString("\n\r******\n\r);
+	UART_vidSendString((u8*)"\n\r******\n\r");
 }
