@@ -1,8 +1,9 @@
 /*
  * GLCD_program.c
  *
- * Created: 5/20/2019 9:15:11 AM
- *  Author: Admin
+ *  Created: 5/20/2019 9:15:11 AM
+ *  Author: Mohamed Ahmed Abd Al-Fattah
+ *  Purpose: Graphical LCD driver, based on code from electronicwings.com
  */ 
 
 #include "Macros.h"
