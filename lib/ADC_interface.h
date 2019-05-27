@@ -22,7 +22,7 @@ u8 ADC_u8GetADCL(void);
 #define ADC_REF_INTERNAL 3
 
 #define ADC_LEFTADJUST 0
-#define ADC_RIGHADJUST 1
+#define ADC_RIGHTADJUST 1
 
 #define ADC_CLK_2 1
 #define ADC_CLK_4 2

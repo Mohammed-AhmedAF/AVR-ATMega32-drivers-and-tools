@@ -39,7 +39,7 @@ void ADC_vidInit(u8 u8RefSelectCpy, u8 u8LeftAdjustCpy, u8 u8ChannelSelect, u8 u
 	if (u8LeftAdjustCpy == ADC_LEFTADJUST) {
 		SET_BIT(ADMUX,5);
 	}
-	else if (u8LeftAdjustCpy == ADC_RIGHADJUST) {
+	else if (u8LeftAdjustCpy == ADC_RIGHTADJUST) {
 		CLEAR_BIT(ADMUX,5);
 	}
 
