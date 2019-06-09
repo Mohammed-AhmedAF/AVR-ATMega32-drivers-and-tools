@@ -15,6 +15,13 @@
 #define INTERRUPTS_INT_0 8
 #define INTERRUPTS_INT_1 9
 #define INTERRUPTS_INT_2 10
+#define INTERRUPTS_ICF1 11
+
+/*Clearer macro names*/
+#define INTERRUPTS_TIMER0_OVF 0
+#define INTERRUPTS_TIMER1_ICP 5
+#define INTERRUPTS_TIMER1_OVF 2
+#define INTERRUPTS_TIMER2_OVF 6
 
 /*External Interrupts Sense Control definitions*/
 #define INTERRUPTS_SC_LOWLEVEL 0
@@ -23,19 +30,29 @@
 #define INTERRUPTS_SC_RISING 3
 
 
-//Defininitions of ISR switches go under here
-#define EXTERNAL_INTERRUPT_0
+/*Definitions of ISR switches go under here*/
+#define TIMER1_OVF_VECT 0
+#define TIMER1_CAPT_VECT 1
+#define TIMER2_OVF_VECT 2
+#define TIMER0_OVF_VECT 3
+#define EXTERNAL_INTERRUPT_0 4
+#define EXTERNAL_INTERRUPT_1 5
 
-//
+/*Size of the array that holds pointer to functions*/
+#define INTERRUPTS_FUNCPTR_SIZE 6
 
 void INTERRUPTS_vidSetInterruptEnable(u8);
-void INTERRUPTS_vidPutISRFunction(void (*ptrFunc) (void));
+void INTERRUPTS_vidPutISRFunction(u8,void (*ptrFunc) (void));
 void INTERRUPTS_vidSetInterruptEnable(u8);
+void INTERRUPTS_vidEnableInterrupt(u8);
+void INTERRUPTS_vidDisableInterrupt(u8);
 void INTERRUPTS_vidSetGlobalInterruptFlag(void);
 void INTERRUPTS_vidClearGlobalInterruptFlag(void);
 void INTERRUPTS_vidSetSenseControl(u8,u8);
 void INTERRUPTS_vidClearInterruptEnable(u8);
 u8 INTERRUPTS_u8CheckExtInterruptFlag(u8);
 void INTERRUPTS_vidClearExtInterruptFlag(u8);
+void INTERRUPTS_vidClearInterruptFlag(u8);
+void INTERRUPTS_vidToggleInterrupt(u8);
 
 #endif
