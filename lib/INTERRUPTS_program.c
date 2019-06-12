@@ -4,7 +4,6 @@
 #include "INTERRUPTS_interface.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "SERVICES_interface.h"
 
 /*Array of function pointers, used to hold pointer to ISRs*/
 void (*ISR_pt[INTERRUPTS_FUNCPTR_SIZE]) (void); 
