@@ -12,7 +12,7 @@
 
 /*Global variables modified in ISR*/
 volatile u8 u8AlarmFlag = CLOCK_ALARM_CLEARED;
-volatile u32 u32OvFCount;
+volatile u16 u16OvFCount;
 volatile u8 u8Sec = 0;
 volatile u8 u8Minute = 33;
 volatile u8 u8Hours = 21;
@@ -27,9 +27,9 @@ void CLOCK_vidInit(void) {
 }
 
 void CLOCK_vidCount(void) {
-	u32OvFCount++;
-	if (u32OvFCount == CLOCK_SEC_OVFCOUNT) {
-		u32OvFCount = 0;
+	u16OvFCount++;
+	if (u16OvFCount == CLOCK_SEC_OVFCOUNT) {
+		u16OvFCount = 0;
 		u8Sec++;
 		if (u8Sec == 60) {
 			u8Sec = 0;
