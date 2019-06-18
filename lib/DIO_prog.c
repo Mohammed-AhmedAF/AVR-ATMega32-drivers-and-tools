@@ -152,3 +152,20 @@ u8 DIO_u8GetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy) {
 	}
 	return u8Value;
 }
+
+void DIO_vidTogglePin(u8 u8PortNumberCpy, u8 u8PinNumberCpy) {
+	switch (u8PortNumberCpy) {
+		case DIO_PORTA:
+			TOGGLE_BIT(PORTA,u8PinNumberCpy);
+			break;
+		case DIO_PORTB:
+			TOGGLE_BIT(PORTB,u8PinNumberCpy);
+			break;
+		case DIO_PORTC:
+			TOGGLE_BIT(PORTC,u8PinNumberCpy);
+			break;
+		case DIO_PORTD:
+			TOGGLE_BIT(PORTD,u8PinNumberCpy);
+			break;
+	}
+}

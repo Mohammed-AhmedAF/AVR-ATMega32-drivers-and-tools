@@ -49,4 +49,6 @@ void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8ValueCpy);
 void DIO_vidSetPinDirection(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8DirectionCpy);
 u8 DIO_u8GetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy);
 
+void DIO_vidTogglePin(u8,u8);
+
 #endif
