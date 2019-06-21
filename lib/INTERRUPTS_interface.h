@@ -22,6 +22,13 @@
 #define INTERRUPTS_TIMER1_ICP 5
 #define INTERRUPTS_TIMER1_OVF 2
 #define INTERRUPTS_TIMER2_OVF 6
+#define INTERRUPTS_USART_RXC 12
+#define INTERRUPTS_USART_TXC 13
+#define INTERRUPTS_USART_UDRE 14
+#define INTERRUPTS_SPI_STC 15
+#define INTERRUPTS_TIMER0_COMP 1
+
+
 
 /*External Interrupts Sense Control definitions*/
 #define INTERRUPTS_SC_LOWLEVEL 0
@@ -34,12 +41,20 @@
 #define TIMER1_OVF_VECT 0
 #define TIMER1_CAPT_VECT 1
 #define TIMER2_OVF_VECT 2
-#define TIMER0_OVF_VECT 3
-#define EXTERNAL_INTERRUPT_0 4
-#define EXTERNAL_INTERRUPT_1 5
-
+#define TIMER2_COMP_VECT 3
+#define TIMER0_OVF_VECT 4
+#define TIMER0_COMP_VECT 5
+#define EXTERNAL_INTERRUPT_0 6
+#define EXTERNAL_INTERRUPT_1 7
+#define TIMER1_COMPA_VECT 8
+#define TIMER1_COMPB_VECT 9
+#define USART_RXC_VECT 10
+#define USART_TXC_VECT 11
+#define USART_UDRE_VECT 12
+#define SPI_STC_VECT 13
+#define TWI_VECT 14
 /*Size of the array that holds pointer to functions*/
-#define INTERRUPTS_FUNCPTR_SIZE 6
+#define INTERRUPTS_FUNCPTR_SIZE 15
 
 void INTERRUPTS_vidSetInterruptEnable(u8);
 void INTERRUPTS_vidPutISRFunction(u8,void (*ptrFunc) (void));

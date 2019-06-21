@@ -54,7 +54,19 @@ void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptEnCpy) {
 		break;
 		case INTERRUPTS_TICIE_1:
 		SET_BIT(TIMSK,5);
-		
+		break;
+		case INTERRUPTS_USART_RXC:
+		SET_BIT(UCSRB,7);
+		break;
+		case INTERRUPTS_USART_TXC:
+		SET_BIT(UCSRB,6);	
+		break;
+		case INTERRUPTS_USART_UDRE:
+		SET_BIT(UCSRB,5);
+		break;
+		case INTERRUPTS_SPI_STC:
+		SET_BIT(SPCR,7);
+		break;
 	}
 }
 
@@ -89,6 +101,19 @@ void INTERRUPTS_vidDisableInterrupt(u8 u8InterruptEnCpy) {
 		break;
 		case INTERRUPTS_TICIE_1:
 		CLEAR_BIT(TIMSK,5);
+		break;
+		case INTERRUPTS_USART_RXC:
+		CLEAR_BIT(UCSRB,7);
+		break;
+		case INTERRUPTS_USART_TXC:
+		CLEAR_BIT(UCSRB,6);
+		break;
+		case INTERRUPTS_USART_UDRE:
+		CLEAR_BIT(UCSRB,5);
+		break;
+		case INTERRUPTS_SPI_STC:
+		CLEAR_BIT(SPCR,7);
+		break;
 	}
 }
 
@@ -199,7 +224,7 @@ ISR(INT0_vect) {
 
 #ifdef EXTERNAL_INTERRUPT_1
 ISR(INT1_vect) {
-	ISRFunc();
+	ISR_pt[EXTERNAL_INTERRUPT_1]();
 }
 #endif
 
@@ -211,7 +236,7 @@ ISR(TIMER0_OVF_vect) {
 
 #ifdef TIMER0_COMP_VECT
 ISR(TIMER0_COMP_vect) {
-	ISRFunc();
+	ISR_pt[TIMER0_COMP_VECT]();
 }
 #endif
 
@@ -223,19 +248,19 @@ ISR(TIMER2_OVF_vect) {
 
 #ifdef TIMER2_COMP_VECT
 ISR(TIMER2_COMP_vect) {
-	ISRFunc();
+	ISR_pt[TIMER2_COMP_VECT]();
 }
 #endif
 
 #ifdef TIMER1_COMPA_VECT
 ISR(TIMER1_COMPA_vect) {
-	ISRFunc();
+	ISR_pt[TIMER1_COMPA_VECT]();
 }
 #endif
 
 #ifdef TIMER1_COMPB_VECT
-ISR(TIMER1_COMB_vect) {
-	ISRFunc();
+ISR(TIMER1_COMPB_vect) {
+	ISR_pt[TIMER1_COMPB_VECT]();
 }
 #endif
 
@@ -248,6 +273,36 @@ ISR(TIMER1_CAPT_vect) {
 
 #ifdef TIMER1_OVF_VECT
 ISR(TIMER1_OVF_vect) {
-	ISRFunc();
+	ISR_pt[TIMER1_OVF_VECT]();
+}
+#endif
+
+#ifdef USART_RXC_VECT
+ISR(USART_RXC_vect) {
+	ISR_pt[USART_RXC_VECT]();
+}
+#endif
+
+#ifdef USART_TXC_VECT
+ISR(USART_TXC_vect) {
+	ISR_pt[USART_TXC_VECT]();
+}
+#endif
+
+#ifdef USART_UDRE_VECT
+ISR(USART_UDRE_vect) {
+	ISR_pt[USART_RXC_VECT]();
+}
+#endif
+
+#ifdef SPI_STC_VECT
+ISR(SPI_STC_vect) {
+	ISR_pt[SPI_STC_VECT]();
+}
+#endif
+
+#ifdef TWI_VECT
+ISR(TWI_vect) {
+	ISR_pt[TWI_VECT]();
 }
 #endif
