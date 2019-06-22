@@ -7,7 +7,7 @@
 #include "Macros.h"
 #include "DIO_interface.h"
 #include "SPI_private.h"
-#include "SPI_inteface.h"
+#include "SPI_interface.h"
 
 void SPI_vidInitMaster(u8 u8ClockPolarity, u8 u8ClockPhase, u8 u8ClockFrequency) {
 
