@@ -30,7 +30,7 @@ void RTO_vidInit(void) {
 	INTERRUPTS_vidPutISRFunction(RTO_vidOVFCount);
 }
 
-//You can put safety requirements 
+/*You can put safety requirements*/ 
 void RTO_vidCreateTask(Task_Type * TaskPointer, u8 TaskPriority) {
 	Arr_Task[TaskPriority] = TaskPointer;
 }
