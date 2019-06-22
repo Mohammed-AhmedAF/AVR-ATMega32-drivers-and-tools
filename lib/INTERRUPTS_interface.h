@@ -26,6 +26,9 @@
 #define INTERRUPTS_USART_TXC 13
 #define INTERRUPTS_USART_UDRE 14
 #define INTERRUPTS_SPI_STC 15
+#define INTERRUPTS_ADC_CONVCOMPLETE 16
+#define INTERRUPTS_ANALOG_COMP 17
+#define INTERRUPTS_EEPROM_READY 18
 #define INTERRUPTS_TIMER0_COMP 1
 
 
@@ -53,8 +56,11 @@
 #define USART_UDRE_VECT 12
 #define SPI_STC_VECT 13
 #define TWI_VECT 14
+#define ADC_VECT 15
+#define ANALOG_COMP_VECT 16
+#define EEPROM_READY_VECT 17
 /*Size of the array that holds pointer to functions*/
-#define INTERRUPTS_FUNCPTR_SIZE 15
+#define INTERRUPTS_FUNCPTR_SIZE 18
 
 void INTERRUPTS_vidSetInterruptEnable(u8);
 void INTERRUPTS_vidPutISRFunction(u8,void (*ptrFunc) (void));

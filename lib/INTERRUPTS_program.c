@@ -34,7 +34,8 @@ void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptEnCpy) {
 		case  INTERRUPTS_TOIE_0:
 		SET_BIT(TIMSK,0);
 		break;
-		case INTERRUPTS_OCIE_0:
+		case INTERRUPTS_OCIE_0
+		:
 		SET_BIT(TIMSK,1);
 		break;
 		case INTERRUPTS_TOIE_2:
@@ -66,6 +67,15 @@ void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptEnCpy) {
 		break;
 		case INTERRUPTS_SPI_STC:
 		SET_BIT(SPCR,7);
+		break;
+		case INTERRUPTS_ADC_CONVCOMPLETE:
+		SET_BIT(ADCSRA,3);
+		break;
+		case INTERRUPTS_ANALOG_COMP:
+		SET_BIT(ACSR,3);
+		break;
+		case INTERRUPTS_EEPROM_READY:
+		SET_BIT(EECR,3);
 		break;
 	}
 }
@@ -113,6 +123,15 @@ void INTERRUPTS_vidDisableInterrupt(u8 u8InterruptEnCpy) {
 		break;
 		case INTERRUPTS_SPI_STC:
 		CLEAR_BIT(SPCR,7);
+		break;
+		case INTERRUPTS_ADC_CONVCOMPLETE:
+		CLEAR_BIT(ADCSRA,3);
+		break;
+		case INTERRUPTS_ANALOG_COMP:
+		CLEAR_BIT(ACSR,3);
+		break;
+		case INTERRUPTS_EEPROM_READY:
+		CLEAR_BIT(EECR,3);
 		break;
 	}
 }
@@ -304,5 +323,23 @@ ISR(SPI_STC_vect) {
 #ifdef TWI_VECT
 ISR(TWI_vect) {
 	ISR_pt[TWI_VECT]();
+}
+#endif
+
+#ifdef ADC_VECT
+ISR(ADC_vect) {
+	ISR_pt[ADC_VECT]();
+}
+#endif
+
+#ifdef ANALOG_COMP_VECT
+ISR(ANA_COMP_vect) {
+	ISR_pt[ANALOG_COMP_VECT]();
+}
+#endif
+
+#ifdef EEPROM_READY_VECT
+ISR(EE_RDY_vect) {
+	ISR_pt[EEPROM_READY_VECT]();
 }
 #endif
