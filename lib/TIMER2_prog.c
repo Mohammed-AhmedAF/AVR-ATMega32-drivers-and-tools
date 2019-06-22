@@ -8,8 +8,8 @@
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
+#include "TIMER2_private.h"
 #include "TIMER2_interface.h"
-#include <avr/io.h>
 
 void TIMER2_vidInit(u8 u8WGMCpy, u8 u8COMCpy, u8 u8CLKCpy) {
 	if (u8WGMCpy == TIMER2_WGM_NORMAL) {
