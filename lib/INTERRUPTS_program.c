@@ -1,6 +1,7 @@
 #include "Std_Types.h"
 #include "Macros.h"
 #include "DIO_interface.h"
+#include "SETTINGS_interface.h"
 #include "INTERRUPTS_interface.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -22,7 +23,63 @@ void INTERRUPTS_vidPutISRFunction(u8 u8InterruptIDCpy, void (*ptrFunc) ()) {
 	ISR_pt[u8InterruptIDCpy] = ptrFunc;
 }
 
+#ifdef ST_MC_ATMEGA128
+void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptID) {
+	switch(u8InterruptID) {
+		case INTERRUPTS_INT_0:
+		SET_BIT(EIMSK,0);
+		break;
+		case INTERRUPTS_INT_1:
+		SET_BIT(EIMSK,1);
+		break;
+		case INTERRUPTS_INT_2:
+		SET_BIT(EIMSK,2);
+		break;
+		case INTERRUPTS_INT_3:
+		SET_BIT(EIMSK,3);
+		break;
+		case INTERRUPTS_INT_4:
+		SET_BIT(EIMSK,4);
+		break;
+		case INTERRUPTS_INT_5:
+		SET_BIT(EIMSK,5);
+		break;
+		case INTERRUPTS_INT_6:
+		SET_BIT(EIMSK,6);
+		break;
+		case INTERRUPTS_INT_7:
+		SET_BIT(EIMSK,7);
+		break;
+		case INTERRUPTS_TIMER0_OVF:
+		SET_BIT(TIMSK,0);
+		break;
+		case INTERRUPTS_TIMER0_OC:
+		SET_BIT(TIMSK,1);
+		break;
+		case INTERRUPTS_TIMER1_OVF:
+		SET_BIT(TIMSK,2);
+		break;
+		case INTERRUPTS_TIMER1_OC_B:
+		SET_BIT(TIMSK,3);
+		break;
+		case INTERRUPTS_TIMER1_OC_A:
+		SET_BIT(TIMSK,4);
+		break;
+		case INTERRUPTS_TIMER1_ICP:
+		SET_BIT(TIMSK,5);
+		break;
+		case INTERRUPTS_TIMER2_OVF:
+		SET_BIT(TIMSK,6);
+		break;
+		case INTERRUPTS_TIMER2_OC:
+		SET_BIT(TIMSK,7);
+		break;
+		
+	}
+}
+#endif
 /*Enable interrupt with a simpler name*/
+#ifdef ST_MC_ATMEGA1632
 void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptEnCpy) {
 	switch(u8InterruptEnCpy) {
 		case INTERRUPTS_INT_0:
@@ -30,6 +87,9 @@ void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptEnCpy) {
 		break;
 		case INTERRUPTS_INT_1:
 		SET_BIT(GICR,7);
+		break;
+		case INTERRUPTS_INT_2:
+		SET_BIT(GICR,5);
 		break;
 		case  INTERRUPTS_TOIE_0:
 		SET_BIT(TIMSK,0);
@@ -79,7 +139,65 @@ void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptEnCpy) {
 		break;
 	}
 }
+#endif
 
+
+#ifdef ST_MC_ATMEGA128
+void INTERRUPTS_vidDisableInterrupt(u8 u8InterruptID) {
+	switch (u8InterruptID) {
+		case INTERRUPTS_INT_0:
+		CLEAR_BIT(EIMSK,0);
+		break;
+		case INTERRUPTS_INT_1:
+		CLEAR_BIT(EIMSK,1);
+		break;
+		case INTERRUPTS_INT_2:
+		CLEAR_BIT(EIMSK,2);
+		break;
+		case INTERRUPTS_INT_3:
+		CLEAR_BIT(EIMSK,3);
+		break;
+		case INTERRUPTS_INT_4:
+		CLEAR_BIT(EIMSK,4);
+		break;
+		case INTERRUPTS_INT_5:
+		CLEAR_BIT(EIMSK,5);
+		break;
+		case INTERRUPTS_INT_6:
+		CLEAR_BIT(EIMSK,6);
+		break;
+		case INTERRUPTS_INT_7:
+		CLEAR_BIT(EIMSK,7);
+		break;
+		case INTERRUPTS_TIMER0_OVF:
+		CLEAR_BIT(TIMSK,0);
+		break;
+		case INTERRUPTS_TIMER0_OC:
+		CLEAR_BIT(TIMSK,1);
+		break;
+		case INTERRUPTS_TIMER1_OVF:
+		CLEAR_BIT(TIMSK,2);
+		break;
+		case INTERRUPTS_TIMER1_OC_B:
+		CLEAR_BIT(TIMSK,3);
+		break;
+		case INTERRUPTS_TIMER1_OC_A:
+		CLEAR_BIT(TIMSK,4);
+		break;
+		case INTERRUPTS_TIMER1_ICP:
+		CLEAR_BIT(TIMSK,5);
+		break;
+		case INTERRUPTS_TIMER2_OVF:
+		CLEAR_BIT(TIMSK,6);
+		break;
+		case INTERRUPTS_TIMER2_OC:
+		CLEAR_BIT(TIMSK,7);
+		break;
+	}
+}
+#endif
+
+#ifdef ST_MC_ATMEGA1632
 void INTERRUPTS_vidDisableInterrupt(u8 u8InterruptEnCpy) {
 	switch(u8InterruptEnCpy) {
 		case INTERRUPTS_INT_0:
@@ -135,7 +253,177 @@ void INTERRUPTS_vidDisableInterrupt(u8 u8InterruptEnCpy) {
 		break;
 	}
 }
+#endif
 
+#ifdef ST_MC_ATMEGA128
+void INTERRUPTS_vidSetSenseControl(u8 u8InterruptID, u8 u8SenseControl) 
+{
+	switch(u8InterruptID) {
+		case INTERRUPTS_INT_0:
+		switch(u8SenseControl) 
+		{
+			case INTERRUPTS_SC_LOWLEVEL:
+				CLEAR_BIT(EICRA,0);
+				CLEAR_BIT(EICRA,1);
+				break;
+			case INTERRUPTS_SC_FALLING:
+				CLEAR_BIT(EICRA,0);
+				SET_BIT(EICRA,1);
+				break;
+			case INTERRUPTS_SC_RISING:
+				SET_BIT(EICRA,0);
+				SET_BIT(EICRA,1);
+				break;
+			default:
+				CLEAR_BIT(EICRA,0);
+				SET_BIT(EICRA,1);
+		}
+		break;
+		case INTERRUPTS_INT_1:
+		switch(u8SenseControl)
+		{
+			case INTERRUPTS_SC_LOWLEVEL:
+			CLEAR_BIT(EICRA,2);
+			CLEAR_BIT(EICRA,3);
+			break;
+			case INTERRUPTS_SC_FALLING:
+			CLEAR_BIT(EICRA,2);
+			SET_BIT(EICRA,3);
+			break;
+			case INTERRUPTS_SC_RISING:
+			SET_BIT(EICRA,2);
+			SET_BIT(EICRA,3);
+			break;
+			default:
+			CLEAR_BIT(EICRA,2);
+			SET_BIT(EICRA,3);
+		}
+		break;
+		case INTERRUPTS_INT_2:
+			switch(u8SenseControl)
+			{
+				case INTERRUPTS_SC_LOWLEVEL:
+				CLEAR_BIT(EICRA,4);
+				CLEAR_BIT(EICRA,5);
+				break;
+				case INTERRUPTS_SC_FALLING:
+				CLEAR_BIT(EICRA,4);
+				SET_BIT(EICRA,5);
+				break;
+				case INTERRUPTS_SC_RISING:
+				SET_BIT(EICRA,4);
+				SET_BIT(EICRA,5);
+				break;
+				default:
+				CLEAR_BIT(EICRA,4);
+				SET_BIT(EICRA,5);
+			}
+		break;
+		case INTERRUPTS_INT_3:
+		switch(u8SenseControl)
+		{
+			case INTERRUPTS_SC_LOWLEVEL:
+			CLEAR_BIT(EICRA,6);
+			CLEAR_BIT(EICRA,7);
+			break;
+			case INTERRUPTS_SC_FALLING:
+			CLEAR_BIT(EICRA,6);
+			SET_BIT(EICRA,7);
+			break;
+			case INTERRUPTS_SC_RISING:
+			SET_BIT(EICRA,6);
+			SET_BIT(EICRA,7);
+			break;
+			default:
+			CLEAR_BIT(EICRA,6);
+			SET_BIT(EICRA,7);
+		}
+		break;
+		case INTERRUPTS_INT_4:
+		switch(u8SenseControl)
+		{
+			case INTERRUPTS_SC_LOWLEVEL:
+			CLEAR_BIT(EICRB,0);
+			CLEAR_BIT(EICRB,1);
+			break;
+			case INTERRUPTS_SC_FALLING:
+			CLEAR_BIT(EICRB,0);
+			SET_BIT(EICRB,1);
+			break;
+			case INTERRUPTS_SC_RISING:
+			SET_BIT(EICRB,0);
+			SET_BIT(EICRB,1);
+			break;
+			default:
+			CLEAR_BIT(EICRB,0);
+			SET_BIT(EICRB,1);
+		}
+		break;
+		case INTERRUPTS_INT_5:
+		switch(u8SenseControl)
+		{
+			case INTERRUPTS_SC_LOWLEVEL:
+			CLEAR_BIT(EICRB,2);
+			CLEAR_BIT(EICRB,3);
+			break;
+			case INTERRUPTS_SC_FALLING:
+			CLEAR_BIT(EICRB,2);
+			SET_BIT(EICRB,3);
+			break;
+			case INTERRUPTS_SC_RISING:
+			SET_BIT(EICRB,2);
+			SET_BIT(EICRB,3);
+			break;
+			default:
+			CLEAR_BIT(EICRB,2);
+			SET_BIT(EICRB,3);
+		}
+		break;
+		case INTERRUPTS_INT_6:
+		switch(u8SenseControl)
+		{
+			case INTERRUPTS_SC_LOWLEVEL:
+			CLEAR_BIT(EICRB,4);
+			CLEAR_BIT(EICRB,5);
+			break;
+			case INTERRUPTS_SC_FALLING:
+			CLEAR_BIT(EICRB,4);
+			SET_BIT(EICRB,5);
+			break;
+			case INTERRUPTS_SC_RISING:
+			SET_BIT(EICRB,4);
+			SET_BIT(EICRB,5);
+			break;
+			default:
+			CLEAR_BIT(EICRB,4);
+			SET_BIT(EICRB,5);
+		}
+		break;
+		case INTERRUPTS_INT_7:
+		switch(u8SenseControl)
+		{
+			case INTERRUPTS_SC_LOWLEVEL:
+			CLEAR_BIT(EICRB,6);
+			CLEAR_BIT(EICRB,7);
+			break;
+			case INTERRUPTS_SC_FALLING:
+			CLEAR_BIT(EICRB,6);
+			SET_BIT(EICRB,7);
+			break;
+			case INTERRUPTS_SC_RISING:
+			SET_BIT(EICRB,6);
+			SET_BIT(EICRB,7);
+			break;
+			default:
+			CLEAR_BIT(EICRB,6);
+			SET_BIT(EICRB,7);
+		}
+		break;
+	}
+}
+#endif
+
+#ifdef ST_MC_ATMEGA1632
 void INTERRUPTS_vidSetSenseControl(u8 u8ExtInterruptNumCpy,u8 u8SenseControlCpy) {
 	switch(u8ExtInterruptNumCpy) {
 		case INTERRUPTS_INT_1:
@@ -177,9 +465,12 @@ void INTERRUPTS_vidSetSenseControl(u8 u8ExtInterruptNumCpy,u8 u8SenseControlCpy)
 	}
 
 }
+#endif
 
+#ifdef ST_MC_ATMEGA1632
 u8 INTERRUPTS_u8CheckExtInterruptFlag(u8 u8ExtInterruptNumCpy) {
-	switch(u8ExtInterruptNumCpy) {
+	switch(u8ExtInterruptNumCpy)/
+	{
 		case INTERRUPTS_INT_0:
 			return GET_BIT(GIFR,6);
 			break;
@@ -194,6 +485,7 @@ u8 INTERRUPTS_u8CheckExtInterruptFlag(u8 u8ExtInterruptNumCpy) {
 		break;
 	}
 }
+#endif
 
 void INTERRUPTS_vidToggleInterrupt(u8 u8InterruptNumCpy) 
 {
@@ -204,6 +496,7 @@ void INTERRUPTS_vidToggleInterrupt(u8 u8InterruptNumCpy)
 	}
 }
 
+#ifdef ST_MC_ATMEGA1632
 void INTERRUPTS_vidClearExtInterruptFlag(u8 u8ExtInterruptNumCpy) {
 	switch(u8ExtInterruptNumCpy) {
 		case INTERRUPTS_INT_0:
@@ -217,9 +510,42 @@ void INTERRUPTS_vidClearExtInterruptFlag(u8 u8ExtInterruptNumCpy) {
 			break;
 	}
 }
+#endif
 
-void INTERRUPTS_vidClearInterruptFlag(u8 u8InterruptFlagIDCpy) {
-	switch(u8InterruptFlagIDCpy) {
+#ifdef ST_MC_ATMEGA128
+void INTERRUPTS_vidClearExtInterruptFlag(u8 u8InterruptID) {
+	switch(u8InterruptID) {
+		case INTERRUPTS_INT_0:
+		SET_BIT(EIFR,0);
+		break;
+		case INTERRUPTS_INT_1:
+		SET_BIT(EIFR,1);
+		break;
+		case INTERRUPTS_INT_2:
+		SET_BIT(EIFR,2);
+		break;
+		case INTERRUPTS_INT_3:
+		SET_BIT(EIFR,3);
+		break;
+		case INTERRUPTS_INT_4:
+		SET_BIT(EIFR,4);
+		break;
+		case INTERRUPTS_INT_5:
+		SET_BIT(EIFR,5);
+		break;
+		case INTERRUPTS_INT_6:
+		SET_BIT(EIFR,6);
+		break;
+		case INTERRUPTS_INT_7:
+		SET_BIT(EIFR,7);
+		break;
+	}
+}
+#endif
+
+void INTERRUPTS_vidClearInterruptFlag(u8 u8InterruptID) {
+	switch(u8InterruptID)
+	 {
 		case INTERRUPTS_TOIE_0:
 			SET_BIT(TIFR,0);
 			break;
@@ -244,6 +570,42 @@ ISR(INT0_vect) {
 #ifdef EXTERNAL_INTERRUPT_1
 ISR(INT1_vect) {
 	ISR_pt[EXTERNAL_INTERRUPT_1]();
+}
+#endif
+
+#ifdef EXTERNAL_INTERRUPT_2
+ISR(INT2_vect) {
+	ISR_pt[EXTERNAL_INTERRUPT_2]();
+}
+#endif
+
+#ifdef EXTERNAL_INTERRUPT_3
+ISR(INT3_vect) {
+	ISR_pt[EXTERNAL_INTERRUPT_3]();
+}
+#endif
+
+#ifdef EXTERNAL_INTERRUPT_4
+ISR(INT4_vect) {
+	ISR_pt[EXTERNAL_INTERRUPT_4]();
+}
+#endif
+
+#ifdef EXTERNAL_INTERRUPT_5
+ISR(INT5_vect) {
+	ISR_pt[EXTERNAL_INTERRUPT_5]();
+}
+#endif
+
+#ifdef EXTERNAL_INTERRUPT_6
+ISR(INT6_vect) {
+	ISR_pt[EXTERNAL_INTERRUPT_6]();
+}
+#endif
+
+#ifdef EXTERNAL_INTERRUPT_7
+ISR(INT7_vect) {
+	ISR_pt[EXTERNAL_INTERRUPT_7]();
 }
 #endif
 
@@ -296,6 +658,8 @@ ISR(TIMER1_OVF_vect) {
 }
 #endif
 
+
+#ifdef ST_MC_ATMEGA1632
 #ifdef USART_RXC_VECT
 ISR(USART_RXC_vect) {
 	ISR_pt[USART_RXC_VECT]();
@@ -313,6 +677,7 @@ ISR(USART_UDRE_vect) {
 	ISR_pt[USART_RXC_VECT]();
 }
 #endif
+#endif
 
 #ifdef SPI_STC_VECT
 ISR(SPI_STC_vect) {
@@ -327,11 +692,13 @@ ISR(TWI_vect) {
 #endif
 
 #ifdef ADC_VECT
-ISR(ADC_vect) {
+ISR(ADC_vect) 
+{
 	ISR_pt[ADC_VECT]();
 }
 #endif
 
+#ifdef ST_MC_ATMEGA1632
 #ifdef ANALOG_COMP_VECT
 ISR(ANA_COMP_vect) {
 	ISR_pt[ANALOG_COMP_VECT]();
@@ -342,4 +709,5 @@ ISR(ANA_COMP_vect) {
 ISR(EE_RDY_vect) {
 	ISR_pt[EEPROM_READY_VECT]();
 }
+#endif
 #endif
