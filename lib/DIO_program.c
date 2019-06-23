@@ -39,11 +39,14 @@ void DIO_vidSetPortDirection(u8 u8PortNumberCpy, u8 u8DirectionCpy) {
 		case DIO_PORTD:
 			DDRD = u8DirectionCpy;
 			break;
+		case DIO_PORTE:
+			DDRE = u8DirectionCpy;
+			break;
 	}
 }
 
 u8 DIO_u8GetPortValue(u8 u8PortNumberCpy) {
-	u8 u8Value;
+	u8 u8Value  = 0x00;
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
 			u8Value = PINA;
@@ -56,6 +59,9 @@ u8 DIO_u8GetPortValue(u8 u8PortNumberCpy) {
 			break;
 		case DIO_PORTD:
 			u8Value = PORTD;
+			break;
+		case DIO_PORTE:
+			u8Value = PORTE;
 			break;
 	}
 	return u8Value;
@@ -95,6 +101,14 @@ void DIO_vidSetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy,u8 u8ValueCpy) {
 				CLEAR_BIT(PORTD,u8PinNumberCpy);
 			}							
 			break;
+		case DIO_PORTE:
+			if (u8ValueCpy == STD_HIGH)
+			{
+			SET_BIT(PORTE,u8PinNumberCpy);
+			}
+			else {
+				CLEAR_BIT(PORTE,u8PinNumberCpy);
+			}
 	}
 }
 
@@ -135,7 +149,7 @@ void DIO_vidSetPinDirection(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8Directio
 }
 
 u8 DIO_u8GetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy) {
-	u8 u8Value;
+	u8 u8Value = 0;
 	switch(u8PortNumberCpy) {
 		case DIO_PORTA:
 			u8Value = GET_BIT(PINA,u8PinNumberCpy);
@@ -168,4 +182,9 @@ void DIO_vidTogglePin(u8 u8PortNumberCpy, u8 u8PinNumberCpy) {
 			TOGGLE_BIT(PORTD,u8PinNumberCpy);
 			break;
 	}
+}
+
+void DIO_vidSetPullUpOnPin(u8 u8PortNumber, u8 u8PinNumber) {
+	DIO_vidSetPinDirection(u8PinNumber,u8PinNumber,DIO_INPUT);
+	DIO_vidSetPinValue(u8PortNumber,u8PinNumber,STD_HIGH);
 }

@@ -17,4 +17,8 @@
 #define PORTD *((u8*) 0x32)
 #define PIND *((u8*) 0x30)
 
+#define DDRE *((u8*) 0x022)
+#define PORTE *((u8*) 0x23)
+#define PINE *((u8*) 0x21)
+
 #endif

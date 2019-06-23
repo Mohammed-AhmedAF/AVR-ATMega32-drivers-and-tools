@@ -12,6 +12,8 @@
 #define DIO_PORTB 1
 #define DIO_PORTC 2
 #define DIO_PORTD 3
+#define DIO_PORTE 4
+#define DIO_PORTF 5
 
 #define DIO_PIN0 0
 #define DIO_PIN1 1
@@ -50,5 +52,7 @@ void DIO_vidSetPinDirection(u8 u8PortNumberCpy, u8 u8PinNumberCpy, u8 u8Directio
 u8 DIO_u8GetPinValue(u8 u8PortNumberCpy, u8 u8PinNumberCpy);
 
 void DIO_vidTogglePin(u8,u8);
+
+void DIO_vidSetPullUpOnPin(u8 u8PortNumber,u8 u8PinNumber);
 
 #endif
