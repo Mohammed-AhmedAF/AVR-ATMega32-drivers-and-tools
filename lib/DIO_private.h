@@ -1,6 +1,7 @@
 #ifndef _DIO_PRIVATE_H
 #define _DIO_PRIVATE_H
 
+/*Register definitions*/
 #define DDRA *((u8*) 0x3A)
 #define PORTA *((u8*) 0x3B)
 #define PINA *((u8*) 0x39)
@@ -20,5 +21,13 @@
 #define DDRE *((u8*) 0x22)
 #define PORTE *((u8*) 0x23)
 #define PINE *((u8*) 0x21)
+
+#define DDRF *((u8*) 0x61)
+#define PORTF *((u8*) 0x62)
+#define PINF *((u8*) 0x20)
+
+#define DDRG *((u8*) 0x64)
+#define PORTG *((u8*) 0x65)
+#define PING *((u8*) 0x63)
 
 #endif
