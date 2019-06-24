@@ -469,7 +469,7 @@ void INTERRUPTS_vidSetSenseControl(u8 u8ExtInterruptNumCpy,u8 u8SenseControlCpy)
 
 #ifdef ST_MC_ATMEGA1632
 u8 INTERRUPTS_u8CheckExtInterruptFlag(u8 u8ExtInterruptNumCpy) {
-	switch(u8ExtInterruptNumCpy)/
+	switch(u8ExtInterruptNumCpy)
 	{
 		case INTERRUPTS_INT_0:
 			return GET_BIT(GIFR,6);
@@ -579,6 +579,7 @@ ISR(INT2_vect) {
 }
 #endif
 
+#ifdef ST_MC_ATMEGA128
 #ifdef EXTERNAL_INTERRUPT_3
 ISR(INT3_vect) {
 	ISR_pt[EXTERNAL_INTERRUPT_3]();
@@ -607,6 +608,7 @@ ISR(INT6_vect) {
 ISR(INT7_vect) {
 	ISR_pt[EXTERNAL_INTERRUPT_7]();
 }
+#endif
 #endif
 
 #ifdef TIMER0_OVF_VECT
