@@ -81,17 +81,17 @@ void LCD_vidWriteCharacter(u8 charCpy) {
 }
 
 void LCD_vidWriteString(s8 * s8String) {	
-	while(*s8String != '\0') {
+	do {
 		LCD_vidWriteCharacter(*s8String);
-		*(s8String++);
-	}
+		(s8String++);
+	}while(*s8String != '\0');
 }
 
 void LCD_vidWriteSizedString(s8 * s8String,u8 u8sizeCpy) {	
 	u8 i = 0;
 	do {
 		LCD_vidWriteCharacter(*s8String);
-		*(s8String++);
+		(s8String++);
 		i++;
 	}while(u8sizeCpy > i);
 }
@@ -104,7 +104,7 @@ void LCD_vidBlinkString(s8 * s8stringCpy,u8 u8timesCpy) {
 		_delay_ms(500);	
 		while(*s8string != '\0') {
 			LCD_vidWriteCharacter(*s8string);
-			*(s8string++);
+			(s8string++);
 		}
 		_delay_ms(500);
 		i++;
@@ -133,7 +133,7 @@ void LCD_vidWriteNumber(u16 u16NumberCpy) {
 
 void LCD_vidGoToXY(u8 u8xCpy, u8 u8yCpy) {
 	#define LCD_SET_CURSOR_LOCATION 0x80
-	u8 u8address;
+	u8 u8address = u8xCpy;
 	switch(u8yCpy) {
 		case 0:
 			u8address = u8xCpy;
