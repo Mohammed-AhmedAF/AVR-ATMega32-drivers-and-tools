@@ -8,14 +8,14 @@
 #define LCD_DATA_PORT DIO_PORTA
 #define LCD_CTRL_PORT DIO_PORTB
 
-#define LCD_D0 0
-#define LCD_D1 1
-#define LCD_D2 2
-#define LCD_D3 3
-#define LCD_D4 4
-#define LCD_D5 5
-#define LCD_D6 6
-#define LCD_D7 7
+#define LCD_D0 DIO_PIN0
+#define LCD_D1 DIO_PIN1
+#define LCD_D2 DIO_PIN2
+#define LCD_D3 DIO_PIN3
+#define LCD_D4 DIO_PIN4
+#define LCD_D5 DIO_PIN5
+#define LCD_D6 DIO_PIN6
+#define LCD_D7 DIO_PIN7
 
 #define LCD_8MODE_2L 0x38
 #define LCD_ON_NOCURSOR 0x0C
@@ -29,9 +29,9 @@
 
 #define LCD_MOVE_CURSOR_LEFT 0x14
 
-#define LCD_E 2
-#define LCD_RW 1
-#define LCD_RS 0
+#define LCD_E DIO_PIN2
+#define LCD_RW DIO_PIN1
+#define LCD_RS DIO_PIN0
 
 /*Macros defined to be used with the GoTOXY function*/
 #define LCD_XPOS0 0
