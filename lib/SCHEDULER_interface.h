@@ -14,6 +14,9 @@
 #define SCHEDULER_NULLTASK 0
 #define SCHEDULER_TASKSTATE_RUNNING 1
 #define SCHEDULER_TASKSTATE_STOPPED 0
+#define SCHEDULER_GLOBALINTERRUPT_RAISED 1
+#define SCHEDULER_GLOBALINTERRUPT_LOWERED 0
+
 
 /*Task definitions*/
 #define SCHEDULER_TASK0 0
@@ -38,7 +41,7 @@ typedef struct {
 
 
 
-void SCHEDULER_vidInit(void);
+void SCHEDULER_vidInit(u8);
 void SCHEDULER_vidCountOneTick(void);
 void SCHEDULER_vidSchedule(void);
 void SCHEDULER_vidCreateTask(Task_Type *,u8);

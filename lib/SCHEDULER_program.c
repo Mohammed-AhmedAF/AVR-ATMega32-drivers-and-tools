@@ -17,11 +17,17 @@ Task_Type * Tasks_Array[SCHEDULER_MAXTASKS];
 
 volatile u8 u8OVFCount;
 
-void SCHEDULER_vidInit(void) {
+void SCHEDULER_vidInit(u8 u8GlobalInterruptFlag) {
 	TIMER0_vidInit(TIMER0_WGM_NORMAL,TIMER0_COM_NORMAL,TIMER0_CLK_1);
 	
 	INTERRUPTS_vidEnableInterrupt(INTERRUPTS_TIMER0_OVF);
 	INTERRUPTS_vidPutISRFunction(TIMER0_OVF_VECT,SCHEDULER_vidCountOneTick);
+	
+	if (u8GlobalInterruptFlag == SCHEDULER_GLOBALINTERRUPT_RAISED) {
+		INTERRUPTS_vidSetGlobalInterruptFlag();
+	}
+	else {
+	}
 	
 }
 
