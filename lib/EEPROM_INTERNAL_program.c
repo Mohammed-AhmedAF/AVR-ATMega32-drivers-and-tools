@@ -39,7 +39,7 @@ u8 EEPROM_INTERNAL_u8ReadByte(u16 u16Address) {
 	EEARL = u16Address;
 	
 	/*Start EEPROM read by writing EEMWE*/
-	SET_BIT(EECR,EEMWE);
+	SET_BIT(EECR,EERE);
 	
 	/*Return data from  data register*/
 	return EEDR;
