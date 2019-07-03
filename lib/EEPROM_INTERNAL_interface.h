@@ -11,6 +11,7 @@
 
 void EEPROM_INTERNAL_vidWriteByte(u16 u16Address, u8 u8Data);
 u8 EEPROM_INTERNAL_u8ReadByte(u16 u16Address);
+void EEPROM_INTERNAL_vidWriteByte_test(u16 u16Address, u8 u8Data);
 
 
 
