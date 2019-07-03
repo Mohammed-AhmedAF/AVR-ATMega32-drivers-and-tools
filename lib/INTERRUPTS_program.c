@@ -563,100 +563,100 @@ void INTERRUPTS_vidClearInterruptFlag(u8 u8InterruptID) {
 
 #ifdef EXTERNAL_INTERRUPT_0
 ISR(INT0_vect) {
-	ISR_pt[EXTERNAL_INTERRUPT_0]();
+	ISR_pt[INTERRUPTS_INT_0]();
 }
 #endif
 
 #ifdef EXTERNAL_INTERRUPT_1
 ISR(INT1_vect) {
-	ISR_pt[EXTERNAL_INTERRUPT_1]();
+	ISR_pt[INTERRUPTS_INT_1]();
 }
 #endif
 
 #ifdef EXTERNAL_INTERRUPT_2
 ISR(INT2_vect) {
-	ISR_pt[EXTERNAL_INTERRUPT_2]();
+	ISR_pt[INTERRUPTS_INT_2]();
 }
 #endif
 
 #ifdef ST_MC_ATMEGA128
 #ifdef EXTERNAL_INTERRUPT_3
 ISR(INT3_vect) {
-	ISR_pt[EXTERNAL_INTERRUPT_3]();
+	ISR_pt[INTERRUPTS_INT_3]();
 }
 #endif
 
 #ifdef EXTERNAL_INTERRUPT_4
 ISR(INT4_vect) {
-	ISR_pt[EXTERNAL_INTERRUPT_4]();
+	ISR_pt[INTERRUPTS_INT_4]();
 }
 #endif
 
 #ifdef EXTERNAL_INTERRUPT_5
 ISR(INT5_vect) {
-	ISR_pt[EXTERNAL_INTERRUPT_5]();
+	ISR_pt[INTERRUPTS_INT_5]();
 }
 #endif
 
 #ifdef EXTERNAL_INTERRUPT_6
 ISR(INT6_vect) {
-	ISR_pt[EXTERNAL_INTERRUPT_6]();
+	ISR_pt[INTERRUPTS_INT_6]();
 }
 #endif
 
 #ifdef EXTERNAL_INTERRUPT_7
 ISR(INT7_vect) {
-	ISR_pt[EXTERNAL_INTERRUPT_7]();
+	ISR_pt[INTERRUPTS_INT_7]();
 }
 #endif
 #endif
 
 #ifdef TIMER0_OVF_VECT
 ISR(TIMER0_OVF_vect) {
-	ISR_pt[TIMER0_OVF_VECT]();
+	ISR_pt[INTERRUPTS_TIMER0_OVF]();
 }
 #endif
 
 #ifdef TIMER0_COMP_VECT
 ISR(TIMER0_COMP_vect) {
-	ISR_pt[TIMER0_COMP_VECT]();
+	ISR_pt[INTERRUPTS_TIMER0_OC]();
 }
 #endif
 
 #ifdef TIMER2_OVF_VECT
 ISR(TIMER2_OVF_vect) {
-	ISR_pt[TIMER2_OVF_VECT]();
+	ISR_pt[INTERRUPTS_TIMER2_OVF]();
 }
 #endif
 
 #ifdef TIMER2_COMP_VECT
 ISR(TIMER2_COMP_vect) {
-	ISR_pt[TIMER2_COMP_VECT]();
+	ISR_pt[INTERRUPTS_TIMER2_OC]();
 }
 #endif
 
 #ifdef TIMER1_COMPA_VECT
 ISR(TIMER1_COMPA_vect) {
-	ISR_pt[TIMER1_COMPA_VECT]();
+	ISR_pt[INTERRUPTS_TIMER1_OC_A]();
 }
 #endif
 
 #ifdef TIMER1_COMPB_VECT
 ISR(TIMER1_COMPB_vect) {
-	ISR_pt[TIMER1_COMPB_VECT]();
+	ISR_pt[INTERRUPTS_TIMER1_OC_B]();
 }
 #endif
 
 #ifdef TIMER1_CAPT_VECT
 
 ISR(TIMER1_CAPT_vect) {
-	ISR_pt[TIMER1_CAPT_VECT]();
+	ISR_pt[INTERRUPTS_TIMER1_ICP]();
 }
 #endif
 
 #ifdef TIMER1_OVF_VECT
 ISR(TIMER1_OVF_vect) {
-	ISR_pt[TIMER1_OVF_VECT]();
+	ISR_pt[INTERRUPTS_TIMER1_OVF]();
 }
 #endif
 
@@ -664,46 +664,46 @@ ISR(TIMER1_OVF_vect) {
 #ifdef ST_MC_ATMEGA1632
 #ifdef USART_RXC_VECT
 ISR(USART_RXC_vect) {
-	ISR_pt[USART_RXC_VECT]();
+	ISR_pt[INTERRUPTS_USART_RXC]();
 }
 #endif
 
 #ifdef USART_TXC_VECT
 ISR(USART_TXC_vect) {
-	ISR_pt[USART_TXC_VECT]();
+	ISR_pt[INTERRUPTS_USART_TXC]();
 }
 #endif
 
 #ifdef USART_UDRE_VECT
 ISR(USART_UDRE_vect) {
-	ISR_pt[USART_RXC_VECT]();
+	ISR_pt[INTERRUPTS_USART_UDRE]();
 }
 #endif
 #endif
 
 #ifdef SPI_STC_VECT
 ISR(SPI_STC_vect) {
-	ISR_pt[SPI_STC_VECT]();
+	ISR_pt[INTERRUPTS_SPI_STC]();
 }
 #endif
 
 #ifdef TWI_VECT
 ISR(TWI_vect) {
-	ISR_pt[TWI_VECT]();
+	ISR_pt[INTERRUPTS_TWI]();
 }
 #endif
 
 #ifdef ADC_VECT
 ISR(ADC_vect) 
 {
-	ISR_pt[ADC_VECT]();
+	ISR_pt[INTERRUPTS_ADC_CONVCOMPLETE]();
 }
 #endif
 
 #ifdef ST_MC_ATMEGA1632
 #ifdef ANALOG_COMP_VECT
 ISR(ANA_COMP_vect) {
-	ISR_pt[ANALOG_COMP_VECT]();
+	ISR_pt[INTERRUPTS_ANALOG_COMP]();
 }
 #endif
 
