@@ -11,9 +11,6 @@
 #include "INTERRUPTS_interface.h"
 #include "EEPROM_INTERNAL_private.h"
 #include "EEPROM_INTERNAL_interface.h"
-#include <avr/eeprom.h>
-#include <avr/interrupt.h>
-#include <util/delay.h>
 
 void EEPROM_INTERNAL_vidWriteByte(u16 u16Address, u8 u8Data) {
 	/*Wait for completion of previous write*/
@@ -44,8 +41,4 @@ u8 EEPROM_INTERNAL_u8ReadByte(u16 u16Address) {
 	
 	/*Return data from  data register*/
 	return EEDR;
-}
-
-void EEPROM_INTERNAL_vidWriteByte_test(u16 u16Address, u8 u8Data) {
-	eeprom_write_byte(u16Address,u8Data);
 }
