@@ -24,7 +24,6 @@ void EEPROM_INTERNAL_vidWriteByte(u16 u16Address, u8 u8Data) {
 	/*Put data in data register*/
 	EEDR = u8Data;
 	/*Preparing write operation by setting logical one to EEMWE*/
-	cli();
 	asm("SBI 0x1C,2");
 	//SET_BIT(EECR,EEMWE);
 	/*Starting write operation*/
