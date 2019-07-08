@@ -156,10 +156,10 @@ u8 ADC_u8GetADCH(void) {
 
 u8 ADC_u8GetValue(void) {
 	ADC_vidStartConversion();
-	if(GET_BIT(ADCSRA,4) == 0) {
+	if(GET_BIT(ADCSRA,4) == 1) {
 		SET_BIT(ADCSRA,4);
-		return ADCH;
 	}
+	return ADCH;
 }
 
 
