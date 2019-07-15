@@ -2,7 +2,6 @@
  * SCHEDULER_program.c
  *
  * Created: 6/25/2019 2:49:18 PM
- *  Author: Admin
  */ 
 
 #include "Std_Types.h"
