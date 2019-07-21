@@ -13,9 +13,18 @@
 #define IC74165_CLKINH_PORT DIO_PORTB
 #define IC74165_CLKINH_PIN DIO_PIN0
 
+typedef struct  {
+	u8 u8CLKINH_Port;
+	u8 u8CLKINH_Pin;
+	u8 u8SHLD_Port;
+	u8 u8SHLD_Pin;
+	}IC165_t;
+
 
 void IC74165_vidInit(void);
+void IC74165_vidInitExtended(IC165_t *);
 u8 IC74165_u8GetByte(void);
+u8 IC74165_u8GetByteExtended(IC165_t *);
 
 
 
