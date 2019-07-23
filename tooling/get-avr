@@ -5,7 +5,7 @@
 # Purpose: This is a script that delivers modules
 # on demand to the working directory
 
-AVR_LIB_PATH=$HOME/programming/imt/lib
+AVR_LIB_PATH=$HOME/programming/avr-lib/lib
 
 while getopts 'h' OPTIONS; do
 	case $OPTIONS in
@@ -36,7 +36,7 @@ else
 			cp $AVR_LIB_PATH/Macros.h ./
 		elif [[ $i = "dio" || $i = "DIO " ]]
 		then
- 			cp $AVR_LIB_PATH/DIO_prog.c ./
+ 			cp $AVR_LIB_PATH/DIO_program.c ./
  			cp $AVR_LIB_PATH/DIO_interface.h ./
 			cp $AVR_LIB_PATH/DIO_private.h ./
  			cp $AVR_LIB_PATH/Std_Types.h ./
@@ -47,9 +47,9 @@ else
 			cp $AVR_LIB_PATH/LCD_interface.h ./
 		elif [[ $i = "key" || $i = "keypad" ]]
 		then
-			cp $AVR_LIB_PATH/KEYPAD_prog.c ./
+			cp $AVR_LIB_PATH/KEYPAD_program.c ./
 			cp $AVR_LIB_PATH/KEYPAD_interface.h ./
-			cp $AVR_LIB_PATH/SERVICES_prog.c  ./
+			cp $AVR_LIB_PATH/SERVICES_program.c  ./
 			cp $AVR_LIB_PATH/SERVICES_interface.h ./
 		elif [[ $i = "eeprom" || $i = "EEPROM" ]]
 		then 
@@ -77,34 +77,34 @@ else
 			cp $AVR_LIB_PATH/StepperMotor_interface.h ./
 		elif [[ $i = "timer0" || $i = "TIMER0" ]]
 		then
-			cp $AVR_LIB_PATH/TIMER0_prog.c ./
+			cp $AVR_LIB_PATH/TIMER0_program.c ./
 			cp $AVR_LIB_PATH/TIMER0_interface.h ./
 			cp $AVR_LIB_PATH/TIMER0_private.h ./
 		elif [[ $i = "timer1" || $i = "TIMER1" ]] 
 		then 
-			cp $AVR_LIB_PATH/TIMER1_prog.c ./
+			cp $AVR_LIB_PATH/TIMER1_program.c ./
 			cp $AVR_LIB_PATH/TIMER1_interface.h ./
 			cp $AVR_LIB_PATH/TIMER1_private.h ./
 		elif [[ $i = "timer2" || $i = "TIMER2" ]]
 		then
-			cp $AVR_LIB_PATH/TIMER2_prog.c ./
+			cp $AVR_LIB_PATH/TIMER2_program.c ./
 			cp $AVR_LIB_PATH/TIMER2_interface.h ./
 		elif [[ $i = "interrupts" || $i = "INTERRUPTS" || $i = "interrupt" ]]
 		then
-			cp $AVR_LIB_PATH/INTERRUPTS_prog.c ./
+			cp $AVR_LIB_PATH/INTERRUPTS_program.c ./
 			cp $AVR_LIB_PATH/INTERRUPTS_interface.h ./
 		elif [[ $i = "adc" || $i = "ADC" ]]
 		then
-			cp $AVR_LIB_PATH/ADC_prog.c ./
+			cp $AVR_LIB_PATH/ADC_program.c ./
 			cp $AVR_LIB_PATH/ADC_interface.h ./
 		elif [[ $i = "spi" || $i = "SPI" ]]
 		then
-			cp $AVR_LIB_PATH/SPI_prog.c ./
+			cp $AVR_LIB_PATH/SPI_program.c ./
 			cp $AVR_LIB_PATH/SPI_interface.h ./
 			cp $AVR_LIB_PATH/SPI_private.h ./
 		elif [[ $i = "services" || $i = "SERVICES" ]]
 		then
-			cp $AVR_LIB_PATH/SERVICES_prog.c ./
+			cp $AVR_LIB_PATH/SERVICES_program.c ./
 			cp $AVR_LIB_PATH/SERVICES_interface.h ./
 
 		else
