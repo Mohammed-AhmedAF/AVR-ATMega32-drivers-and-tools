@@ -55,17 +55,22 @@ else
 		then 
 			cp $AVR_LIB_PATH/EEPROM_prog.c ./
 			cp $AVR_LIB_PATH/EEPROM_interface.h ./
+		elif [[ $i = "internal-eeprom" || $i = "InternalEEPROM" ]]
+		then
+			cp $AVR_LIB_PATH/EEPROM_INTERNAL_program.c ./
+			cp $AVR_LIB_PATH/EEPROM_INTERNAL_interface.h ./
+			cp $AVR_LIB_PATH/EEPROM_INTERNAL_private.h ./
 		elif [[ $i = "rto" ]]
 		then
 			cp $AVR_LIB_PATH/RTO_prog.c ./
 			cp $AVR_LIB_PATH/RTO_interface.h ./
 		elif [[ $i = "twi" || $i = "TWI" ]]
 		then
-			cp $AVR_LIB_PATH/TWI_prog.c ./
+			cp $AVR_LIB_PATH/TWI_program.c ./
 			cp $AVR_LIB_PATH/TWI_interface.h ./
 		elif [[ $i = "uart" || $i = "UART" ]]
 		then
-			cp $AVR_LIB_PATH/UART_prog.c ./
+			cp $AVR_LIB_PATH/UART_program.c ./
 			cp $AVR_LIB_PATH/UART_interface.h ./
 		elif [[ $i = "7s" ]]
 		then
