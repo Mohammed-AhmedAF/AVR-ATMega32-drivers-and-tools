@@ -38,12 +38,12 @@ u8 EEPROM_u8WriteByte(u16 u16Location,u8 u8ByteCpy)
 				if(TWI_u8CheckAck(DATA_TX_ACK)==1)
 				{
 					TWI_vidSendStop();
-					return 1;
+					return EEPROM_STATUS_SUCCESS;
 				}
 			}
 		}
 	}
-	return 0;
+	return EEMPORM_STATUS_FAIL;
 }
 
 u8 EEPROM_u8ReadByte(u16 u16LocationCpy,u8 * u8DataCpy)
@@ -70,13 +70,13 @@ u8 EEPROM_u8ReadByte(u16 u16LocationCpy,u8 * u8DataCpy)
 					if(TWI_u8CheckAck(SLA_R_ACK) == 1) {
 						*u8DataCpy = TWI_u8ReceiveWithNoAck();
 						TWI_vidSendStop();
-						return 1;
+						return EEPROM_STATUS_SUCCESS;
 					}
 				}
 			}
 		}
 	}
-	return 0;
+	return EEPROM_STATUS_FAIL;
 }
 
 
