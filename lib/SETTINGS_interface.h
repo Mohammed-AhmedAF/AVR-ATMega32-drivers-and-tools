@@ -1,6 +1,7 @@
 /*
  * SETTINGS_interface.h
- *
+ * Purpose: To be used as a holder of various macros that define certain
+	    configurations of various microcontroller peripherals.
  * Created: 5/16/2019 11:14:43 AM
  */ 
 
