@@ -53,13 +53,17 @@ else
 			cp $AVR_LIB_PATH/SERVICES_interface.h ./
 		elif [[ $i = "eeprom" || $i = "EEPROM" ]]
 		then 
-			cp $AVR_LIB_PATH/EEPROM_prog.c ./
-			cp $AVR_LIB_PATH/EEPROM_interface.h ./
+			cp $AVR_LIB_PATH/EEPROM_EXTERNAL_program.c ./
+			cp $AVR_LIB_PATH/EEPROM_EXTERNAL_interface.h ./
 		elif [[ $i = "internal-eeprom" || $i = "InternalEEPROM" ]]
 		then
 			cp $AVR_LIB_PATH/EEPROM_INTERNAL_program.c ./
 			cp $AVR_LIB_PATH/EEPROM_INTERNAL_interface.h ./
 			cp $AVR_LIB_PATH/EEPROM_INTERNAL_private.h ./
+		elif [[ $i = "scheduler" || $i = "SCHEDULER" ]]
+		then
+			cp $AVR_LIB_PATH/SCHEDULER_program.c ./
+			cp $AVR_LIB_PATH/SCHEDULER_interface.h ./
 		elif [[ $i = "rto" ]]
 		then
 			cp $AVR_LIB_PATH/RTO_prog.c ./
@@ -111,7 +115,9 @@ else
 		then
 			cp $AVR_LIB_PATH/SERVICES_program.c ./
 			cp $AVR_LIB_PATH/SERVICES_interface.h ./
-
+		elif [[ $i = "settings" || $i = "SETTINGS" ]]
+		then 
+			cp $AVR_LIB_PATH/SETTINGS_interface.h ./
 		else
 			echo "Error: Could not process $i."
 		fi
