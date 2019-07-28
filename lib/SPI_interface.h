@@ -9,6 +9,7 @@ void SPI_vidInitMaster(void);
 void SPI_vidEnableSS(void);
 void SPI_vidDisableSS(void);
 void SPI_vidTransferByte(u8);
+u8 SPI_u8ReceiveByte(void);
 void SPI_vidEnableInterrupt(void);
 void SPI_vidDisableInterrupt(void);
 

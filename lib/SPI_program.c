@@ -40,7 +40,13 @@ void SPI_vidTransferByte(u8 u8ByteCpy) {
 }
 
 
-void SPI_vidEnableInterrupt(void) {
+u8 SPI_u8ReceiveByte(void) {
+	SPDR = 0xFE;
+	while(!(SPSR & (1<<7));
+	return SPDR;
+}
+
+oid SPI_vidEnableInterrupt(void) {
 	SET_BIT(SPCR,7);
 }
 
