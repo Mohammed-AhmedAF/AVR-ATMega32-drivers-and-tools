@@ -14,8 +14,8 @@
 yields readings with low error margins.
 */
 #define ST_PRESCALER_8
-#define ST_MC_ATMEGA128
-//#define ST_MC_ATMEGA1632
+//#define ST_MC_ATMEGA128
+#define ST_MC_ATMEGA1632
 
 /*Definition of various settings, only one 
 *can be used at a time
