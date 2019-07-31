@@ -40,7 +40,7 @@ void SCHEDULER_vidSchedule(void) {
 		if (Tasks_Array[u8TaskIndex] != SCHEDULER_NULLTASK) {
 			if (Tasks_Array[u8TaskIndex]->u8State == SCHEDULER_TASKSTATE_RUNNING) {
 				if (Tasks_Array[u8TaskIndex]->u16FirstDelay == 0) {
-					Tasks_Array[u8TaskIndex]->ptrfun();
+					Tasks_Array[u8TaskIndex]->ptrFun();
 					Tasks_Array[u8TaskIndex]->u16FirstDelay = Tasks_Array[u8TaskIndex]->u16Periodicity-1;					
 				}
 				else {

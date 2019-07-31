@@ -36,7 +36,7 @@
 typedef struct {
 	u16 u16FirstDelay;
 	u16  u16Periodicity; //If u16Periodicity = 0, then it will not repeat
-	void (*ptrfun)(void);
+	void (*ptrFun)(void);
 	u8 u8State;
 } Task_Type; 
 
