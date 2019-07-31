@@ -55,8 +55,8 @@ void UART_vidInitExtended(u8 u8ChannelNumber) {
 		SET_BIT(UCSR0C,3);
 		/*Character size*/
 		CLEAR_BIT(UCSR0B,2);
-		SET_BIT(UCSR0B,2);
-		SET_BIT(UCSR0B,1);
+		SET_BIT(UCSR0C,2);
+		SET_BIT(UCSR0C,1);
 		/*Selecting baudrate*/
 		UBRR0H = 0;
 		UBRR0L = 51;
@@ -72,11 +72,11 @@ void UART_vidInitExtended(u8 u8ChannelNumber) {
 		SET_BIT(UCSR1C,3);
 		/*Character size*/
 		CLEAR_BIT(UCSR1B,2);
-		SET_BIT(UCSR1B,2);
-		SET_BIT(UCSR1B,1);
+		SET_BIT(UCSR1C,2);
+		SET_BIT(UCSR1C,1);
 		/*Selecting baudrate*/
 		UBRR1H = 0;
-		UBRR1L = 51;
+		UBRR1L = 103;
 	}
 }
 #endif
@@ -116,9 +116,11 @@ u8 UART_u8ReceiveByteExtended(u8 u8ChannelNumber) {
 		case UART_CHANNEL0:
 			while (GET_BIT(UCSR0A,7) == 0);
 			return UDR0;
+		break;
 		case UART_CHANNEL1:
 			while (GET_BIT(UCSR1A,7) == 0);
 			return UDR1;
+		break;
 	}
 }
 #endif
