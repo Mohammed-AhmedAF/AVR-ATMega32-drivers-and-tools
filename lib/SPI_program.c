@@ -10,10 +10,10 @@
 
 void SPI_vidInitMaster(void) {
 
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN5,DIO_OUTPUT); /*MOSI*/
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN6,DIO_INPUT); /*MISO*/
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN7,DIO_OUTPUT); /*SCK*/
-	DIO_vidSetPinDirection(DIO_PORTB,DIO_PIN4,DIO_OUTPUT); /*SS*/
+	DIO_vidSetPinDirection(SPI_MOSI_PORT,SPI_MOSI_PIN,DIO_OUTPUT); /*MOSI*/
+	DIO_vidSetPinDirection(SPI_MISO_PORT,SPI_MISO_PIN,DIO_INPUT); /*MISO*/
+	DIO_vidSetPinDirection(SPI_SCK_PORT,SPI_SCK_PIN,DIO_OUTPUT); /*SCK*/
+	DIO_vidSetPinDirection(SPI_SS_PORT,DIO_SS_PIN,DIO_OUTPUT); /*SS*/
 		
 	/*SPI control*/
 	
@@ -27,11 +27,11 @@ void SPI_vidInitMaster(void) {
 
 
 void SPI_vidEnableSS(void) {
-	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN4,STD_LOW);
+	DIO_vidSetPinValue(SPI_SS_PORT,SPI_SS_PIN,STD_LOW);
 }
 
 void SPI_vidDisableSS(void) {
-	DIO_vidSetPinValue(DIO_PORTB,DIO_PIN4,STD_HIGH);
+	DIO_vidSetPinValue(SPI_SS_PORT,SPI_SS_PIN4,STD_HIGH);
 }
 
 void SPI_vidTransferByte(u8 u8ByteCpy) {
