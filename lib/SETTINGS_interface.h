@@ -14,6 +14,8 @@
 yields readings with low error margins.
 */
 #define ST_PRESCALER_8
+
+/*Uncomment macro for the microcontroller used*/
 //#define ST_MC_ATMEGA128
 #define ST_MC_ATMEGA1632
 
