@@ -76,6 +76,7 @@ else
 		then
 			cp $AVR_LIB_PATH/UART_program.c ./
 			cp $AVR_LIB_PATH/UART_interface.h ./
+			cp $AVR_LIB_PATH/UART_private.h ./
 		elif [[ $i = "7s" ]]
 		then
 			cp $AVR_LIB_PATH/SevenSegment_prog.c ./
@@ -118,6 +119,14 @@ else
 		elif [[ $i = "settings" || $i = "SETTINGS" ]]
 		then 
 			cp $AVR_LIB_PATH/SETTINGS_interface.h ./
+		elif [[ $i = "ic595" || $i = "IC595" ]]
+		then
+			cp $AVR_LIB_PATH/IC74595_interface.h ./
+			cp $AVR_LIB_PATH/IC74595_program.c ./
+		elif [[ $i = "ic165" || $i = "IC165" ]]
+		then
+			cp $AVR_LIB_PATH/IC74165_interface.h ./
+			cp $AVR_LIB_PATH/IC74165_program.c ./
 		else
 			echo "Error: Could not process $i."
 		fi
