@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+#A script to change directory to the testing directory
+#Must be used with source .
+#Example usage: $. gtt
+
+cd ~/programming/avr-workspace/testing
