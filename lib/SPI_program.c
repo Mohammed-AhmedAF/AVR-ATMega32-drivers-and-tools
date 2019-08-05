@@ -13,7 +13,7 @@ void SPI_vidInitMaster(void) {
 	DIO_vidSetPinDirection(SPI_MOSI_PORT,SPI_MOSI_PIN,DIO_OUTPUT); /*MOSI*/
 	DIO_vidSetPinDirection(SPI_MISO_PORT,SPI_MISO_PIN,DIO_INPUT); /*MISO*/
 	DIO_vidSetPinDirection(SPI_SCK_PORT,SPI_SCK_PIN,DIO_OUTPUT); /*SCK*/
-	DIO_vidSetPinDirection(SPI_SS_PORT,DIO_SS_PIN,DIO_OUTPUT); /*SS*/
+	DIO_vidSetPinDirection(SPI_SS_PORT,SPI_SS_PIN,DIO_OUTPUT); /*SS*/
 		
 	/*SPI control*/
 	
@@ -31,7 +31,7 @@ void SPI_vidEnableSS(void) {
 }
 
 void SPI_vidDisableSS(void) {
-	DIO_vidSetPinValue(SPI_SS_PORT,SPI_SS_PIN4,STD_HIGH);
+	DIO_vidSetPinValue(SPI_SS_PORT,SPI_SS_PIN,STD_HIGH);
 }
 
 void SPI_vidTransferByte(u8 u8ByteCpy) {
@@ -42,11 +42,11 @@ void SPI_vidTransferByte(u8 u8ByteCpy) {
 
 u8 SPI_u8ReceiveByte(void) {
 	SPDR = 0xFE;
-	while(!(SPSR & (1<<7));
+	while(!(SPSR & (1<<7)));
 	return SPDR;
 }
 
-oid SPI_vidEnableInterrupt(void) {
+void SPI_vidEnableInterrupt(void) {
 	SET_BIT(SPCR,7);
 }
 
