@@ -1,7 +1,6 @@
 /*
  * SCHEDULER_program.c
  *
- * Created: 6/25/2019 2:49:18 PM
  */ 
 
 #include "Std_Types.h"
@@ -25,10 +24,24 @@ void SCHEDULER_vidInit(u8 u8GlobalInterruptFlag) {
 	if (u8GlobalInterruptFlag == SCHEDULER_GLOBALINTERRUPT_RAISED) {
 		INTERRUPTS_vidSetGlobalInterruptFlag();
 	}
-	else {
-	}
 	
 }
+
+void SCHEDULER_vidInitExpanded(u8 u8TimerMode,u8 u8CLKPrescaler,u8 u8OCRValue, u8 u8GlobalInterruptFlag) {
+	if (u8TimerMode == SCHEDULER_TIMER_MODE_CTC) {
+		TIMER0_vidSetOCRegister(u8OCRValue);	
+		TIMER0_vidInit(TIMER0_WGM_CTC,TIMER0_COM_NORMAL,u8CLKPrescaler);
+	}
+	else {
+		TIMER0_vidInit(TIMER0_WGM_NORMAL,TIMER0_COM_NORMAL,u8CLKPrescaler);
+	}
+
+	if (u8GlobalInterruptFlag == SCHEDULER_GLOBALINTERRUPT_RAISED) {
+		INTERRUPTS_vidSetGlobalInterruptFlag();
+	}
+
+}
+
 
 void SCHEDULER_vidCreateTask(Task_Type * task, u8 u8TaskPriority) {
 	Tasks_Array[u8TaskPriority] = task;
@@ -40,7 +53,9 @@ void SCHEDULER_vidSchedule(void) {
 		if (Tasks_Array[u8TaskIndex] != SCHEDULER_NULLTASK) {
 			if (Tasks_Array[u8TaskIndex]->u8State == SCHEDULER_TASKSTATE_RUNNING) {
 				if (Tasks_Array[u8TaskIndex]->u16FirstDelay == 0) {
-					Tasks_Array[u8TaskIndex]->ptrFun();
+					INTERRUPTS_vidClearGlobalInterruptFlag();
+					Tasks_Array[u8TaskIndex]->ptrfun();
+					INTERRUPTS_vidSetGlobalInterruptFlag();
 					Tasks_Array[u8TaskIndex]->u16FirstDelay = Tasks_Array[u8TaskIndex]->u16Periodicity-1;					
 				}
 				else {
