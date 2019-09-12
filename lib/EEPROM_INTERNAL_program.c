@@ -17,7 +17,8 @@ void EEPROM_INTERNAL_vidWriteByte(u16 u16Address, u8 u8Data) {
 	while(EECR & (1<<EEWE));
 
 	/*Put address in address register*/
-	EEAR = u16Address;
+	EEARH = u16Address>>8;
+	EEARL = u16Address;
 	/*Put data in data register*/
 	EEDR = u8Data;
 	/*Preparing write operation by setting logical one to EEMWE*/
@@ -35,7 +36,8 @@ u8 EEPROM_INTERNAL_u8ReadByte(u16 u16Address) {
 	while(SPMCR & (1<<SPMEN));
 	
 	/*Put address of data to be read in register*/
-	EEAR = u16Address;
+	EEARH = u16Address>>8;
+	EEARL = u16Address;
 	/*Start EEPROM read by writing EEMWE*/
 	SET_BIT(EECR,EERE);
 	
