@@ -39,6 +39,96 @@ void UART_vidInit(void) {
 	UBRRL = 51;
 }
 
+void UART_vidInitExpanded(UARTConfig_t * UARTConfig)
+{
+	switch(UARTConfig->u8RxTxEnable)
+	{
+		case UART_ENABLE_TXRX:
+			SET_BIT(UCSRB,4);
+			SET_BIT(UCSRB,3);
+			break;
+		case UART_ENABLE_TX:
+			SET_BIT(UCSRB,3);
+			break;
+		case UART_ENABLE_RX:
+			SET_BIT(UCSRB,4);
+			break;
+		default:
+			SET_BIT(UCSRB,4);
+			SET_BIT(UCSRB,3);
+	}
+	
+	switch (UARTConfig->u8ParityBits)
+	{
+		case UART_PARITYBITS_DISABLED:
+			CLEAR_BIT(UCSRC,5);
+			CLEAR_BIT(UCSRC,4);
+			break;
+		case UART_PARITYBITS_EVEN:
+			SET_BIT(UCSRC,5);
+			CLEAR_BIT(UCSRC,4);
+			break;
+		case UART_PARITYBITS_ODD:
+			SET_BIT(UCSRC,5);
+			SET_BIT(UCSRC,4);
+		default:
+			CLEAR_BIT(UCSRC,5);
+			CLEAR_BIT(UCSRC,4);
+	}
+
+	switch (UARTConfig->u8StopBits)
+	{
+		case UART_STOPBITS_1:
+			CLEAR_BIT(UCSRC,3);
+			break;
+		case UART_STOPBITS_2:
+			SET_BIT(UCSRC,3);
+			break;
+		default:
+			CLEAR_BIT(UCSRC,3);
+	}
+
+	switch (UARTConfig->u8CharacterSize)
+	{
+		case UART_CHARSIZE_5:
+			CLEAR_BIT(UCSRB,2);
+			CLEAR_BIT(UCSRC,2);
+			CLEAR_BIT(UCSRC,1);
+			break;
+		case UART_CHARSIZE_6:
+			CLEAR_BIT(UCSRB,2);
+			CLEAR_BIT(UCSRC,2);
+			SET_BIT(UCSRC,1);
+			break;
+		case UART_CHARSIZE_7:
+			CLEAR_BIT(UCSRB,2);
+			CLEAR_BIT(UCSRC,2);
+			SET_BIT(UCSRC,1);
+			break;
+		case UART_CHARSIZE_8:
+			CLEAR_BIT(UCSRB,2);
+			CLEAR_BIT(UCSRC,2);
+			SET_BIT(UCSRC,1);
+			break;
+		case UART_CHARSIZE_9:
+			SET_BIT(UCSRB,2);
+			SET_BIT(UCSRC,2);
+			SET_BIT(UCSRC,1);
+			break;
+		default:
+			CLEAR_BIT(UCSRB,2);
+			CLEAR_BIT(UCSRB,2);
+			SET_BIT(UCSRB,1);
+			break;
+	}
+
+	//Selecting UBRRH
+	UBRRH = 0;
+	UBRRL = 51;
+
+
+}
+
 void UART_vidSendByte(u8 u8byteCpy) {
 	while (GET_BIT(UCSRA,5) == 0); //Checking the UART Data Register Empty (UDRE) bit
 	UDR = u8byteCpy;
