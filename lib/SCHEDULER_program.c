@@ -31,10 +31,15 @@ void SCHEDULER_vidInitExpanded(u8 u8TimerMode,u8 u8CLKPrescaler,u8 u8OCRValue, u
 	if (u8TimerMode == SCHEDULER_TIMER_MODE_CTC) {
 		TIMER0_vidSetOCRegister(u8OCRValue);	
 		TIMER0_vidInit(TIMER0_WGM_CTC,TIMER0_COM_NORMAL,u8CLKPrescaler);
+		INTERRUPTS_vidEnableInterrupt(INTERRUPTS_TIMER0_COMP);
+		INTERRUPTS_vidPutISRFunction(INTERRUPTS_TIMER0_COMP,SCHEDULER_vidCountOneTick);
 	}
 	else {
+		INTERRUPTS_vidEnableInterrupt(INTERRUPTS_TIMER0_OVF);
+		INTERRUPTS_vidPutISRFunction(INTERRUPTS_TIMER0_OVF,SCHEDULER_vidCountOneTick);
 		TIMER0_vidInit(TIMER0_WGM_NORMAL,TIMER0_COM_NORMAL,u8CLKPrescaler);
-	}
+		}
+
 
 	if (u8GlobalInterruptFlag == SCHEDULER_GLOBALINTERRUPT_RAISED) {
 		INTERRUPTS_vidSetGlobalInterruptFlag();
@@ -53,15 +58,25 @@ void SCHEDULER_vidSchedule(void) {
 		if (Tasks_Array[u8TaskIndex] != SCHEDULER_NULLTASK) {
 			if (Tasks_Array[u8TaskIndex]->u8State == SCHEDULER_TASKSTATE_RUNNING) {
 				if (Tasks_Array[u8TaskIndex]->u16FirstDelay == 0) {
-					INTERRUPTS_vidClearGlobalInterruptFlag();
 					Tasks_Array[u8TaskIndex]->ptrfun();
-					INTERRUPTS_vidSetGlobalInterruptFlag();
 					Tasks_Array[u8TaskIndex]->u16FirstDelay = Tasks_Array[u8TaskIndex]->u16Periodicity-1;					
 				}
 				else {
 					Tasks_Array[u8TaskIndex]->u16FirstDelay--;
 				}
 			}
+		}
+	}
+}
+
+void SCHEDULER_vidDeleteTaskByAddress(Task_Type * TaskPtr)
+{
+	u8 u8TaskIndex;
+	for (u8TaskIndex = 0; u8TaskIndex < SCHEDULER_MAXTASKS; u8TaskIndex)
+	{
+		if (Tasks_Array[u8TaskIndex] == TaskPtr)
+		{
+			Tasks_Array[u8TaskIndex] == SCHEDULER_NULLTASK;
 		}
 	}
 }

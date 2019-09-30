@@ -9,8 +9,8 @@
 #ifndef _SCHEDULER_INTERFACE_H_
 #define _SCHEDULER_INTERFACE_H_
 
-#define SCHEDULER_ONETICK 25
-#define SCHEDULER_MAXTASKS 10
+#define SCHEDULER_ONETICK 5
+#define SCHEDULER_MAXTASKS 3
 #define SCHEDULER_NULLTASK 0
 #define SCHEDULER_TASKSTATE_RUNNING 1
 #define SCHEDULER_TASKSTATE_STOPPED 0
@@ -55,8 +55,9 @@ typedef struct {
 void SCHEDULER_vidInit(u8);
 void SCHEDULER_vidInitExpanded(u8 u8TimerMode, u8 u8CLKPrescaler, u8 u8OCRValue, u8 u8GlobalInterruptFlag);
 void SCHEDULER_vidCountOneTick(void);
-void SCHEDULER_vidSchedule(void);
+static inline void SCHEDULER_vidSchedule(void);
 void SCHEDULER_vidCreateTask(Task_Type *,u8);
+void SCHEDULER_vidDeleteTask(u8);
 
 
 #endif /* SCHEDULER_INTERFACE_H_ */
