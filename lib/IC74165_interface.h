@@ -14,10 +14,10 @@
 #define IC74165_CLKINH_PIN DIO_PIN0
 
 typedef struct  {
-	u8 u8CLKINH_Port;
-	u8 u8CLKINH_Pin;
-	u8 u8SHLD_Port;
-	u8 u8SHLD_Pin;
+	u8 u8CLKINH_Port : 4;
+	u8 u8CLKINH_Pin : 4;
+	u8 u8SHLD_Port : 4;
+	u8 u8SHLD_Pin : 4;
 	}IC165_t;
 
 
