@@ -42,6 +42,12 @@ void DIO_vidSetPortDirection(u8 u8PortNumberCpy, u8 u8DirectionCpy) {
 		case DIO_PORTE:
 			DDRE = u8DirectionCpy;
 			break;
+		case DIO_PORTF:
+			DDRF = u8DirectionCpy;
+			break;
+		case DIO_PORTG:
+			DDRG = u8DirectionCpy;
+			break;
 	}
 }
 
@@ -58,10 +64,16 @@ u8 DIO_u8GetPortValue(u8 u8PortNumberCpy) {
 			u8Value = PINC;
 			break;
 		case DIO_PORTD:
-			u8Value = PORTD;
+			u8Value = PIND;
 			break;
 		case DIO_PORTE:
-			u8Value = PORTE;
+			u8Value = PINE;
+			break;
+		case DIO_PORTF:
+			u8Value = PINF;
+			break;
+		case DIO_PORTG:
+			u8Value = PING;
 			break;
 	}
 	return u8Value;
