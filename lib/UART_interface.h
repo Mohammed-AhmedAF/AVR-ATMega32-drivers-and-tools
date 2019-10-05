@@ -30,6 +30,8 @@ void UART_vidInit(void);
 void UART_vidInitExpanded(UARTConfig_t *);
 void UART_vidSendByte(u8);
 u8 UART_u8ReceiveByte(void);
+u8 UART_u8GetReceivedByte(void);
 void UART_vidSendLine(void);
 void UART_vidSendString(u8 *);
+
 #endif

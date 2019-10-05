@@ -139,6 +139,11 @@ u8 UART_u8ReceiveByte(void) {
 	return UDR;
 }
 
+u8 UART_u8GetReceivedByte(void)
+{
+	return UDR;
+}
+
 void UART_vidSendString(u8 * u8pStringCpy) {
 	do {
 		UART_vidSendByte(*u8pStringCpy);
