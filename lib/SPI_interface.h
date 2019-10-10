@@ -6,6 +6,7 @@
 #define _SPI_INTERFACE_H
 
 void SPI_vidInitMaster(void);
+void SPI_vidInitSlave(void);
 void SPI_vidEnableSS(void);
 void SPI_vidDisableSS(void);
 void SPI_vidTransferByte(u8);
