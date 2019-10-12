@@ -72,3 +72,6 @@ void SPI_vidEnableInterrupt(void) {
 void SPI_vidDisableInterrupt(void) {
 	CLEAR_BIT(SPCR,7);
 }
+ Void test(void)
+{
+}
