@@ -71,6 +71,7 @@ void UART_vidInitExpanded(UARTConfig_t * UARTConfig)
 		case UART_PARITYBITS_ODD:
 			SET_BIT(UCSRC,5);
 			SET_BIT(UCSRC,4);
+			break;
 		default:
 			CLEAR_BIT(UCSRC,5);
 			CLEAR_BIT(UCSRC,4);
@@ -122,9 +123,9 @@ void UART_vidInitExpanded(UARTConfig_t * UARTConfig)
 			break;
 	}
 
-	//Selecting UBRRH
-	UBRRH = 0;
-	UBRRL = 51;
+	//Selecting baudrate
+	UBRRH = UARTConfig->u8BaudRateHigh;
+	UBRRL = UARTConfig->u8BaudRateLow;
 
 
 }
