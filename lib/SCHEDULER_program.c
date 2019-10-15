@@ -72,11 +72,11 @@ void SCHEDULER_vidSchedule(void) {
 void SCHEDULER_vidDeleteTaskByAddress(Task_Type * TaskPtr)
 {
 	u8 u8TaskIndex;
-	for (u8TaskIndex = 0; u8TaskIndex < SCHEDULER_MAXTASKS; u8TaskIndex)
+	for (u8TaskIndex = 0; u8TaskIndex < SCHEDULER_MAXTASKS; u8TaskIndex++)
 	{
 		if (Tasks_Array[u8TaskIndex] == TaskPtr)
 		{
-			Tasks_Array[u8TaskIndex] == SCHEDULER_NULLTASK;
+			Tasks_Array[u8TaskIndex] = SCHEDULER_NULLTASK;
 		}
 	}
 }
