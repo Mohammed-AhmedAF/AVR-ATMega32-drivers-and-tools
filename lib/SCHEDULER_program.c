@@ -1,6 +1,7 @@
 /*
  * SCHEDULER_program.c
- *
+ * Purpose: A simple scheduler based on round-robin algorithm for AVR ATMega16, ATMega32
+ * microcontrollers.
  */ 
 
 #include "Std_Types.h"
