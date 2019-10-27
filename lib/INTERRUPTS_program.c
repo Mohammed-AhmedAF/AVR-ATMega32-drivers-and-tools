@@ -9,6 +9,7 @@
 /*Array of function pointers, used to hold pointer to ISRs*/
 void (*ISR_pt[INTERRUPTS_FUNCPTR_SIZE]) (void); 
 
+/*Pointer to function*/
 void (*ISRFunc) (void);
 
 void INTERRUPTS_vidSetGlobalInterruptFlag(void) {
