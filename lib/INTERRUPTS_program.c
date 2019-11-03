@@ -81,7 +81,7 @@ void INTERRUPTS_vidEnableInterrupt(const u8 u8InterruptID) {
 #endif
 /*Enable interrupt with a simpler name*/
 #ifdef ST_MC_ATMEGA1632
-void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptEnCpy) {
+void INTERRUPTS_vidEnableInterrupt(const u8 u8InterruptEnCpy) {
 	switch(u8InterruptEnCpy) {
 		case INTERRUPTS_INT_0:
 		SET_BIT(GICR,6);
