@@ -25,7 +25,7 @@ void INTERRUPTS_vidPutISRFunction(u8 u8InterruptIDCpy, void (*ptrFunc) ()) {
 }
 
 #ifdef ST_MC_ATMEGA128
-void INTERRUPTS_vidEnableInterrupt(u8 u8InterruptID) {
+void INTERRUPTS_vidEnableInterrupt(const u8 u8InterruptID) {
 	switch(u8InterruptID) {
 		case INTERRUPTS_INT_0:
 		SET_BIT(EIMSK,0);
