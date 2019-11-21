@@ -20,6 +20,7 @@ void INTERRUPTS_vidClearGlobalInterruptFlag(void) {
 	CLEAR_BIT(SREG,7);
 }
 
+/*Callback registerer*/
 void INTERRUPTS_vidPutISRFunction(u8 u8InterruptIDCpy, void (*ptrFunc) ()) {
 	ISR_pt[u8InterruptIDCpy] = ptrFunc;
 }
@@ -562,6 +563,7 @@ void INTERRUPTS_vidClearInterruptFlag(u8 u8InterruptID) {
 	}
 }
 
+/*Signal handlers*/
 #ifdef EXTERNAL_INTERRUPT_0
 ISR(INT0_vect) {
 	ISR_pt[INTERRUPTS_INT_0]();
