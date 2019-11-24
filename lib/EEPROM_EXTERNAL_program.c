@@ -9,7 +9,7 @@
 #include"Macros.h"
 #include"Std_Types.h"
 #include"TWI_interface.h"
-#include"EEPROM_interface.h"
+#include"EEPROM_EXTERNAL_interface.h"
 
 void EEPROM_vidInit(void)
 {
@@ -43,7 +43,7 @@ u8 EEPROM_u8WriteByte(u16 u16Location,u8 u8ByteCpy)
 			}
 		}
 	}
-	return EEMPORM_STATUS_FAIL;
+	return EEPROM_STATUS_FAIL;
 }
 
 u8 EEPROM_u8ReadByte(u16 u16LocationCpy,u8 * u8DataCpy)
