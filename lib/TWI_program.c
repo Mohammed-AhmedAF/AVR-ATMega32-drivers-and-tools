@@ -12,7 +12,7 @@ void TWI_vidInit(void) {
 	TWCR = (1<<TWEN); //To enable TWI
 	TWBR = 2; //Clk configuration
 	TWSR = 0; //Clk configuration
-	TWAR = 2; // Address of this node, wheter it is a slave or master
+	TWAR = 2; // Address of this node, whether it is a slave or master
 }
 
 void TWI_vidSendStart(void) {
