@@ -5,7 +5,7 @@
 # Purpose: This is a script that delivers modules
 # on demand to the working directory
 
-AVR_LIB_PATH=$HOME/programming/avr-lib/lib
+AVR_LIB_PATH=$HOME/programming/IMT-course/lib
 
 while getopts 'h' OPTIONS; do
 	case $OPTIONS in
@@ -133,3 +133,5 @@ else
 
 	done
 fi
+
+exit 0
