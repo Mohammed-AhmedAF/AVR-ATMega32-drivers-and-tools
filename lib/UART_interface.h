@@ -6,7 +6,8 @@ typedef struct {
 	u8 u8ParityBits;
 	u8 u8StopBits;
 	u8 u8CharacterSize;
-	u8 u8BaudRate;
+	u8 u8BaudRateHigh;
+	u8 u8BaudRateLow;
 } UARTConfig_t;
 
 #define UART_ENABLE_TXRX 0
