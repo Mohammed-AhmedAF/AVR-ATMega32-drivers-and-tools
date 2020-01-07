@@ -42,5 +42,15 @@ void SPI_vidDisableInterrupt(void);
 #define SPI_CLK_PHASE_SAMPLE 0
 #define SPI_CLK_PHASE_SETUP 1
 
+/*Prescaler definitions*/
+#define SPI_CLK_PRES_4 0
+#define SPI_CLK_PRES_16 1
+#define SPI_CLK_PRES_64 2
+#define SPI_CLK_PRES_128 3
+#define SPI_CLK_PRES_2 4
+#define SPI_CLK_PRES_8 5
+#define SPI_CLK_RPES_32 6
+#define SPI_CLK_RPES_64 7
+
 #endif
 
