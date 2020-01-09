@@ -15,6 +15,14 @@ void TWI_vidInit(void) {
 	TWAR = 2; // Address of this node, whether it is a slave or master
 }
 
+void TWI_vidInitWithValues(u8 u8BitrateRegVal, u8 u8PresScalerVal) {
+	TWCR = (1<<TWEN);
+	TWBR = u8BitrateRegVal;
+	TWSR = u8PresScalerVal;
+	TWAR = 2;
+
+}
+
 void TWI_vidSendStart(void) {
 
 	TWCR = (1<<TWSTA) | (1<<TWINT) | (1<<TWEN); //
@@ -33,6 +41,13 @@ void TWI_vidSendByte(u8 u8byteCpy) {
 void TWI_vidSendStop(void) {
 	TWCR = (1 << TWSTO) | (1 << TWINT) | (1 << TWEN);
 	//We don't need to worry about checking the flag
+}
+
+u8 TWI_u8ReceiveWithAck(void)
+{
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
+	while(GET_BIT(TWCR,TWINT) == 0);
+	return TWDR;
 }
 
 u8 TWI_u8ReceiveWithNoAck(void) {

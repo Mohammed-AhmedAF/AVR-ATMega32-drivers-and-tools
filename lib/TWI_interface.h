@@ -9,6 +9,8 @@ void TWI_vidInit(void);
 void TWI_vidSendStart(void);
 void TWI_vidSendByte(u8);
 void TWI_vidSendStop(void);
+void TWI_vidInitWithValues(u8,u8);
+u8 TWI_u8ReceiveWithAck(void);
 u8 TWI_u8ReceiveWithNoAck(void);
 u8 TWI_u8CheckAck(u8);
 
