@@ -127,6 +127,10 @@ else
 		then
 			cp $AVR_LIB_PATH/IC74165_interface.h ./
 			cp $AVR_LIB_PATH/IC74165_program.c ./
+		elif [[ $i = "rtc" || $i = "RTC" ]]
+		then
+			cp $AVR_LIB_PATH/RTC_program.c ./
+			cp $AVR_LIB_PATH/RTC_interface.h ./
 		else
 			echo "Error: Could not process $i."
 		fi
