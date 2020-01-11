@@ -11,7 +11,7 @@
 #include "INTERRUPTS_interface.h"
 #include "SCHEDULER_interface.h"
 
-
+/*Array holding task structs*/
 Task_Type * Tasks_Array[SCHEDULER_MAXTASKS];
 
 volatile u8 u8OVFCount;
