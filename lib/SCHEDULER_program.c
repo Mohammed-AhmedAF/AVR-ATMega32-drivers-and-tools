@@ -54,7 +54,7 @@ void SCHEDULER_vidCreateTask(Task_Type * task, u8 u8TaskPriority) {
 }
 
 void SCHEDULER_vidSchedule(void) {
-	u8 u8TaskIndex = 0;
+	static u8 u8TaskIndex = 0;
 	for (u8TaskIndex = 0; u8TaskIndex < SCHEDULER_MAXTASKS; u8TaskIndex++) {
 		if (Tasks_Array[u8TaskIndex] != SCHEDULER_NULLTASK) {
 			if (Tasks_Array[u8TaskIndex]->u8State == SCHEDULER_TASKSTATE_RUNNING) {
