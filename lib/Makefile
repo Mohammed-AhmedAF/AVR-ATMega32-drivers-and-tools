@@ -8,8 +8,9 @@
 
 MAIN = main.c
 CC = avr-gcc
-SRC = $(MAIN) DIO_program.c LCD_program.c INTERRUPTS_program.c TIMER0_program.c CLOCK_program.c KEYPAD_program.c SERVICES_program.c
-CFLAGS = -mmcu=atmega32 -I . -O3
+SRC = $(MAIN) *.c
+MICROCNTRL = atmega32
+CFLAGS = -mmcu=$(MICROCNTRL) -I . -O3
 
 PRO = avrdude
 
@@ -41,12 +42,12 @@ build-hex:
 .PHONY : load
 load: clean generate_ctags build
 	@pwd
-	$(PRO) -p atmega32 -c usbasp -U flash:w:main.o
+	$(PRO) -p $(MICROCNTRL) -c usbasp -U flash:w:main.o
 	rm -f *.o *.i
 
 .PHONY : flash
 flash :
-	$(PRO) -V -p atmega32 -c usbasp -U flash:w:main.o
+	$(PRO) -V -p $(MICROCNTRL) -c usbasp -U flash:w:main.o
 
 .PHONY : convert
 convert: clean
