@@ -1,6 +1,8 @@
-// File: LCD_prog.c
-// Author: Mohammed Ahmed Abd Al-Fattah
-//
+/* 
+ * File: LCD_prog.c
+ *  Author: Mohammed Ahmed Abd Al-Fattah
+ */
+
 
 /*
  * RS: Register Select, Data/Instruction select, driven
@@ -116,6 +118,7 @@ void LCD_vidBlinkString(s8 * s8stringCpy,u8 u8timesCpy) {
 
 void LCD_vidWriteNumber(u16 u16NumberCpy) {
 	if(u16NumberCpy < 10) {
+		LCD_vidWriteCharacter('0');
 		LCD_vidWriteCharacter(u16NumberCpy+'0');
 	}
 	else {
@@ -124,7 +127,14 @@ void LCD_vidWriteNumber(u16 u16NumberCpy) {
 			LCD_vidWriteCharacter(u16NumberCpy%10+'0');
 		}
 		else if (u16NumberCpy < 1000) {
-			LCD_vidWriteCharacter(u16NumberCpy/100+'0');
+			LCD_vidWriteCharacter((u16NumberCpy/100)+'0');
+			LCD_vidWriteCharacter((u16NumberCpy%100)/10+'0');
+			LCD_vidWriteCharacter((u16NumberCpy%100)%10+'0');
+		}
+		else if (u16NumberCpy < 10000)
+		{
+			LCD_vidWriteCharacter((u16NumberCpy/1000)+'0');
+			LCD_vidWriteCharacter((u16NumberCpy%1000)/100+'0');
 			LCD_vidWriteCharacter((u16NumberCpy%100)/10+'0');
 			LCD_vidWriteCharacter((u16NumberCpy%100)%10+'0');
 		}
@@ -172,4 +182,14 @@ void LCD_vidWriteCustomChar(u8 u8LocationCpy) {
 void LCD_vidWriteInPlace(u8 u8xCpy,u8 u8yCpy, u8 u8CharCpy) {
 	LCD_vidGoToXY(u8xCpy,u8yCpy);
 	LCD_vidWriteCharacter(u8CharCpy);
+}
+
+void LCD_vidClearLine(u8 u8LineNumber)
+{
+	LCD_vidGoToXY(LCD_XPOS0,u8LineNumber);
+	u8 u8xPos;
+	for (u8xPos = 0; u8xPos < 20; u8xPos++)
+	{
+		LCD_vidWriteCharacter(' ');
+	}
 }
