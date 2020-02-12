@@ -8,7 +8,7 @@
 
 MAIN = main.c
 CC = avr-gcc
-SRC = $(MAIN) *.c
+SRC = $(MAIN) DIO_program.c TIMER0_program.c LCD_program.c UART_program.c INTERRUPTS_program.c RTC_program.c TWI_program.c EEPROM_INTERNAL_program.c DCLOCK_program.c
 MICROCNTRL = atmega32
 CFLAGS = -mmcu=$(MICROCNTRL) -I . -O3
 
@@ -47,7 +47,7 @@ load: clean generate_ctags build
 
 .PHONY : flash
 flash :
-	$(PRO) -V -p $(MICROCNTRL) -c usbasp -U flash:w:main.o
+	$(PRO) -V -v -p $(MICROCNTRL) -c usbasp -U flash:w:main.o
 
 .PHONY : convert
 convert: clean
@@ -56,6 +56,12 @@ convert: clean
 .PHONY : reconvert
 reconvert : clean
 	dos2unix * 
+
+.PHONY : burn_fuses
+burn_fuses:
+	$(PRO) -p m32 -c usbasp -U lfuse:w:0xD4:m
+	$(PRO) -p m32  -c usbasp -u hfuse:w:0xD9:m
+
 .PHONY : clean
 clean:
 	rm -f *.o *.i
