@@ -8,7 +8,7 @@
 
 MAIN = main.c
 CC = avr-gcc
-SRC = $(MAIN) DIO_program.c TIMER0_program.c LCD_program.c UART_program.c INTERRUPTS_program.c RTC_program.c TWI_program.c EEPROM_INTERNAL_program.c DCLOCK_program.c
+SRC = $(MAIN) DIO_program.c TIMER1_program.c LCD_program.c INTERRUPTS_program.c
 MICROCNTRL = atmega32
 CFLAGS = -mmcu=$(MICROCNTRL) -I . -O3
 
@@ -60,7 +60,7 @@ reconvert : clean
 .PHONY : burn_fuses
 burn_fuses:
 	$(PRO) -p m32 -c usbasp -U lfuse:w:0xD4:m
-	$(PRO) -p m32  -c usbasp -u hfuse:w:0xD9:m
+	$(PRO) -p m32  -c usbasp -U hfuse:w:0xD9:m
 
 .PHONY : clean
 clean:
