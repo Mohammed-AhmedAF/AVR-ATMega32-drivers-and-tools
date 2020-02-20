@@ -49,7 +49,7 @@ u8 KEYPAD_u8GetKey(void) {
 		 *the button is depressed. It is used to prevent printing 
 		 *the character more than once.
 		 **/		
-		#ifdef HOLD_BUTTON
+		#ifdef KEYPAD_HOLD_BUTTON
 			while(DIO_u8GetPinValue(COL0_PORT,COL0_PIN) == 0);
 			while(DIO_u8GetPinValue(COL1_PORT,COL1_PIN) == 0);
 			while(DIO_u8GetPinValue(COL2_PORT,COL2_PIN) == 0);

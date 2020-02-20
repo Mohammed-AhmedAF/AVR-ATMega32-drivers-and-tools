@@ -1,6 +1,8 @@
 #ifndef KEYPAD_INTERFACE_H
 #define KEYPAD_INTERFACE_H
 
+#define KEYAPD_HOLD_BUTTON
+
 #define ROW0_PORT DIO_PORTC
 #define ROW0_PIN 0
 #define ROW1_PORT DIO_PORTC
@@ -9,7 +11,6 @@
 #define ROW2_PIN 2
 #define ROW3_PORT DIO_PORTC
 #define ROW3_PIN 3
-
 
 #define COL0_PORT DIO_PORTC
 #define COL0_PIN 4
