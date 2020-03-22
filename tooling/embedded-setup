@@ -18,6 +18,7 @@ else
 	apt-get install avrdude
 	apt-get install gcc-avr
 	apt-get install doxygen
+	apt-get install graphviz
 	apt-get install universal-ctags
 	apt-get install dos2unix
 	apt-get intall unix2dos
