@@ -14,6 +14,7 @@
 #define DIO_PORTD 3
 #define DIO_PORTE 4
 #define DIO_PORTF 5
+#define DIO_PORTG 6
 
 #define DIO_PIN0 0
 #define DIO_PIN1 1
