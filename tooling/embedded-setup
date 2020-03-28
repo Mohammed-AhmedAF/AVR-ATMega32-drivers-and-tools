@@ -17,9 +17,24 @@ else
 	apt-get install curl
 	apt-get install avrdude
 	apt-get install gcc-avr
+	apt-get install avr-libc
 	apt-get install doxygen
 	apt-get install graphviz
 	apt-get install universal-ctags
 	apt-get install dos2unix
-	apt-get intall unix2dos
 fi
+
+#Move to home
+cd
+#Execute command and silence the error
+if mkdir programming &> /dev/null
+then
+	echo "Created directory: programming"
+	cd ./programming
+	git clone https://github.com/Mohammed-AhmedAF/IMT-course
+	
+	cp ./IMT-course/tooling/get-avr /usr/bin
+else
+	echo "Error creating directory: programming"
+fi
+
