@@ -4,6 +4,17 @@
 #embedded software development on AVR microcontrollers
 #Script started on 22 March 2020
 
+
+setupVim ()
+{
+#install plugin manager
+	echo "Setting vim up..."
+	git clone  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	#Copying vimrc to home directory
+	cd ~/programming/IMT-course/tooling/
+	cp .vimrc ~/
+}
+
 #Check if script is run by root
 if [ "$(whoami)" != "root" ]
 then
@@ -22,6 +33,8 @@ else
 	apt-get install graphviz
 	apt-get install universal-ctags
 	apt-get install dos2unix
+	#Setup vim (installing plugin manager)
+	setupVim
 fi
 
 #Move to home
@@ -31,10 +44,10 @@ if mkdir programming &> /dev/null
 then
 	echo "Created directory: programming"
 	cd ./programming
-	git clone https://github.com/Mohammed-AhmedAF/IMT-course
-	
+	git clone https://github.com/Mohammed-AhmedAF/IMT-course	
 	cp ./IMT-course/tooling/get-avr /usr/bin
 else
 	echo "Error creating directory: programming"
+	setupVim
 fi
 
