@@ -1,49 +1,48 @@
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set number
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" This is the Vundle package, which can be found on GitHub.
-" For GitHub repos, you specify plugins using the
-" 'user/repository' format
-Plugin 'gmarik/vundle'
+nmap <F6> :NERDTreeToggle<CR>
 
-" We could also add repositories with a ".git" extension
-Plugin 'scrooloose/nerdtree.git'
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-" To get plugins from Vim Scripts, you can reference the plugin
-" by name as it appears on the site
-Plugin 'Buffergator'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'honza/vim-snippets'
-Plugin 'foosoft/vim-argwrap'
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+
 Plugin 'vim-airline/vim-airline'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'justinmk/vim-syntax-extra'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-" Plugin 'Valloric/YouCompleteMe'
-
-" Now we can turn our filetype functionality back on
-filetype plugin indent on
-
-map <F8> :w <CR> :!gcc % -o %< && ./%< <CR>
-map <F9> :w <CR> :python % <CR>
-map <F7> mzgg=G`z
-map <C-b> :w <CR> :! load main.c<CR>
-map <C-/> :w <CR> :! python3 % <CR>
-set nu
-
-"Key mapping for tabs
-map <C-n> :NERDTreeToggle<CR>
-map <C-Left> :tabprevious <CR>
-map <C-Right> :tabnext <CR>
-map <C-t> :tabnew <CR>
-
-let g:ycm_confirm_extra_conf = 1
-let g:ycm_auto_trigger = 0
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-
-syntax enable
-set background=dark
-colorscheme solarized
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
