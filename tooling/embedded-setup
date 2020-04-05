@@ -9,8 +9,8 @@ setupVim ()
 {
 #install plugin manager
 	echo "Setting vim up..."
-	cd ~
-	git clone  https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	rm -r /root/.vim/bundle/Vundle.vim
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	#Copying vimrc to home directory
 	cd ~/programming/IMT-course/tooling/
 	cp .vimrc ~/
@@ -38,6 +38,8 @@ else
 	setupVim
 fi
 
+createProgramming()
+{
 #Move to home
 cd
 #Execute command and silence the error
@@ -49,6 +51,5 @@ then
 	cp ./IMT-course/tooling/get-avr /usr/bin
 else
 	echo "Error creating directory: programming"
-	setupVim
 fi
-
+}
