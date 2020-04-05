@@ -9,7 +9,8 @@ setupVim ()
 {
 #install plugin manager
 	echo "Setting vim up..."
-	git clone  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	cd ~
+	git clone  https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	#Copying vimrc to home directory
 	cd ~/programming/IMT-course/tooling/
 	cp .vimrc ~/
