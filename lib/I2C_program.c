@@ -18,7 +18,7 @@ void I2C_vidSendStart(void)
 	TWCR = (1<<TWEN) | (1<<TWSTA) | (1<<TWEA);
 	
 	/*Until flag is set to 1 by hardware after sending start*/
-	while(TWCR & (1<<TWINT)==0);
+	while((TWCR & (1<<TWINT))==0);
 	/*Read status register*/
 	while((TWSR & 0xF8) != 0x08);
 
@@ -26,8 +26,8 @@ void I2C_vidSendStart(void)
 
 void I2C_vidSendAddress(u8 u8Address)
 {
-	TWDR = u8Address<<1;swas
-	TWCR = (1<<TWEN) | (1<TWINT);
+	TWDR = u8Address<<1;
+	TWCR = (1<<TWEN) | (1<<TWINT);
 	while ((TWCR & (1<<TWINT)) == 0);
 	while ((TWSR & (0xF8)) != 0x18);
 
@@ -42,7 +42,7 @@ void I2C_vidSendData(u8 u8Byte)
 
 }
 
-void I2C_vidReadDataAsSlave(void)
+u8 I2C_vidReadDataAsSlave(void)
 {
 	TWCR = (1<<TWEN) | (1<<TWINT) | (1<<TWEA);
 	while((TWCR & (1<<TWINT)) == 0);
@@ -63,7 +63,7 @@ void I2C_vidMatchACK(void)
 {
 	while((TWSR & (0xF8)) != 0x60)
 	{
-		TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TEA);
+		TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
 		while ((TWCR & (1<<TWINT)) == 0);
 	}
 }
