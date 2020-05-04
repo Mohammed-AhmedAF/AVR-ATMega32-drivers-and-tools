@@ -65,7 +65,7 @@ void SCHEDULER_vidInit(u8);
 void SCHEDULER_vidInitExpanded(u8 u8TimerMode, u8 u8CLKPrescaler, u8 u8OCRValue, u8 u8GlobalInterruptFlag);
 void SCHEDULER_vidCountOneTick(void);
 void SCHEDULER_vidSchedule(void);
-void SCHEDULER_vidCreateTask(Task_Type *,u8);
+void SCHEDULER_vidCreateTask(const Task_Type *,u8);
 void SCHEDULER_vidDeleteTask(u8);
 
 

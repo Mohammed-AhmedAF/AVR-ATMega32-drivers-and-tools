@@ -49,7 +49,7 @@ void SCHEDULER_vidInitExpanded(u8 u8TimerMode,u8 u8CLKPrescaler,u8 u8OCRValue, u
 }
 
 
-void SCHEDULER_vidCreateTask(Task_Type * task, u8 u8TaskPriority) {
+void SCHEDULER_vidCreateTask(const Task_Type * task, u8 u8TaskPriority) {
 	Tasks_Array[u8TaskPriority] = task;
 }
 
