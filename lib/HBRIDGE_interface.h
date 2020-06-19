@@ -1,0 +1,19 @@
+#ifndef _HBRIDGE_INTERFACE_H
+#define _HBRIDGE_INTERFACE_H
+
+void HBRIDGE_vidInit(void);
+void HBRIDGE_vidControl(u8 u8Command);
+
+/*Commands*/
+
+#define HBRIDGE_BOTH_FORWARD 0
+#define HBRIDGE_BOTH_BACKWARD 1
+#define HBRIDGE_BOTH_STOP 2
+#define HBRIDGE_RIGHT_FORWARD 3
+#define HBRIDGE_RIGH_BACKWARD 4
+#define HBRIDGE_LEFT_FORWARD 5
+#define HBRIDGE_LEFT_BACKWARD 6
+
+
+
+#endif
