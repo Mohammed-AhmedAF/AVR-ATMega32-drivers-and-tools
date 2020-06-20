@@ -13,6 +13,7 @@ MICROCNTRL = atmega32
 CFLAGS = -mmcu=$(MICROCNTRL) -I . -O3
 
 PRO = avrdude
+PROGRAMMER_TYPE = usbasp
 
 %.i :%.c
 	$(CC) $< $(CFLAGS) -E -o $@
@@ -42,12 +43,12 @@ build-hex:
 .PHONY : load
 load: clean generate_ctags build
 	@pwd
-	$(PRO) -p $(MICROCNTRL) -c usbasp -U flash:w:main.o
+	$(PRO) -p $(MICROCNTRL) -c $(PROGRAMMER_TYPE) -U flash:w:main.o
 	rm -f *.o *.i
 
 .PHONY : flash
 flash :
-	$(PRO) -V -v -p $(MICROCNTRL) -c usbasp -U flash:w:main.o
+	$(PRO) -V -v -p $(MICROCNTRL) -c $(PROGRAMMER_TYPE) -U flash:w:main.o
 
 .PHONY : convert
 convert: clean
@@ -59,8 +60,8 @@ reconvert : clean
 
 .PHONY : burn_fuses
 burn_fuses:
-	$(PRO) -p m32 -c usbasp -U lfuse:w:0xD4:m
-	$(PRO) -p m32  -c usbasp -U hfuse:w:0xD9:m
+	$(PRO) -p m32 -c $(PROGRAMMER_TYPE) -U lfuse:w:0xD4:m
+	$(PRO) -p m32  -c $(PROGRAMMER_TYPE) -U hfuse:w:0xD9:m
 
 .PHONY : clean
 clean:
