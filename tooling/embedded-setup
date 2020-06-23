@@ -34,6 +34,8 @@ else
 	apt-get install graphviz
 	apt-get install universal-ctags
 	apt-get install dos2unix
+	apt-get install python3-pip
+	apt-get install python3-tk 
 	#Setup vim (installing plugin manager)
 	setupVim
 fi
