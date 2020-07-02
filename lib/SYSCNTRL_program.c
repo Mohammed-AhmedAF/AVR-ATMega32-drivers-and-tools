@@ -1,3 +1,11 @@
+/*
+ *
+ *	To control sleep mode, and other system wide properties.
+ *
+ *
+ */
+
+
 #include "Macros.h"
 #include "Std_Types.h"
 #include "SYSCNTRL_private.h"
