@@ -107,6 +107,7 @@ else
 		then
 			cp $AVR_LIB_PATH/ADC_program.c ./
 			cp $AVR_LIB_PATH/ADC_interface.h ./
+			cp $AVR_LIB_PATH/ADC_private.h ./
 		elif [[ $i = "spi" || $i = "SPI" ]]
 		then
 			cp $AVR_LIB_PATH/SPI_program.c ./
@@ -131,6 +132,15 @@ else
 		then
 			cp $AVR_LIB_PATH/RTC_program.c ./
 			cp $AVR_LIB_PATH/RTC_interface.h ./
+		elif [[ $i = "dht22" || $i = "DHT22" ]]
+		then
+			cp $AVR_LIB_PATH/DHT22_program.c ./
+			cp $AVR_LIB_PATH/DHT22_interface.h ./
+		elif [[ $i = "SYSCNTRL" || $i = "syscntrl" ]]
+		then
+			cp $AVR_LIB_PATH/SYSCNTRL_program.c ./
+			cp $AVR_LIB_PATH/SYSCNTRL_interface.h ./
+			cp $AVR_LIB_PATH/SYSCNTRL_private.h ./
 		else
 			echo "Error: Could not process $i."
 		fi
