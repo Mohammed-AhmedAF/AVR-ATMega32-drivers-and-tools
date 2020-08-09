@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+mkdir APP
+mkdir HAL
+mkdir MCAL
+
