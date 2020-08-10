@@ -1,6 +1,24 @@
+
 #!/usr/bin/env bash
 
-mkdir APP
-mkdir HAL
-mkdir MCAL
+#Setup directory for avr atmega projects
 
+#Creating project directories
+mkdir APP &> /dev/null
+mkdir HAL &> /dev/null
+mkdir MCAL &> /dev/null
+
+#Getting files for drivers library
+get-avr makef dio timer0 adc interrupts syscntrl uart twi lcd rtc
+
+#Moving files to their suitable directories
+mv DIO* ./MCAL
+mv TIMER0* ./MCAL
+mv INTERRUPTS* ./MCAL
+mv UART* ./MCAL
+mv ADC* ./MCAL
+mv SYSCNTRL* ./MCAL
+
+mv LCD* ./HAL
+mv RTC* ./HAL
+mv KEYPAD* ./HAL
