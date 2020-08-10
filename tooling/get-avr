@@ -5,15 +5,24 @@
 # Purpose: This is a script that delivers modules
 # on demand to the working directory
 
+
+displayHelp() 
+{
+	echo "get-avr tool is used to bring module files to the current working directory."
+	echo "Usage: get-avr <Name_of_Module>"
+	echo "Example: get-avr spi"
+}
+
 AVR_LIB_PATH=$HOME/programming/IMT-course/lib
+
+
 
 while getopts 'h' OPTIONS; do
 	case $OPTIONS in
-		-h)
-			echo "get-avr tool is used to bring module files to the current working directory."
-			echo "Usage: get-avr <Name_of_Module>"
-			echo "Example: get-avr spi"
-		;;
+		h)
+			displayHelp
+			exit;;
+
 	esac
 done
 
