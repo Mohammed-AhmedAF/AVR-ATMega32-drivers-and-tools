@@ -13,19 +13,34 @@ displayHelp()
 	echo "Example: get-avr spi"
 }
 
+displayDrivers()
+{
+	echo "Available drivers: "
+	echo "	dio, uart, spi, twi"
+	echo "	uart, interrupts, makef"
+	echo "	adc, timer0, timer1, timer2"
+	echo "	internal-eeprom"
+	echo "	lcd, rtc, keypad, s7, eeprom"
+	echo "	scheduler"
+	echo "	syscntrl"
+}
+
+
 AVR_LIB_PATH=$HOME/programming/IMT-course/lib
 
 
 
-while getopts 'h' OPTIONS; do
+while getopts 'hv' OPTIONS; do
 	case $OPTIONS in
 		h)
 			displayHelp
 			exit;;
+		v)
+			displayDrivers
+			exit;;
 
 	esac
 done
-
 
 if [[ $# -eq 0 ]]
 then
