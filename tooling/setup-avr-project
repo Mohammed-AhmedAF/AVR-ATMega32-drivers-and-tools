@@ -16,6 +16,7 @@ mv DIO* ./MCAL
 mv TIMER0* ./MCAL
 mv INTERRUPTS* ./MCAL
 mv UART* ./MCAL
+mv TWI* ./MCAL
 mv ADC* ./MCAL
 mv SYSCNTRL* ./MCAL
 
