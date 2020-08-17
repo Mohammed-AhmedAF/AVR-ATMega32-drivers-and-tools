@@ -2,6 +2,7 @@
 #!/usr/bin/env bash
 
 #Setup directory for avr atmega projects
+#Author: Mohammed Ahmed
 
 #Creating project directories
 mkdir APP &> /dev/null
