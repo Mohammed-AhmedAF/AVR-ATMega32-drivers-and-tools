@@ -20,6 +20,11 @@ mv UART* ./MCAL
 mv TWI* ./MCAL
 mv ADC* ./MCAL
 mv SYSCNTRL* ./MCAL
+mv SETTINGS* ./MCAL
+
+mv Makefile-layered ./
+rm Makefile
+mv Makefile-layered Makefile
 
 mv LCD* ./HAL
 mv RTC* ./HAL
