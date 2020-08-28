@@ -8,6 +8,7 @@
 mkdir APP &> /dev/null
 mkdir HAL &> /dev/null
 mkdir MCAL &> /dev/null
+mkdir SERVICES &> /dev/null
 
 #Getting files for drivers library
 get-avr makef dio timer0 adc interrupts syscntrl uart twi lcd rtc
@@ -21,6 +22,10 @@ mv TWI* ./MCAL
 mv ADC* ./MCAL
 mv SYSCNTRL* ./MCAL
 mv SETTINGS* ./MCAL
+
+mv Std_Types.h ./SERVICES
+mv Macros.h ./SERVICES
+
 
 mv Makefile-layered ./
 rm Makefile
