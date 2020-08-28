@@ -165,6 +165,9 @@ else
 			cp $AVR_LIB_PATH/SYSCNTRL_program.c ./
 			cp $AVR_LIB_PATH/SYSCNTRL_interface.h ./
 			cp $AVR_LIB_PATH/SYSCNTRL_private.h ./
+		elif [[ $i = "makef-layered" || $i = "Makefile-layered" ]]
+		then
+			cp $AVR_LIB_PATH/Makefile-layered ./
 		else
 			echo "Error: Could not process $i."
 		fi
