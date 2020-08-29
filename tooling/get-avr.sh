@@ -168,6 +168,9 @@ else
 		elif [[ $i = "makef-layered" || $i = "Makefile-layered" ]]
 		then
 			cp $AVR_LIB_PATH/Makefile-layered ./
+		elif [[ $i = "main" || $i = "main.c" ]]
+		then
+			cp $AVR_LIB_PATH/main.c ./
 		else
 			echo "Error: Could not process $i."
 		fi
