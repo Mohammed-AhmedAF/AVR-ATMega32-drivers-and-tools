@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#Putting drivers in dedicated directories based on software layer
+#Putting drivers in dedicated directories based on software layer including FreeRTOS files
 
 #Making directories for layers
 mkdir APP &> /dev/null
@@ -10,31 +10,39 @@ mkdir UTIL &> /dev/null
 mkdir RTOS &> /dev/null
 
 #Copy makefile
-cp ~/programming/IMT-course/lib/Makefile-layered ./Makefile
+cp ~/programming/avr-source/lib/Makefile-layered ./Makefile
 
-#Move to UTIL
-mv Std_Types.h ./UTIL &> /dev/null
-mv Macros.h ./UTIL &> /dev/null
+cp ~/programming/avr-source/FreeRTOS-template/* ./RTOS
 
-#Move to MCAL 
-mv DIO* ./MCAL &> /dev/null
-mv SPI* ./MCAL &> /dev/null
-mv UART* ./MCAL &> /dev/null
-mv TWI* ./MCAL &> /dev/null
-mv INTERRUPTS* ./MCAL &> /dev/null
-mv ADC* ./MCAL &> /dev/null
-mv TIMER0* ./MCAL  &> /dev/null
-mv TIMER1* ./MCAL &> /dev/null
-mv TIMER2* ./MCAL &> /dev/null
-mv SETTINGS* ./MCAL &> /dev/null
-mv EEPROM_INTERNAL* ./MCAL &> /dev/null
+#Getting files for drivers library
+get-avr main std macros makef dio timer0 adc interrupts syscntrl uart twi lcd rtc keypad settings eeprom makef-layered 
 
-#Move to HAL
-mv DHT22* ./HAL &> /dev/null
-mv LCD* ./HAL &> /dev/null
-mv RTC* ./HAL &> /dev/null
-mv EEPROM_EXTERNAL* &> /dev/null
+#Moving files to their suitable directories
 
-#Move to APP
-mv main.c ./APP &> /dev/null
+#Moving MCAL drivers to directory MCAL
+mv DIO* ./MCAL
+mv TIMER0* ./MCAL
+mv INTERRUPTS* ./MCAL
+mv UART* ./MCAL
+mv TWI* ./MCAL
+mv ADC* ./MCAL
+mv SYSCNTRL* ./MCAL
+mv SETTINGS* ./MCAL
+
+rm Makefile
+mv Makefile-layered Makefile
+
+#Moving HAL drivers to directory HAL
+mv LCD* ./HAL
+mv RTC* ./HAL
+mv KEYPAD* ./HAL
+mv EEPROM_EXTERNAL_* ./HAL
+
+#Moving UTIL drivers io directory UTIL
+mv Std_Types.h ./UTIL
+mv Macros.h ./UTIL
+mv SERVICES* ./UTIL
+
+#Moving APP drivers to diretory APP
+mv main.c ./APP
 
