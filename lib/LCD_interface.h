@@ -64,6 +64,29 @@
  * */
 #define  LCD_XPOS_SHIFT 6
 
+
+/*LCD configurations*/
+
+/*Entry mode*/
+#define LCD_SET_ENTRY_MODE 0x04
+#define LCD_MOVE_CURSOR_RIGHT 0x02
+
+
+/*Display on/off control */
+#define LCD_DISPLAY_ON 0x0C
+#define LCD_DISPLAY_OFF 0x08
+
+#define LCD_CURSOR_ON 0x0A
+#define LCD_CURSOR_OFF 0x08
+
+#define LCD_CURSOR_BLINK_ON 0x09
+#define LCD_CURSOR_BLINK_OFF 0x08
+
+/*Function set*/
+#define LCD_FUNCTION_SET 0x20
+#define LCD_8BIT 0x10
+#define LCD_4LINES 0x08
+
 /*Function definitions*/
 void LCD_vidInit(void);
 void LCD_vidSendCommand(u8);

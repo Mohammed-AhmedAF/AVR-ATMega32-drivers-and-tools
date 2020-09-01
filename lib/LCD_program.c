@@ -35,9 +35,9 @@ void LCD_vidInit(void) {
 	
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN); /*Clear screen*/
 	LCD_vidSendCommand(LCD_RETURN_HOME); /*Move to home*/
-	LCD_vidSendCommand(0b00000110); /*Set entry mode*/
-	LCD_vidSendCommand(0b00001100); /*Display On/Off control*/
-	LCD_vidSendCommand(0b00111000); /*Function Set*/
+	LCD_vidSendCommand(LCD_SET_ENTRY_MODE|LCD_MOVE_CURSOR_RIGHT); /*Set entry mode*/
+	LCD_vidSendCommand(LCD_DISPLAY_ON); /*Display On/Off control*/
+	LCD_vidSendCommand(LCD_FUNCTION_SET|LCD_8BIT|LCD_4LINES); /*Function Set*/
 
 }
 
