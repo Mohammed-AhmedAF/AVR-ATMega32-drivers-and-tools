@@ -11,7 +11,7 @@ mkdir MCAL &> /dev/null
 mkdir UTIL &> /dev/null
 
 #Getting files for drivers library
-get-avr main std macros makef dio timer0 adc interrupts syscntrl uart twi lcd rtc keypad settings eeprom makef-layered 
+get-avr main std macros makef dio timer0 adc interrupts syscntrl uart twi lcd rtc keypad settings eeprom makef-layered timer1
 
 #Moving files to their suitable directories
 
@@ -24,6 +24,7 @@ mv TWI* ./MCAL
 mv ADC* ./MCAL
 mv SYSCNTRL* ./MCAL
 mv SETTINGS* ./MCAL
+mv TIMER1* ./MCAL
 
 rm Makefile
 mv Makefile-layered Makefile
