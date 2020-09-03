@@ -71,6 +71,9 @@
 /*Entry mode*/
 #define LCD_SET_ENTRY_MODE 0x04
 #define LCD_MOVE_CURSOR_RIGHT 0x02
+#define LCD_MOVE_CURSOR_LEFT 0x00
+#define LCD_DISPLAY_SHIFT_ON 0x01
+#define LCD_DISPLAY_SHIFT_OFF 0x00
 
 
 /*Display on/off control */
