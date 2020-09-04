@@ -1,9 +1,11 @@
 #include "Std_Types.h"
 #include "Macros.h"
 #include "LCD_interface.h"
+#include "STOPWATCH_config.h"
 #include "STOPWATCH_interface.h"
 
 /*Stopwatch variables*/
+volatile u8 u8MSeconds = 0;
 volatile u8 u8SSeconds = 0;
 volatile u8 u8SMinutes = 0;
 volatile u8 u8StopwatchFlag = 0;
@@ -12,7 +14,7 @@ volatile u8 u8StopwatchFlag = 0;
 void STOPWATCH_vidToggle()
 {
 	u8StopwatchFlag ^= (1<<0);
-	LCD_vidGoToXY(LCD_XPOS0,LCD_YPOS3);
+	LCD_vidGoToXY(STOPWATCH_LCD_XPOS,LCD_YPOS3);
 	LCD_vidWriteString("Stop wa.:");
 }
 
@@ -41,6 +43,7 @@ void STOPWATCH_vidStop(void)
 	u8SMinutes = 0;
 }
 
+/*Check if stopwatch is running or not*/
 u8 STOPWATCH_u8CheckFlag(void)
 {
 	return u8StopwatchFlag;
