@@ -15,7 +15,7 @@ cp ~/programming/avr-source/lib/Makefile-layered ./Makefile
 cp ~/programming/avr-source/FreeRTOS-template/* ./RTOS
 
 #Getting files for drivers library
-get-avr main std macros makef dio timer0 adc interrupts syscntrl uart twi lcd rtc keypad settings eeprom makef-layered 
+get-avr main std macros makef dio timer0 adc interrupts syscntrl uart twi lcd rtc keypad settings eeprom makef-layered internal-eeprom
 
 #Moving files to their suitable directories
 
@@ -28,6 +28,7 @@ mv TWI* ./MCAL
 mv ADC* ./MCAL
 mv SYSCNTRL* ./MCAL
 mv SETTINGS* ./MCAL
+mv EEPROM_INTERNAL_* ./MCAL
 
 rm Makefile
 mv Makefile-layered Makefile
