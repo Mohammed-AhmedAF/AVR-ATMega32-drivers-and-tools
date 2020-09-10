@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+#Used to remove unused drivers from layerd projects
+
+for i in $@
+do
+	if [[ $i = "RTC" || $i = "rtc" ]]
+	then
+		cd ./HAL/
+		rm RTC*
+	elif [[ $i = "lcd" || $i = "LCD" ]]
+	then
+		cd ./HAL
+		rm LCD*
+	elif [[ $i = "keypad" || $i = "KEYPAD" ]]
+	then
+		cd ./HAL
+		rm KEYPAD*
+	elif [[ $i = "timer1" || $i = "TIMER1" ]]
+	then
+		cd ./MCAL
+		rm TIMER1*
+	fi
+done 
+	
