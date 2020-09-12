@@ -20,6 +20,10 @@ do
 	then
 		cd ./MCAL
 		rm TIMER1*
+	elif [[ $i = "timer2" || $i = "TIMER2" ]]
+	then
+		cd ./MCAL
+		rm TIMER2
 	fi
 done 
 	
