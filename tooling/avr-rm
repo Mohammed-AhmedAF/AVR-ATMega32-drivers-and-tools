@@ -23,7 +23,11 @@ do
 	elif [[ $i = "timer2" || $i = "TIMER2" ]]
 	then
 		cd ./MCAL
-		rm TIMER2
+		rm TIMER2*
+	elif [[ $i = "adc" || $i = "ADC" ]]
+	then
+		cd ./MCAL
+		rm ADC*
 	fi
 done 
 	
