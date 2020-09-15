@@ -16,6 +16,10 @@ do
 	then
 		cd ./HAL
 		rm KEYPAD*
+	elif [[ $i = "timer0" || $i = "TIMER0" ]]
+	then
+		cd ./MCAL
+		rm TIMER0*
 	elif [[ $i = "timer1" || $i = "TIMER1" ]]
 	then
 		cd ./MCAL
