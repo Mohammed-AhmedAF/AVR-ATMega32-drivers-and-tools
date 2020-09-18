@@ -32,6 +32,10 @@ do
 	then
 		cd ./MCAL
 		rm ADC*
+	elif [[ $i = "syscntrl" || $i = "SYSCNTRL" ]]
+	then
+		cd ./MCAL
+		rm SYSCNTRL
 	fi
 done 
 	
