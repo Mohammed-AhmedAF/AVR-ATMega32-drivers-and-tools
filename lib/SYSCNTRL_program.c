@@ -1,3 +1,10 @@
+/*
+ *
+ * Control sleep mode on AVR ATMega32
+ *
+ *
+ */
+
 #include "Macros.h"
 #include "Std_Types.h"
 #include "SYSCNTRL_private.h"
