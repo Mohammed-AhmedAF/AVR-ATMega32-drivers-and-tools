@@ -33,6 +33,7 @@ mv DHT22* ./HAL &> /dev/null
 mv LCD* ./HAL &> /dev/null
 mv RTC* ./HAL &> /dev/null
 mv EEPROM_EXTERNAL* &> /dev/null
+mv KEYPAD* ./HAL &> /dev/null
 
 #Move to APP
 mv main.c ./APP &> /dev/null
