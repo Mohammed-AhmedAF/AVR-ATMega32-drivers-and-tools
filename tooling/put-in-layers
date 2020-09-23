@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#Putting drivers in dedicated directories based on software layer
+#Putting drivers of an already created project in dedicated directories based on software layer
 
 #Making directories for layers
 mkdir APP &> /dev/null
