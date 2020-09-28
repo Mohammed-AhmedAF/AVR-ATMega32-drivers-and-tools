@@ -14,6 +14,7 @@ cp ~/programming/IMT-course/lib/Makefile-layered ./Makefile
 #Move to UTIL
 mv Std_Types.h ./UTIL &> /dev/null
 mv Macros.h ./UTIL &> /dev/null
+mv SERVICES* ./UTIL &> /dev/null
 
 #Move to MCAL 
 mv DIO* ./MCAL &> /dev/null
