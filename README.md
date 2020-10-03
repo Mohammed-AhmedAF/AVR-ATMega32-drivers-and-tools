@@ -6,4 +6,4 @@ This lib directory contains drivers for various components inside the AVR ATmega
 This repo also contains a template of FreeRTOS to the AVR ATMega32 MCU.
 
 ##Useful note
-In the tooling directory, you will find `get-avr` and `setup-avr-project`. These two scripts can be used to start a new project, provided that you put the whole parent directory "IMT-course" in a directory called programming; or change the script if you put imt-course in a different directory.
+In the tooling directory, you will find `get-avr` and `setup-avr-project`. These two scripts can be used to start a new project, provided that you put the whole parent directory containing lib in a directory called programming; or change the script if you put the parent directory in a different directory.
