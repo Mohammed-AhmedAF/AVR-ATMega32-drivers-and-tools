@@ -17,7 +17,7 @@ displayDrivers()
 {
 	echo "Available drivers: "
 	echo "	dio, uart, spi, twi"
-	echo "	uart, interrupts, makef"
+	echo "	uart, interrupts, makef, makefile-layered"
 	echo "	adc, timer0, timer1, timer2"
 	echo "	internal-eeprom"
 	echo "	lcd, rtc, keypad, s7, eeprom"
