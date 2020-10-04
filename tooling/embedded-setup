@@ -9,11 +9,12 @@ setupVim ()
 {
 #install plugin manager
 	echo "Setting vim up..."
-	rm -r /root/.vim/bundle/Vundle.vim
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	rm -r /home/mohamed/.vim/bundle/*
+	git clone https://github.com/VundleVim/Vundle.vim.git /home/mohamed/.vim/bundle/Vundle.vim
 	#Copying vimrc to home directory
-	cd ~/programming/IMT-course/tooling/
-	cp .vimrc ~/
+	echo "Copying .vimrc"
+	cd /home/mohamed/programming/AVR-ATMega32-drivers-and-tools/tooling/
+	cp .vimrc /home/mohamed/
 }
 
 #Check if script is run by root
