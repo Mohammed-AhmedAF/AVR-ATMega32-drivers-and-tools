@@ -1,4 +1,4 @@
-# IMT-course
+# AVR ATMega32 drivers and tools
 Personal repository of all C activities I did during embedded software course in IMT School.
 
 This lib directory contains drivers for various components inside the AVR ATmega32, like timers, interrupts, ADC, and DIO, along with drivers character LCD, RTC, External EEPROM and other components. The drivers have been built during and mostly after taking the diploma. Also, in this directory you will find a Makefile that is used to build code into executables that run on the MCU. The makefile contains a rule to upload the executable to the MCU too.
