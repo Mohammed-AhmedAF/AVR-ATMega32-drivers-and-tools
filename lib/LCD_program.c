@@ -32,7 +32,7 @@ void LCD_vidInit(void) {
 	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_E,DIO_OUTPUT);
 	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_RS,DIO_OUTPUT);
 	DIO_vidSetPinDirection(LCD_CTRL_PORT,LCD_RW,DIO_OUTPUT);
-	
+
 	LCD_vidSendCommand(LCD_CLEAR_SCREEN); /*Clear screen*/
 	LCD_vidSendCommand(LCD_RETURN_HOME); /*Move to home*/
 	LCD_vidSendCommand(LCD_SET_ENTRY_MODE|LCD_MOVE_CURSOR_RIGHT); /*Set entry mode*/
@@ -141,8 +141,55 @@ void LCD_vidWriteNumber(u16 u16NumberCpy) {
 	}
 }
 
+/*Write a number with a fixed number of digits, zeros from the left to complete
+ *the fixed size.
+ * */
+void LCD_vidWriteSizedNumber(u16 u16NumberCpy, u8 u8Size)
+{
+	u8 u8i;
+	if(u16NumberCpy < 10) {
+		for (u8i = 0; u8i < u8Size-1; u8i++)
+		{		
+			LCD_vidWriteCharacter('0');
+		}
+		LCD_vidWriteCharacter(u16NumberCpy+'0');
+	}
+	else {
+		if (u16NumberCpy < 100) {
+			for (u8i = 0; u8i < u8Size-2; u8i++)
+			{		
+				LCD_vidWriteCharacter('0');
+			}
+
+			LCD_vidWriteCharacter(u16NumberCpy/10+'0');
+			LCD_vidWriteCharacter(u16NumberCpy%10+'0');
+		}
+		else if (u16NumberCpy < 1000) {
+			for (u8i = 0; u8i < u8Size-3; u8i++)
+			{		
+				LCD_vidWriteCharacter('0');
+			}
+			LCD_vidWriteCharacter((u16NumberCpy/100)+'0');
+			LCD_vidWriteCharacter((u16NumberCpy%100)/10+'0');
+			LCD_vidWriteCharacter((u16NumberCpy%100)%10+'0');
+		}
+		else if (u16NumberCpy < 10000)
+		{
+			for (u8i = 0; u8i < u8Size-4; u8i++)
+			{		
+				LCD_vidWriteCharacter('0');
+			}
+			LCD_vidWriteCharacter((u16NumberCpy/1000)+'0');
+			LCD_vidWriteCharacter((u16NumberCpy%1000)/100+'0');
+			LCD_vidWriteCharacter((u16NumberCpy%100)/10+'0');
+			LCD_vidWriteCharacter((u16NumberCpy%100)%10+'0');
+		}
+	}
+
+}
+
 void LCD_vidGoToXY(u8 u8xCpy, u8 u8yCpy) {
-	#define LCD_SET_CURSOR_LOCATION 0x80
+#define LCD_SET_CURSOR_LOCATION 0x80
 	u8 u8address = u8xCpy;
 	switch(u8yCpy) {
 		case 0:
