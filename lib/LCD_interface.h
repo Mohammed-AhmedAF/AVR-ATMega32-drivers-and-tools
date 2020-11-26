@@ -100,4 +100,5 @@ void LCD_vidWriteNumber(u16);
 void LCD_vidWriteSizedNumber(u16, u8);
 void LCD_vidWriteInPlace(u8,u8,u8);
 void LCD_vidClearLine(u8);
+void LCD_vidClearSpace(u8 u8xPosStart, u8 u8xPosEnd, u8 u8yPos);
 #endif

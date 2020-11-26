@@ -231,6 +231,17 @@ void LCD_vidWriteInPlace(u8 u8xCpy,u8 u8yCpy, u8 u8CharCpy) {
 	LCD_vidWriteCharacter(u8CharCpy);
 }
 
+void LCD_vidClearSpace(u8 u8xPosStart, u8 u8xPosEnd ,u8 u8yPos)
+{
+	u8 u8i = 0;
+	LCD_vidGoToXY(u8xPosStart,u8yPos);
+	for (u8i = 0; u8i < u8xPosEnd; u8i++)
+	{
+		LCD_vidWriteCharacter(' ');	
+	}
+	LCD_vidGoToXY(u8xPosStart,u8yPos);
+}
+
 void LCD_vidClearLine(u8 u8LineNumber)
 {
 	LCD_vidGoToXY(LCD_XPOS0,u8LineNumber);
