@@ -6,7 +6,7 @@
 #define _LCD_INTERFACE_H
 
 #define LCD_DATA_PORT DIO_PORTD
-#define LCD_CTRL_PORT DIO_PORTB
+#define LCD_CTRL_PORT DIO_PORTD
 
 #define LCD_D0 DIO_PIN0
 #define LCD_D1 DIO_PIN1
@@ -86,6 +86,7 @@
 /*Function set*/
 #define LCD_FUNCTION_SET 0x20
 #define LCD_8BIT 0x10
+#define LCD_4BIT 0x00
 #define LCD_4LINES 0x08
 
 /*Function definitions*/
