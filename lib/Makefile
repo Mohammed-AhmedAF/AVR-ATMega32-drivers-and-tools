@@ -50,6 +50,12 @@ load: clean generate_ctags build
 flash :
 	$(PRO) -V -v -p $(MICROCNTRL) -c $(PROGRAMMER_TYPE) -U flash:w:main.o
 
+.PHONY : load-no-erase
+load-no-erase: clean build
+	@pwd
+	@(PRO) -p $(MICROCONTROL) -c $(PROGRAMMER_TYPE) -D -U flash:w:main.o
+	rm -f *.o *.i
+
 .PHONY : convert
 convert: clean
 	unix2dos *
