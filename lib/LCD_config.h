@@ -1,7 +1,7 @@
 #ifndef _LCD_CONFIG_H
 #define _LCD_CONFIG_H
 
-/*Uncomment to use 8 bit*/
+/*Comment to use 8 bit*/
 #define LCD_CONFIG_4BIT
 
 #endif
