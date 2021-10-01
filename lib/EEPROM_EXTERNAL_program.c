@@ -65,6 +65,7 @@ u8 EEPROM_u8ReadByte(u16 u16LocationCpy,u8 * u8DataCpy)
 			if(TWI_u8CheckAck(DATA_TX_ACK) == 1) {
 				TWI_vidSendStart();
 				if(TWI_u8CheckAck(REPEATED_START) == 1) {
+					/*To indicate a read operation*/
 					SET_BIT(SLA_W,0);
 					TWI_vidSendByte(SLA_W);
 					if(TWI_u8CheckAck(SLA_R_ACK) == 1) {
