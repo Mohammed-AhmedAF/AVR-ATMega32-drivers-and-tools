@@ -6,17 +6,29 @@
 #define PORTA *((volatile u8* const) 0x3B)
 #define PINA *((volatile u8* const) 0x39)
 
-#define DDRB *((volatile u8* const) 0x37)
-#define PORTB *((volatile u8* const) 0x38)
-#define PINB *((volatile u8* const) 0x36)
+#ifdef ST_MC_ATMEGA328P
+#define DDRB *((volatile u8* const) 0x24)
+#define PORTB *((volatile u8* const) 0x25)
+#define PINB *((volatile u8* const) 0x23)
+#else
+#define DDRB *((volatile u8* const) 0x24)
+#define PORTB *((volatile u8* const) 0x25)
+#define PINB *((volatile u8* const) 0x23)
+#endif
 
 #define DDRC *((volatile u8* const) 0x34) 
 #define PORTC *((volatile u8* const) 0x35)
 #define PINC *((volatile u8* const) 0x33)
 
+#ifdef ST_MC_ATMEGA328P
+#define DDRD *((volatile u8* const) 0x2A)
+#define PORTD *((volatile u8* const) 0x2B)
+#define PIND *((volatile u8* const) 0x29)
+#else
 #define DDRD *((volatile u8* const) 0x31)
 #define PORTD *((volatile u8* const) 0x32)
 #define PIND *((volatile u8* const) 0x30)
+#endif
 
 #define DDRE *((volatile u8* const) 0x22)
 #define PORTE *((volatile u8* const) 0x23)
