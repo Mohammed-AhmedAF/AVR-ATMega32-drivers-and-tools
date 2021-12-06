@@ -20,7 +20,7 @@ displayDrivers()
 	echo "	uart, interrupts, makef, makefile-layered"
 	echo "	adc, timer0, timer1, timer2"
 	echo "	internal-eeprom"
-	echo "	lcd, rtc, keypad, s7, eeprom"
+	echo "	lcd, lcd-i2c, rtc, keypad, s7, eeprom"
 	echo "	scheduler"
 	echo "	syscntrl"
 }
@@ -172,6 +172,10 @@ else
 		elif [[ $i = "main" || $i = "main.c" ]]
 		then
 			cp $AVR_LIB_PATH/main.c ./
+		elif [[ $i = "lcd-i2c" || $i = "LCD_I2C" ]]
+		then 
+			cp $AVR_LIB_PATH/LCD_I2C_program.c ./
+			cp $AVR_LIB_PATH/LCD_I2C_interface.h ./
 		else
 			echo "Error: Could not process $i."
 		fi
