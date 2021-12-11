@@ -5,6 +5,8 @@ void LCD_I2C_vidInit(void);
 void LCD_I2C_vidSendCommand(u8 u8Command);
 void LCD_I2C_vidSendCharacter(u8 u8Char);
 void LCD_I2C_vidSendString(u8 * ptu8String);
+void LCD_I2C_vidSendNumber(u16 u16NumberCpy);
+void LCD_I2C_vidGoToXY(u8 u8xCpy, u8 u8yCpy);
 
 #define LCD_I2C_CLEAR_SCREEN 0b00000001
 #define LCD_I2C_RETURN_HOME 0b00000010
