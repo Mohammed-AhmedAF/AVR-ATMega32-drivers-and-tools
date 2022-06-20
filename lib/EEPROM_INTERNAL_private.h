@@ -11,11 +11,11 @@
 
 
 /*Register definitions*/
-#define EEAR * ((volatile u8*) 0x3E)
-#define EEARH * ((volatile u8*) 0x3F) 
-#define EEARL * ((volatile u8*) 0x3E)
-#define EEDR * ((volatile u8*) 0x3D)
-#define EECR * ((volatile u8*) 0x3C) /*So that the compiler doesn't outsmart me*/
+#define EEAR * ((volatile u8 * const) 0x3E)
+#define EEARH * ((volatile u8 * const) 0x3F) 
+#define EEARL * ((volatile u8 * const) 0x3E)
+#define EEDR * ((volatile u8 * const) 0x3D)
+#define EECR * ((volatile u8 * const) 0x3C) /*So that the compiler doesn't outsmart me*/
 
 #define SPMCR * ((u8*) 0x57)
 
