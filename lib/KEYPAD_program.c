@@ -35,17 +35,17 @@ static u8 value,i = 0;
 
 u8 KEYPAD_u8GetKey(void) {
 	for (i = 0; i < 4; i++) {
-		u8 x = 0;
+		u8 u8ColRead = 0;
 		value = values[i];
 		DIO_vidSetPinValue(ROW0_PORT,ROW0_PIN,GET_BIT(value,0));
 		DIO_vidSetPinValue(ROW1_PORT,ROW1_PIN,GET_BIT(value,1));
 		DIO_vidSetPinValue(ROW2_PORT,ROW2_PIN,GET_BIT(value,2));
 		DIO_vidSetPinValue(ROW3_PORT,ROW3_PIN,GET_BIT(value,3));
 
-		x |= (DIO_u8GetPinValue(COL0_PORT,COL0_PIN) << 0);
-		x |= (DIO_u8GetPinValue(COL1_PORT,COL1_PIN) << 1);
-		x |= (DIO_u8GetPinValue(COL2_PORT,COL2_PIN) << 2);
-		x |= (DIO_u8GetPinValue(COL3_PORT,COL3_PIN) << 3);
+		u8ColRead |= (DIO_u8GetPinValue(COL0_PORT,COL0_PIN) << 0);
+		u8ColRead |= (DIO_u8GetPinValue(COL1_PORT,COL1_PIN) << 1);
+		u8ColRead |= (DIO_u8GetPinValue(COL2_PORT,COL2_PIN) << 2);
+		u8ColRead |= (DIO_u8GetPinValue(COL3_PORT,COL3_PIN) << 3);
 		/*This macro, if defined, will not print a character until
 		 *the button is depressed. It is used to prevent printing 
 		 *the character more than once.
@@ -56,7 +56,7 @@ u8 KEYPAD_u8GetKey(void) {
 			while(DIO_u8GetPinValue(COL2_PORT,COL2_PIN) == 0);
 			while(DIO_u8GetPinValue(COL3_PORT,COL3_PIN) == 0);	
 		#endif
-		switch(x) {
+		switch(u8ColRead) {
 			case 0x07:
 				return keys[i][0];
 			case 0x0B:
