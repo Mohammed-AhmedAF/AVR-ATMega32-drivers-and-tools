@@ -29,9 +29,10 @@ void KEYPAD_vidInit(void) {
 }
 
 
-u8 keys[4][4] = {{'/',3,2,1},{'*',6,5,4},{'+',9,8,7},{'=','-',0,'#'}};
-u8 values[4] = {0x0E,0x0D,0x0B,0x07};
-u8 value,i = 0;
+static u8 keys[4][4] = {{'/',3,2,1},{'*',6,5,4},{'+',9,8,7},{'=','-',0,'#'}};
+static u8 values[4] = {0x0E,0x0D,0x0B,0x07};
+static u8 value,i = 0;
+
 u8 KEYPAD_u8GetKey(void) {
 	for (i = 0; i < 4; i++) {
 		u8 x = 0;
